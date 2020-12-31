@@ -22,7 +22,6 @@
             align-items: center;
             background-color: #e2f7fa;
             flex-wrap: wrap;
-            margin: 40px 0;
         }
 
         .card {
@@ -51,16 +50,6 @@
             object-position: center;
         }
 
-        .imgBx .glass {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(102, 255, 255, 0.5);
-            transition: all 0.5s;
-            height: 0;
-        }
-
         .card:hover .content {
             bottom: 0;
         }
@@ -79,10 +68,12 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(15px);
             box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease-in;
+            transition: all 0.5s ;
         }
 
         .content .text {
+            /* 參考資料 : https://www.w3.org/Style/Examples/007/text-shadow.zh_HK.html */
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -116,6 +107,9 @@
         ul li a {
             color: #fff;
             font-size: 24px;
+
+            /* 底圖是白色時 , 圖片還是能顯示清楚 */
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
         }
 
         ul.sci {
