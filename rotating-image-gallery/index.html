@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pure CSS 3D Rotating Image Gallery</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            animation: ani 20s linear infinite;
+        }
+
+        @keyframes ani {
+            0%{
+                transform: perspective(1000px) rotateY(0deg);
+            }
+            100%{
+                transform: perspective(1000px) rotateY(360deg);
+            }
+        }
+
+        .box span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #d0c247;
+            width: 200px;
+            height: 200px;
+            transform-origin: center;
+            transform-style: preserve-3d;
+            transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+        }
+
+        .box span img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+        }
+
+        .box span img {
+            height: 200px;
+            width: 200px;
+        }
+
+        /* 也許要做個文字倒影 */
+        .text {
+            color: #e2f7fa;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: ani 20s linear infinite reverse;
+
+            -webkit-box-reflect: below;
+        }
+    </style>
+</head>
+<body>
+<!-- images from pexels : https://www.pexels.com/zh-tw/ -->
+<div class="box">
+<!--    <p class="text">Pure CSS 3D Rotating Image Gallery</p>-->
+    <span style="--i:1;"><img src="./imgs/img1.jpeg"></span>
+    <span style="--i:2;"><img src="./imgs/img2.jpeg"></span>
+    <span style="--i:3;"><img src="./imgs/img3.jpeg"></span>
+    <span style="--i:4;"><img src="./imgs/img4.jpeg"></span>
+    <span style="--i:5;"><img src="./imgs/img5.jpeg"></span>
+    <span style="--i:6;"><img src="./imgs/img6.jpeg"></span>
+    <span style="--i:7;"><img src="./imgs/img7.jpeg"></span>
+    <span style="--i:8;"><img src="./imgs/img8.jpeg"></span>
+</div>
+</body>
+</html>
