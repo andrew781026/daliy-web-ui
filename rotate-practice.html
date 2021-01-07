@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>preserve-3d - Rotate</title>
+</head>
+<style>
+
+    body {
+        user-select: none;
+    }
+
+    .outer {
+        cursor: pointer;
+        perspective: 250px;
+        perspective-origin: left;
+    }
+
+    .box {
+        position: relative;
+        border-radius: 0 20px 20px 0;
+        width: 200px;
+        height: 200px;
+        transform-style: preserve-3d;
+        background-color: #263adb;
+        transition: transform 1s;
+        margin: 100px;
+        transform-origin: left;
+
+        /* text style */
+        line-height: 200px;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 700;
+        color: #f0f7fc;
+    }
+
+    .box:active {
+        transform: rotateY(90deg);
+    }
+
+    .box2 {
+        background: #2db34a;
+        border-radius: 6px;
+        height: 150px;
+        width: 150px;
+        line-height: 150px;
+        text-align: center;
+        color: white;
+        font-size: 20px;
+
+        transform: perspective(250px) rotateY(45deg);
+    }
+</style>
+<body>
+<div class="outer">
+    <div class="box">點擊開門</div>
+</div>
+<div class="box2">
+    rotateY(45deg)
+</div>
+</body>
+</html>

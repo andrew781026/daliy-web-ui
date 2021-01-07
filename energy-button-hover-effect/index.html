@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Energy Button Hover Effects</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333333;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .container a {
+            position: relative;
+            display: inline-block;
+            padding: 15px 30px;
+            border: 2px solid #00ff00;
+            margin: 40px;
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #fff;
+            font-size: 40px;
+            -webkit-box-reflect: below 0 linear-gradient(transparent, #0002);
+            transition: all 0.5s;
+        }
+
+        .container a:hover {
+            color: #000000;
+
+            transition-delay: 1s;
+            box-shadow: 0 0 10px #00ff00,
+                        0 0 20px #00ff00,
+                        0 0 40px #00ff00,
+                        0 0 80px #00ff00,
+                        0 0 160px #00ff00;
+        }
+
+        .container a:nth-child(2) {
+            filter: hue-rotate(80deg);
+        }
+
+        .container a::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 2px;
+            background-color: #00ff00;
+
+            /* 原本只有 1 條綠色的線 , 利用 box-shadow 追加 2 條線 */
+            box-shadow: 5px -8px 0 #00ff00, 5px 8px 0 #00ff00;
+            /* transition : [property] [duration] [delay] */
+            transition: left 0.5s, width 0.5s, height 0.5s, box-shadow 0.5s;
+            transition-delay: 1s, 0.5s, 0s, 0s;
+        }
+
+        .container a:hover::before {
+            width: 60%;
+            height: calc(100% + 3px);
+            left: -2px;
+            box-shadow: 5px 0 0 #00ff00, 5px 0 0 #00ff00;
+            transition-delay: 0s, 0.5s, 0.5s, 1s;
+        }
+
+        .container a::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 2px;
+            background-color: #00ff00;
+
+            /* 原本只有 1 條綠色的線 , 利用 box-shadow 追加 2 條線 */
+            box-shadow: -5px -8px 0 #00ff00, -5px 8px 0 #00ff00;
+            /* transition : [property] [duration] [delay] */
+            transition: right 0.5s, width 0.5s, height 0.5s, box-shadow 0.5s;
+            transition-delay: 1s, 0.5s, 0s, 0s;
+        }
+
+        .container a:hover::after {
+            width: 60%;
+            height: calc(100% + 3px);
+            right: -2px;
+            box-shadow: -5px 0 0 #00ff00, -5px 0 0 #00ff00;
+            transition-delay: 0s, 0.5s, 0.5s, 1s;
+        }
+
+        .container a span {
+            position: relative;
+            z-index: 100;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="#"><span>炫酷綠</span></a>
+    <a href="#"><span>天空藍</span></a>
+</div>
+</body>
+</html>
