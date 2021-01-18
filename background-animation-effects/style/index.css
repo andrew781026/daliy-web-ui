@@ -66,6 +66,7 @@ section h2 {
     50%{
         opacity: 1;
         background: url(../bg.png);
+        background-size: cover;
         background-position:center ;
         background-attachment: fixed;
     }
@@ -74,6 +75,7 @@ section h2 {
         transform: scale(1) translateY(0);
 
         background: url(../bg.png);
+        background-size: cover;
         background-position:center ;
         background-attachment: fixed;
     }
