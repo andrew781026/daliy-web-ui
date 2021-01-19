@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Glassmorphism | Shiny Glass Social Media Icon Hover Effects</title>
+    <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+<body>
+<section id="app">
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+    <ul>
+        <li class="card" v-for="icon in icons" :key="icon.id">
+            <a href="#">
+                <i :class="`fab ${icon.name}`"></i>
+            </a>
+        </li>
+    </ul>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        data() {
+            return {
+                icons: [
+                    {
+                        id: 11,
+                        name: 'fa-facebook-f',
+                    },
+                    {
+                        id: 22,
+                        name: 'fa-twitter',
+                    },
+                    {
+                        id: 33,
+                        name: 'fa-instagram',
+                    },
+                    {
+                        id: 44,
+                        name: 'fa-line',
+                    },
+                    {
+                        id: 55,
+                        name: 'fa-linkedin-in',
+                    },
+                ]
+            }
+        }
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>
