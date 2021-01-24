@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Glass Morphism User Card Interactions | Glassmorphism UI Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<section id="app">
+    <div class="row" v-for="i in 20" :key="i">
+        <div v-for="i in 2" :key="`inner-${i}`">
+            <i class="far fa-address-book"></i>
+            <i class="fa fa-bath"></i>
+            <i class="fa fa-shower"></i>
+            <i class="fa fa-thermometer-half"></i>
+            <i class="fa fa-balance-scale"></i>
+            <i class="fa fa-battery-half"></i>
+            <i class="far fa-bell"></i>
+            <i class="fa fa-bicycle"></i>
+            <i class="fa fa-bolt"></i>
+            <i class="fa fa-bullhorn"></i>
+            <i class="far fa-comment-dots"></i>
+            <i class="far fa-comments"></i>
+            <i class="far fa-envelope"></i>
+            <i class="fa fa-gift"></i>
+            <i class="fas fa-glass-martini"></i>
+            <i class="fa fa-globe"></i>
+            <i class="fa fa-graduation-cap"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-hourglass-end"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {}
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>
