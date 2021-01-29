@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Skewed Border | Creative Box Border Hover Effects | Html CSS</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div class="app" id="app">
+    <div class="container">
+        <div class="box" v-for="card in cardInfo" :key="card.id">
+            <div class="content">
+                <h2>{{card.title}}</h2>
+                <h3>{{card.subtitle}}</h3>
+                <!-- 中文的假文產生器 : https://free.com.tw/lorem-ipsum-generator/ -->
+                <p>{{card.content}}</p>
+                <a href="#">查看更多...</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        data() {
+            return {
+                cardInfo: [
+                    {
+                        id: 1,
+                        title: '01',
+                        subtitle: 'Service One',
+                        content: '一想實之去東輕把為朋：兩才子，當從樂動北靈石聽環人：生期有背你？課事高數兒色光起去友條；處法上業……於生火，下話銀地意前：綠做數究長破一生收我作了驗；立裡文興操中我如苦不、未的也方，中風清，計可水？起性我放義通百時因友港，布就來。消不高在路司特配那響呢預寫的裝候化早仍帶速，法組友始比看：求府真！名發是中一來，後是離之去，就升來復麼說頭我布發會然臺兒醫弟十件的公把路公他業驗，於洋都邊如構成得示術……此人維，學要業界……個型格善視：全好場親環呢行參？'
+                    },
+                    {
+                        id: 2,
+                        title: '02',
+                        subtitle: 'Service Two',
+                        content: '一想實之去東輕把為絕，時一非義通百時因友港，布就來。消不高在路司特配那響呢預寫的裝候化早仍帶速，法組友始比看：求府真！名發是中一來，後是離之去，就升來復麼說頭我布發會然臺兒醫弟十件的公把路公他業驗，於洋都邊如構成得示術……此人維，學要業界……個型格善視：全好場親環呢行參？'
+                    },
+                    {
+                        id: 3,
+                        title: '03',
+                        subtitle: 'Service Three',
+                        content: '一想實之去東輕把為朋：兩才子，當從樂動北靈石聽環人：生期有背你業……於生火，下話銀風清，計可水？起性我放但故生溫怎地心這，心回正人著西禮河和真強禮又；園前企之物西我。質我令！視型不且日室安信之了快唱知雨算義在陽照，的子股上於。亞原光對手人是中一來，後是離之去，就升來復麼說頭我布發會然臺兒醫弟十件的公把路公他業驗，於洋都邊如構成得示術……此人維，學要業界……個型格善視：全好場親環呢行參？'
+                    },
+                    {
+                        id: 4,
+                        title: '04',
+                        subtitle: 'Service Four',
+                        content: '一想實之去東輕把為朋：兩才子，當從樂動北靈石聽環人：生期有背你？課事高接情形說量離法的的香原；立裡起性我放但故生溫怎地心這，心回正人著西禮河和真強禮又；園前企之物西我。質我令！視型不且日的子股上於。亞原光對手人，書過所景模：決向些媽絕，時一非義通百時因友港，布就來。化早仍帶速，法組友始比看：求府真！名發是中一來，後是離之去，就升來復麼說頭我布發會然臺兒醫弟十件的公把路公他業驗，於洋都邊如構成得示術……此人維，學要業界……個型格善視：全好場親環呢行參？'
+                    },
+                ]
+            }
+        }
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Skewed Border | Creative Box Border Hover Effects | Html CSS</title>
+    <style>
+
+        body{
+            background-color: lime;
+        }
+
+        .skew {
+
+            position: relative;
+            background-color: black;
+            height: 300px;
+            width: 300px;
+
+        }
+
+        .skew::before {
+
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            bottom: -2px;
+            right: -2px;
+            background-color: white;
+            transform: skew(2deg,2deg);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+<div class="skew"></div>
+</body>
+</html>
