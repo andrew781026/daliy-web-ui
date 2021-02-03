@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Navigation Menu With Icons Hover Effects | Fontawesome Menu Icon</title>
+    <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+<div id="app" class="app">
+    <ul>
+        <li v-for="menu in menus" :key="menu.id">
+            <a :href="menu.link">
+                <div class="icon">
+                    <i :class="menu.icon"></i>
+                    <i :class="menu.icon"></i>
+                </div>
+                <div class="name"><span :data-text="menu.name">{{menu.name}}</span></div>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        data() {
+            return {
+                menus: [
+                    {
+                        id: 1,
+                        icon: 'fa fas fa-home',
+                        name: 'Home',
+                        link: '#',
+                    },
+                    {
+                        id: 2,
+                        icon: 'fa far fa-file-alt',
+                        name: 'About',
+                        link: '#',
+                    },
+                    {
+                        id: 3,
+                        icon: 'fa fas fa-cogs',
+                        name: 'Services',
+                        link: '#',
+                    },
+                    {
+                        id: 4,
+                        icon: 'fa far fa-image',
+                        name: 'Portfolio',
+                        link: '#',
+                    },
+                    {
+                        id: 5,
+                        icon: 'fa fas fa-users',
+                        name: 'Team',
+                        link: '#',
+                    },
+                    {
+                        id: 6,
+                        icon: 'fa fas fa-envelope',
+                        name: 'Contact',
+                        link: '#',
+                    },
+                ]
+            }
+        }
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>
