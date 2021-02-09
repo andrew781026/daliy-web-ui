@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Navigation Menu | Change Background Image On List Item Hover</title>
+    <link rel="stylesheet" href="./style/index.css">
+    <!-- 圖片來源 : https://www.pexels.com/ -->
+</head>
+<body>
+<div id="app">
+    <div class="navigation">
+        <div class="navArea" :class="bgc">
+            <ul>
+                <li v-for="nav in navs" :key="nav.id">
+                    <a :href="nav.link" @mouseenter="changeImage(nav.img,nav.id)">
+                        {{nav.name}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="imgArea">
+            <img :src="imgUrl" alt="大圖">
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        methods: {
+
+            changeImage(img, id) {
+
+                this.imgUrl = img;
+                this.bgc = `bg-c${id}`;
+            }
+        },
+
+        data() {
+            return {
+                bgc: 'bg-c1',
+                imgUrl: 'imgs/img1.jpg',
+                navs: [
+                    {
+                        id: 1,
+                        name: 'Home',
+                        link: '#',
+                        img: 'imgs/img1.jpg',
+                        color: '#905c49'
+                    },
+                    {
+                        id: 2,
+                        name: 'About',
+                        link: '#',
+                        img: 'imgs/img2.jpg',
+                        color: '#ffde0f'
+                    },
+                    {
+                        id: 3,
+                        name: 'Service',
+                        link: '#',
+                        img: 'imgs/img3.jpg',
+                        color: '#d28759'
+                    },
+                    {
+                        id: 4,
+                        name: 'Portfolio',
+                        link: '#',
+                        img: 'imgs/img4.jpg',
+                        color: '#72a785'
+                    },
+                    {
+                        id: 5,
+                        name: 'Team',
+                        link: '#',
+                        img: 'imgs/img5.jpg',
+                        color: '#01080e'
+                    },
+                    {
+                        id: 6,
+                        name: 'Contact',
+                        link: '#',
+                        img: 'imgs/img6.jpg',
+                        color: '#137ac7'
+                    },
+                ]
+            }
+        }
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>
