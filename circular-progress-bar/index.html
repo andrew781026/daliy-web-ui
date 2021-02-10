@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pure CSS Circular Progress Bar | CSS Glassmorphism Effects</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div id="app" class="app">
+    <div v-if="loading" class="block"></div>
+    <div class="bg-line"></div>
+    <div class="card" v-for="card in cards" :key="card.id">
+        <div class="box">
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70" :style="`--percent:${card.percent}`"></circle>
+            </svg>
+            <span class="number">{{card.percent}}</span>
+            <span class="percent">%</span>
+        </div>
+        <div class="button" :class="`bg-${card.buttonColor}`">{{card.buttonText}}</div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        mounted() {
+
+            this.loading = false;
+        },
+        data() {
+            return {
+                loading: true,
+                cards: [
+                    {
+                        id: 1,
+                        percent: 90,
+                        buttonColor: 'red',
+                        buttonText: 'HTML',
+                    },
+                    {
+                        id: 2,
+                        percent: 82,
+                        buttonColor: 'blue',
+                        buttonText: 'CSS',
+                    },
+                    {
+                        id: 3,
+                        percent: 65,
+                        buttonColor: 'green',
+                        buttonText: 'JAVASCRIPT',
+                    }
+                ]
+            }
+        },
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>
