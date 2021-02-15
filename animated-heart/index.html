@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pure CSS Animated Heart Shape | CSS Animation Effects</title>
+    <!-- 參考影片 : https://www.youtube.com/watch?v=uGG5aHlnwgE&t=0s&ab_channel=OnlineTutorials -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f60505;
+            min-height: 100vh;
+        }
+
+        .heart {
+            position: relative;
+            animation: heartBeat 4s ease-in alternate infinite;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.4));
+        }
+
+        .heart:hover {
+            animation-play-state: paused;
+        }
+
+        .left {
+            left: -10vw;
+            top: -13vh;
+            position: absolute;
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+            height: 200px;
+            width: 130px;
+            background-color: #db9090;
+            transform: rotate(-45deg);
+        }
+
+        .right {
+            left: calc(50px - 10vw);
+            top: -13vh;
+            position: absolute;
+            border-top-left-radius: 100px;
+            border-top-right-radius: 100px;
+            height: 200px;
+            width: 130px;
+            background-color: #db9090;
+            transform: rotate(45deg);
+        }
+
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1)
+            }
+            5% {
+                transform: scale(0.8)
+            }
+            10% {
+                transform: scale(1)
+            }
+            15% {
+                transform: scale(0.8)
+            }
+            85% {
+                transform: scale(2.2)
+            }
+            90% {
+                transform: scale(2)
+            }
+            95% {
+                transform: scale(2.2)
+            }
+            100% {
+                transform: scale(2)
+            }
+        }
+    </style>
+</head>
+<body>
+<!--
+ 1. 六等分的花嫁 - 到底誰是主角最後的新娘呢 ?
+ 2. 使用者選六位腳色中的一個
+ 3. 選後 , 做一個心跳的愛心 , 跳個一秒
+ 4. 顯示猜中與否
+ -->
+<div class="container">
+    <div class="heart">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</div>
+</body>
+</html>
