@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flying Text Animation Effects using CSS & Anime.js | Website Animations</title>
+    <link rel="stylesheet" href="./style/second.css">
+</head>
+<body>
+
+<section>
+    <p class="text">
+        閉幕式直播，還沒開放呢，我去買麵包一個蔥花麵包都要20塊了！當我第一次來這裡時，
+        我依然盯著窗外圓山飯店的燈光，只要你不離婚，它比較公平，專業私人教師，」安靜、有禮、削瘦並戴著眼鏡，
+        讓那些外面發生的事情影響到妳是誰和妳的自信。中，多年以來，聽起來很血汗，這樣人民真的都當白痴嗎?)和各種宗教，
+        所以人類在水中要學美人魚，不過我印象中新聞好像沒有著作權，才能消滅一切的黑暗、收了會被牆；公家考試試題也可以拿來用；
+        沒事多喝水；聽媽媽怒吼，我送之前會手動處理，就是因為他是豬隊友，英文詞彙盡量轉為中文詞彙輸入喔！
+        還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴！
+        睽違7年回歸台劇，熱身賽挨轟，終場前0.5秒，10年債得標利率，北捷破50億人次，松山-金浦航權，的地震嗎？這隻獅子也太糗了!
+        嗯，不管是真是假，前情侶臉書鬧翻，明星周新秀挑戰賽，我真的笑了，好眼熟的辣模，山獅被看門狗追，法拉利時速300km撞毀，比較對？
+    </p>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+    // now split text into word
+    const text = document.querySelector('.text');
+
+    // 取出文字的部分
+    const str = text.textContent;
+
+    // 文字取代 , $& = Inserts the matched substring.
+    // 參考資料 : https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/String/replace#%E6%8C%87%E5%AE%9A%E4%B8%80%E5%80%8B%E5%AD%97%E4%B8%B2%E7%82%BA%E5%8F%83%E6%95%B8
+    text.innerHTML = str.replace(/\S/g, '<span>$&</span>');
+
+    // 使用 anime.js
+    const animation = anime.timeline({
+        targets: '.text span',
+        easing: 'easeOutExpo',
+        loop: true
+    });
+
+    animation.add({
+        rotate: () => anime.random(-360, 360),
+        translateX: () => anime.random(-500, 500),
+        translateY: () => anime.random(-500, 500),
+        duration: 5000,  // 5 秒
+        delay: anime.stagger(20),
+    });
+
+    animation.add({
+        rotate: 0,
+        translateX: 0,
+        translateY: 0,
+        duration: 5000,  // 5 秒
+        delay: anime.stagger(20),
+    });
+
+</script>
+</body>
+</html>

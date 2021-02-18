@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: '微軟正黑體', sans-serif;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #130e23;
+    overflow: hidden;
+}
+
+.text {
+    color: #03a9f4;
+    max-width: 650px;
+}
+
+.text span {
+    display: inline-block;
+}

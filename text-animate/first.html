@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How to Create AnimeJS Text Animation Effects | Anime.js</title>
+    <link rel="stylesheet" href="./style/first.css">
+</head>
+<body>
+
+<section>
+    <h2 class="text">AnimeJS Text Animation Effects</h2>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+    // now split text into word
+    const text = document.querySelector('.text');
+
+    // 取出文字的部分
+    const str = text.textContent;
+
+    // 文字取代 , $& = Inserts the matched substring.
+    // 參考資料 : https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/String/replace#%E6%8C%87%E5%AE%9A%E4%B8%80%E5%80%8B%E5%AD%97%E4%B8%B2%E7%82%BA%E5%8F%83%E6%95%B8
+    text.innerHTML = str.replace(/\S/g, '<span>$&</span>');
+
+    // 使用 anime.js
+    anime.timeline({
+        loop: true
+    })
+        .add({
+            targets: '.text span',
+            translateY: [-600, 0], // [ startValue , endValue ]
+            scale: [10, 1], // [ startValue , endValue ]
+            opacity: [0, 1], // [ startValue , endValue ]
+            easing: 'easeOutExpo',
+            duration: 1500,  // 1.5 秒
+            delay: anime.stagger(100),
+        })
+
+        .add({
+            targets: '.text span',
+            translateX: [0, -1000], // [ startValue , endValue ]
+            scale: [1, 1], // [ startValue , endValue ]
+            opacity: [1, 0], // [ startValue , endValue ]
+            easing: 'easeOutExpo',
+            duration: 2000,  // 2 秒
+            delay: anime.stagger(100),
+        })
+
+        .add({
+            targets: '.text span',
+            translateX: [1000, 0], // [ startValue , endValue ]
+            scale: [1, 1], // [ startValue , endValue ]
+            opacity: [0, 1], // [ startValue , endValue ]
+            easing: 'easeOutExpo',
+            duration: 2000,  // 2 秒
+            delay: anime.stagger(100),
+        })
+
+</script>
+</body>
+</html>
