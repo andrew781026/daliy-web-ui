@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>捲動效果</title>
+    <style>
+
+        :root {
+            --top: 0;
+            --left: 0;
+            --scroll: 0;
+            --fontSize: 10em;
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .cloud {
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            background-image: url("cloud.jpg");
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .text {
+            color: white;
+            font-size: var(--fontSize);
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            margin-right: 0.5em;
+        }
+
+        /* 讓捲動控制 z 軸大小 */
+
+        .container {
+            min-height: 300vh;
+        }
+
+        .cat {
+            position: fixed;
+            left: calc(100vw - var(--left));
+            top: var(--top);
+            height: 128px;
+            width: 128px;
+            transform: scale(var(--scroll));
+        }
+
+    </style>
+</head>
+<body>
+<div class="cloud">
+    <span class="text">SCROLL</span>
+    <span class="text">TO</span>
+    <span class="text">FLY</span>
+</div>
+
+<!-- 超人飛地球 -->
+<div class="container">
+    <img class="cat" src="airplane.png"/>
+</div>
+
+<script>
+    window.addEventListener("scroll", () => {
+
+        const scrollTop = document.documentElement.scrollTop || window.pageYOfset || document.body.scrollTop;
+        const totalHeight = document.documentElement.offsetHeight;
+        const totalWidth = document.documentElement.offsetWidth;
+        const viewHeight = window.innerHeight;
+        const viewWidth = window.innerWidth;
+        console.table({scrollTop, totalHeight, totalWidth});
+
+        document.documentElement.style.setProperty('--scroll', (scrollTop / totalHeight) * 10);
+        document.documentElement.style.setProperty('--fontSize', `${10 - (scrollTop / totalHeight) * 10}em`);
+        document.documentElement.style.setProperty('--top', `${(scrollTop / totalHeight) * viewHeight}px`);
+        document.documentElement.style.setProperty('--left', `${(scrollTop / totalHeight) * viewWidth}px`);
+
+    }, false);
+</script>
+</body>
+</html>
