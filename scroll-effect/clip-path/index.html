@@ -7,8 +7,8 @@
 
 </head>
 <body>
-<h2 class="title">請向下捲動，查看 "兇手"</h2>
-<section></section>
+<h2 class="title">請向下捲動，查看 ~~美女~~ 😎</h2>
+<section id="bg" style=''></section>
 <div class="container">
     <h2>Also Watch Part 1 and 2... Link in Video Description</h2>
     <!-- 假文產生器 -->
@@ -35,6 +35,14 @@
         在學期末之後，老師可不可以補交？</p>
 </div>
 <script>
+
+    const getRandomNumber = (min, max) => Math.floor(Math.random() * max) % (max - min + 1) + min;
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const index = getRandomNumber(1, 4);
+        document.getElementById('bg').style.backgroundImage = `url("./img/bg-${index}.jpg")`;
+    });
+
     window.addEventListener("scroll", () => {
 
         const scrollTop = document.documentElement.scrollTop || window.pageYOfset || document.body.scrollTop;
