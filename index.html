@@ -9,10 +9,13 @@
         }
 
         .container {
-            display: flex;
+
+            /* 參考資料 : https://stackoverflow.com/questions/32802202/how-to-center-a-flex-container-but-left-align-flex-items#answer-60870221 */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, max-content));
+            grid-gap: 16px;
+            justify-content: center;
             min-height: 100vh;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
         }
 
         .card {
@@ -28,13 +31,16 @@
 
         .card .img {
             overflow: hidden;
+            min-height: 250px;
             max-height: 250px;
+            background-color: #555454;
+            border-radius: 7px 7px 0 0;
         }
 
         .card img {
             width: 400px;
             height: 250px;
-            object-fit: cover;
+            object-fit: contain;
             transition: transform 0.3s;
         }
 
@@ -45,6 +51,11 @@
         .title {
             line-height: 50px;
         }
+
+        iframe{
+            width: 400px;
+            height: 250px;
+        }
     </style>
 </head>
 <body>
@@ -52,7 +63,10 @@
 <div class="container">
     <div class="card" v-for="card in infos" :key="card.uuid" @click="openLink(card.link)">
         <div class="img">
-            <img :src="card.imgUrl" alt="圖片">
+            <img v-if="card.imgUrl" :src="card.imgUrl" alt="圖片">
+            <iframe :src="card.link">
+                你的瀏覽器不支援 iframe
+            </iframe>
         </div>
         <span class="title">{{card.title}}</span>
     </div>
@@ -91,30 +105,30 @@
 
             return {
                 infos: [
-                    cardGenerator('2020-12-31 : 毛玻璃卡片', './image-filper/image-filper.gif', './glass-morphism-user-card/index.html'),
-                    cardGenerator('2020-01-05 : 旋轉相簿', './image-filper/image-filper.gif', './rotating-image-gallery/index.html'),
-                    cardGenerator('2020-01-07 : 能量按鈕', './image-filper/image-filper.gif', './energy-button-hover-effect/index.html'),
-                    cardGenerator('2020-01-08 : Clip-path 按鈕', './image-filper/image-filper.gif', './clip-path-button-hover-effects/index.html'),
-                    cardGenerator('2020-01-11 : 客製化單選按鈕', './image-filper/image-filper.gif', './glass-morphism-user-card/index.html'),
-                    cardGenerator('2020-01-14 : 流水效果 (Gooey)', './image-filper/image-filper.gif', './liquid-loader-animation-effects/index.html'),
-                    cardGenerator('2020-01-15 : JS 拼圖動畫', './image-filper/image-filper.gif', './background-animation-effects/index.html'),
-                    cardGenerator('2020-01-18 : JS 拼圖動畫 2', './image-filper/image-filper.gif', './background-animation-effects/second.html'),
-                    cardGenerator('2020-01-19 : 閃亮按鈕', './image-filper/image-filper.gif', './shiny-glass/index.html'),
-                    cardGenerator('2020-01-24 : FontAwesome Icon 背景牆', './image-filper/image-filper.gif', './fontAwesome-icon-background-animation-effects/index.html'),
-                    cardGenerator('2020-01-27 : Loading 頁面', './image-filper/image-filper.gif', './loading-animate/index.html'),
-                    cardGenerator('2020-01-28 : 白色毛玻璃時鐘', './image-filper/image-filper.gif', './analog-clock/index.html'),
-                    cardGenerator('2020-01-29 : Skew 卡片背景', './image-filper/image-filper.gif', './skew-box-border-hover/index.html'),
-                    cardGenerator('2020-02-03 : 響應式導航菜單', './image-filper/image-filper.gif', './responsive-navigation-menu/index.html'),
-                    cardGenerator('2020-02-08 : CSS 冒煙動畫', './image-filper/image-filper.gif', './hot-cup-css-animate/index.html'),
-                    cardGenerator('2020-02-09 : hover 改變背景圖片', './image-filper/image-filper.gif', './change-bg-image-on-hover/index.html'),
-                    cardGenerator('2020-02-11 : 圓形進度條', './image-filper/image-filper.gif', './circular-progress-bar/index.html'),
-                    cardGenerator('2020-02-12 : 泡泡效果顯示圖片', './image-filper/image-filper.gif', './bubbly-background-animation/index.html'),
-                    cardGenerator('2020-02-14 : 霓虹燈文字', './image-filper/image-filper.gif', './neon-light-text/index.html'),
-                    cardGenerator('2020-02-15 : 愛心背景動畫', './image-filper/image-filper.gif', './animated-heart/index.html'),
-                    cardGenerator('2020-02-16 : 捲動飛行的飛機', './image-filper/image-filper.gif', './scroll-effect/airplane/index.html'),
-                    cardGenerator('2020-02-17 : 文字動畫', './image-filper/image-filper.gif', './text-animate/first.html'),
-                    cardGenerator('2020-02-18 : 散亂的文字', './image-filper/image-filper.gif', './text-animate/second.html'),
-                    cardGenerator('2020-02-21 : 捲動揭密藏鏡人', './image-filper/image-filper.gif', './scroll-effect/clip-path/index.html'),
+                    cardGenerator('2020-12-31 : 毛玻璃卡片', './glass-morphism-user-card/glass-card.gif', './glass-morphism-user-card/index.html'),
+                    cardGenerator('2020-01-05 : 旋轉相簿', './rotating-image-gallery/rotate-imgs.gif', './rotating-image-gallery/index.html'),
+                    cardGenerator('2020-01-07 : 能量按鈕', './energy-button-hover-effect/energy-button.gif', './energy-button-hover-effect/index.html'),
+                    cardGenerator('2020-01-08 : Clip-path 按鈕', './clip-path-button-hover-effects/clip-path-button.gif', './clip-path-button-hover-effects/index.html'),
+                    cardGenerator('2020-01-11 : 客製化單選按鈕(Custom Radio)', './custom-radio-button/energy-switcher.gif', './custom-radio-button/index.html'),
+                    cardGenerator('2020-01-14 : 流水效果 (Gooey)', './liquid-loader-animation-effects/gooey-liquid.gif', './liquid-loader-animation-effects/index.html'),
+                    cardGenerator('2020-01-15 : JS 拼圖動畫', './background-animation-effects/bg-animate-01.gif', './background-animation-effects/index.html'),
+                    cardGenerator('2020-01-18 : JS 拼圖動畫 2', './background-animation-effects/bg-animate-02.gif', './background-animation-effects/second.html'),
+                    cardGenerator('2020-01-19 : 閃亮按鈕', './shiny-glass/shiny-glass.gif', './shiny-glass/index.html'),
+                    cardGenerator('2020-01-24 : FontAwesome Icon 背景牆', './fontAwesome-icon-background-animation-effects/icon-hover-bg.gif', './fontAwesome-icon-background-animation-effects/index.html'),
+                    cardGenerator('2020-01-27 : Loading 頁面', './loading-animate/loading-animate.gif', './loading-animate/index.html'),
+                    cardGenerator('2020-01-28 : 白色毛玻璃時鐘', '', './analog-clock/index.html'),
+                    cardGenerator('2020-01-29 : Skew 卡片背景', '', './skew-box-border-hover/index.html'),
+                    cardGenerator('2020-02-03 : 響應式導航菜單', '', './responsive-navigation-menu/index.html'),
+                    cardGenerator('2020-02-08 : CSS 冒煙動畫', './hot-cup-css-animate/hot-cup-coffee.gif', './hot-cup-css-animate/index.html'),
+                    cardGenerator('2020-02-09 : hover 改變背景圖片', '', './change-bg-image-on-hover/index.html'),
+                    cardGenerator('2020-02-11 : 圓形進度條', '', './circular-progress-bar/index.html'),
+                    cardGenerator('2020-02-12 : 泡泡效果顯示圖片', '', './bubbly-background-animation/index.html'),
+                    cardGenerator('2020-02-14 : 霓虹燈文字', '', './neon-light-text/index.html'),
+                    cardGenerator('2020-02-15 : 愛心背景動畫', '', './animated-heart/index.html'),
+                    cardGenerator('2020-02-16 : 捲動飛行的飛機', '', './scroll-effect/airplane/index.html'),
+                    cardGenerator('2020-02-17 : 文字動畫', '', './text-animate/first.html'),
+                    cardGenerator('2020-02-18 : 散亂的文字', '', './text-animate/second.html'),
+                    cardGenerator('2020-02-21 : 捲動揭密藏鏡人', '', './scroll-effect/clip-path/index.html'),
                     cardGenerator('2020-02-22 : CSS 圖片翻頁效果', './image-filper/image-filper.gif', './image-filper/index.html'),
                 ]
             }
