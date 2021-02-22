@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced CSS 3D Image Flip Effects | Beautiful CSS 3D Transform Effects</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .imgBx {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            background-color: black;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .imgBx input[type=checkbox] {
+
+            width: 400px;
+            height: 400px;
+            appearance: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .imgBx input[type=checkbox]:checked ~ span.bg1::before {
+
+            transform: rotateY(180deg);
+        }
+
+        span {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            pointer-events: none;
+            transform-style: preserve-3d;
+        }
+
+        span.bg1 {
+            left: 0;
+            background-image: url("imgs/grape.jpg");
+            background-size: cover;
+            background-position-x: -44px;
+        }
+
+        span.bg1::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("imgs/lemon.jpg");
+            background-size: cover;
+            transform-origin: right;
+            transition: all 2s;
+            backface-visibility: hidden;
+        }
+
+
+        span.bg2 {
+            right: 0;
+            background-image: url("imgs/lemon.jpg");
+            background-size: cover;
+            background-position-x: 310px;
+        }
+
+        span.bg2::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("imgs/grape.jpg");
+            background-size: cover;
+            background-position-x: 300px;
+            transform-origin: left;
+            transition: all 2s;
+            backface-visibility: hidden;
+            transform: rotateY(180deg);
+        }
+
+        .imgBx input[type=checkbox]:checked ~ span.bg2::before {
+
+            transform: rotateY(360deg);
+        }
+
+        .bg{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 25px 35px rgba(0,0,0,0.1),0 0 0 100vmax #ffa011;
+            pointer-events: none;
+            transition: all 1s;
+        }
+
+        .imgBx input[type=checkbox]:checked ~ .bg{
+            box-shadow: 0 25px 35px rgba(0,0,0,0.1),0 0 0 100vmax #a0d621;
+        }
+    </style>
+</head>
+<body>
+<div class="imgBx">
+    <input type="checkbox">
+    <span class="bg1"></span>
+    <span class="bg2"></span>
+    <div class="bg"></div>
+</div>
+</body>
+</html>

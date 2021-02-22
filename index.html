@@ -3,32 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <title>每日練習 UI 設計</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+        .card {
+            cursor: pointer;
+            width: 400px;
+            height: 300px;
+            border-radius: 7px;
+            /* x-位移 y-位移 模糊量 陰影長 陰影顏色 */
+            box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 10px;
+        }
+
+        .card .img {
+            overflow: hidden;
+            max-height: 250px;
+        }
+
+        .card img {
+            width: 400px;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .card:hover img {
+            transform: scale(1.4);
+        }
+
+        .title {
+            line-height: 50px;
+        }
+    </style>
 </head>
 <body>
 <h1>挑戰每日製作 UI 設計</h1>
-<a href="./glass-morphism-user-card/index.html" target="_blank">2020-12-31 : 毛玻璃卡片</a><br>
-<a href="./rotating-image-gallery/index.html" target="_blank">2020-01-05 : 旋轉相簿</a><br>
-<a href="./energy-button-hover-effect/index.html" target="_blank">2020-01-07 : 能量按鈕</a><br>
-<a href="./clip-path-button-hover-effects/index.html" target="_blank">2020-01-08 : Clip-path 按鈕</a><br>
-<a href="./custom-radio-button/index.html" target="_blank">2020-01-11 : 客製化單選按鈕</a><br>
-<a href="./liquid-loader-animation-effects/index.html" target="_blank">2020-01-14 : 流水效果 (Gooey)</a><br>
-<a href="./background-animation-effects/index.html" target="_blank">2020-01-15 : JS 拼圖動畫</a><br>
-<a href="./background-animation-effects/second.html" target="_blank">2020-01-18 : JS 拼圖動畫 2</a><br>
-<a href="./shiny-glass/index.html" target="_blank">2020-01-19 : 閃亮按鈕</a><br>
-<a href="./fontAwesome-icon-background-animation-effects/index.html" target="_blank">2020-01-24 : FontAwesome Icon 背景牆</a><br>
-<a href="./loading-animate/index.html" target="_blank">2020-01-27 : Loading 頁面</a><br>
-<a href="./loading-animate/index.html" target="_blank">2020-01-28 : 白色毛玻璃時鐘</a><br>
-<a href="./skew-box-border-hover/index.html" target="_blank">2020-01-29 : Skew 卡片背景</a><br>
-<a href="./responsive-navigation-menu/index.html" target="_blank">2020-02-03 : 響應式導航菜單</a><br>
-<a href="./hot-cup-css-animate/index.html" target="_blank">2020-02-08 : CSS 冒煙動畫</a><br>
-<a href="./change-bg-image-on-hover/index.html" target="_blank">2020-02-09 : hover 改變背景圖片</a><br>
-<a href="./circular-progress-bar/index.html" target="_blank">2020-02-11 : 圓形進度條</a><br>
-<a href="./bubbly-background-animation/index.html" target="_blank">2020-02-12 : 泡泡效果顯示圖片</a><br>
-<a href="./neon-light-text/index.html" target="_blank">2020-02-14 : 霓虹燈文字</a><br>
-<a href="./animated-heart/index.html" target="_blank">2020-02-15 : 愛心背景動畫</a><br>
-<a href="./scroll-effect/airplane/index.html" target="_blank">2020-02-16 : 捲動飛行的飛機</a><br>
-<a href="./text-animate/first.html" target="_blank">2020-02-17 : 文字動畫</a><br>
-<a href="./text-animate/second.html" target="_blank">2020-02-18 : 散亂的文字</a><br>
-<a href="./scroll-effect/clip-path/index.html" target="_blank">2020-02-21 : 捲動揭密藏鏡人</a><br>
+<div class="container">
+    <div class="card" v-for="card in infos" :key="card.uuid" @click="openLink(card.link)">
+        <div class="img">
+            <img :src="card.imgUrl" alt="圖片">
+        </div>
+        <span class="title">{{card.title}}</span>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    function _uuid() {
+        var d = Date.now();
+        if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+            d += performance.now(); //use high-precision timer if available
+        }
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+    }
+
+    const cardGenerator = (title, imgUrl, link) => ({uuid: _uuid(), imgUrl, link, title});
+
+
+    const App = {
+
+        methods:{
+
+            openLink(link){
+
+                window.open(link);
+            }
+        },
+
+        data() {
+
+            return {
+                infos: [
+                    cardGenerator('2020-12-31 : 毛玻璃卡片', './image-filper/image-filper.gif', './glass-morphism-user-card/index.html'),
+                    cardGenerator('2020-01-05 : 旋轉相簿', './image-filper/image-filper.gif', './rotating-image-gallery/index.html'),
+                    cardGenerator('2020-01-07 : 能量按鈕', './image-filper/image-filper.gif', './energy-button-hover-effect/index.html'),
+                    cardGenerator('2020-01-08 : Clip-path 按鈕', './image-filper/image-filper.gif', './clip-path-button-hover-effects/index.html'),
+                    cardGenerator('2020-01-11 : 客製化單選按鈕', './image-filper/image-filper.gif', './glass-morphism-user-card/index.html'),
+                    cardGenerator('2020-01-14 : 流水效果 (Gooey)', './image-filper/image-filper.gif', './liquid-loader-animation-effects/index.html'),
+                    cardGenerator('2020-01-15 : JS 拼圖動畫', './image-filper/image-filper.gif', './background-animation-effects/index.html'),
+                    cardGenerator('2020-01-18 : JS 拼圖動畫 2', './image-filper/image-filper.gif', './background-animation-effects/second.html'),
+                    cardGenerator('2020-01-19 : 閃亮按鈕', './image-filper/image-filper.gif', './shiny-glass/index.html'),
+                    cardGenerator('2020-01-24 : FontAwesome Icon 背景牆', './image-filper/image-filper.gif', './fontAwesome-icon-background-animation-effects/index.html'),
+                    cardGenerator('2020-01-27 : Loading 頁面', './image-filper/image-filper.gif', './loading-animate/index.html'),
+                    cardGenerator('2020-01-28 : 白色毛玻璃時鐘', './image-filper/image-filper.gif', './analog-clock/index.html'),
+                    cardGenerator('2020-01-29 : Skew 卡片背景', './image-filper/image-filper.gif', './skew-box-border-hover/index.html'),
+                    cardGenerator('2020-02-03 : 響應式導航菜單', './image-filper/image-filper.gif', './responsive-navigation-menu/index.html'),
+                    cardGenerator('2020-02-08 : CSS 冒煙動畫', './image-filper/image-filper.gif', './hot-cup-css-animate/index.html'),
+                    cardGenerator('2020-02-09 : hover 改變背景圖片', './image-filper/image-filper.gif', './change-bg-image-on-hover/index.html'),
+                    cardGenerator('2020-02-11 : 圓形進度條', './image-filper/image-filper.gif', './circular-progress-bar/index.html'),
+                    cardGenerator('2020-02-12 : 泡泡效果顯示圖片', './image-filper/image-filper.gif', './bubbly-background-animation/index.html'),
+                    cardGenerator('2020-02-14 : 霓虹燈文字', './image-filper/image-filper.gif', './neon-light-text/index.html'),
+                    cardGenerator('2020-02-15 : 愛心背景動畫', './image-filper/image-filper.gif', './animated-heart/index.html'),
+                    cardGenerator('2020-02-16 : 捲動飛行的飛機', './image-filper/image-filper.gif', './scroll-effect/airplane/index.html'),
+                    cardGenerator('2020-02-17 : 文字動畫', './image-filper/image-filper.gif', './text-animate/first.html'),
+                    cardGenerator('2020-02-18 : 散亂的文字', './image-filper/image-filper.gif', './text-animate/second.html'),
+                    cardGenerator('2020-02-21 : 捲動揭密藏鏡人', './image-filper/image-filper.gif', './scroll-effect/clip-path/index.html'),
+                    cardGenerator('2020-02-22 : CSS 圖片翻頁效果', './image-filper/image-filper.gif', './image-filper/index.html'),
+                ]
+            }
+        },
+    }
+
+    createApp(App).mount('.container');
+</script>
 </body>
 </html>
