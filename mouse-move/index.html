@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animated Eyes Follow Mouse Cursor 02 | Vanilla Javascript Mousemove</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(#f2761e, #ef4921);
+        }
+
+        .box {
+            display: flex;
+        }
+
+        .eye {
+            position: relative;
+            display: block;
+            height: 120px;
+            width: 120px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 5px 45px rgba(0, 0, 0, 0.2),
+            inset 0 0 15px #f2761e,
+            inset 0 0 25px #f2761e;
+            margin: 0 20px;
+        }
+
+        .eye::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 35px;
+            transform: translate(-50%, -50%);
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            border: 10px solid #2196f3;
+            background-color: #000;
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="eye"></div>
+    <div class="eye"></div>
+</div>
+
+<script>
+    const eyeball = () => {
+        const eyes = document.querySelectorAll('.eye');
+        eyes.forEach(eye => {
+
+            const x = eye.getBoundingClientRect().left + eye.clientWidth / 2;
+            const y = eye.getBoundingClientRect().top + eye.clientHeight / 2;
+
+            const radian = Math.atan2(event.pageX - x, event.pageY - y);  // radian : [ -π , π ]
+            const rotation = (radian * (180 / Math.PI) * -1) + 270;
+            eye.style.transform = `rotate(${rotation}deg)`;
+        })
+    }
+
+    document.querySelector('body').addEventListener('mousemove', eyeball);
+</script>
+</body>
+</html>
