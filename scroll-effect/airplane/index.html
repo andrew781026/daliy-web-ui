@@ -9,12 +9,16 @@
             --top: 0;
             --left: 0;
             --scroll: 0;
-            --fontSize: 10em;
+            --text-scale: calc(1 - var(--scroll) / 10);
         }
 
         /* width */
         ::-webkit-scrollbar {
             width: 0;
+        }
+
+        body {
+            margin: 0;
         }
 
         .cloud {
@@ -30,9 +34,10 @@
 
         .text {
             color: white;
-            font-size: var(--fontSize);
+            font-size: 10vw;
             text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
             margin-right: 0.5em;
+            transform: scale(var(--text-scale));
         }
 
         /* 讓捲動控制 z 軸大小 */
@@ -41,7 +46,7 @@
             min-height: 300vh;
         }
 
-        .cat {
+        .airplane {
             position: fixed;
             left: calc(100vw - var(--left));
             top: var(--top);
@@ -54,14 +59,12 @@
 </head>
 <body>
 <div class="cloud">
-    <span class="text">SCROLL</span>
-    <span class="text">TO</span>
-    <span class="text">FLY</span>
+    <span class="text">SCROLL TO FLY</span>
 </div>
 
 <!-- 超人飛地球 -->
 <div class="container">
-    <img class="cat" src="airplane.png"/>
+    <img class="airplane" src="airplane.png"/>
 </div>
 
 <script>
@@ -75,7 +78,6 @@
         console.table({scrollTop, totalHeight, totalWidth});
 
         document.documentElement.style.setProperty('--scroll', (scrollTop / totalHeight) * 10);
-        document.documentElement.style.setProperty('--fontSize', `${10 - (scrollTop / totalHeight) * 10}em`);
         document.documentElement.style.setProperty('--top', `${(scrollTop / totalHeight) * viewHeight}px`);
         document.documentElement.style.setProperty('--left', `${(scrollTop / totalHeight) * viewWidth}px`);
 
