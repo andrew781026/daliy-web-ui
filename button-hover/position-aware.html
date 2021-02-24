@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>POSITION AWARE BUTTON</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button {
+
+            cursor: pointer;
+            line-height: 70px;
+            text-align: center;
+            position: relative;
+            height: 70px;
+            width: 200px;
+            border: 1px solid #95e816;
+            color: #95e816;
+            font-weight: 900;
+            font-size: 24px;
+            transition: all 1s;
+            overflow: hidden;
+        }
+
+        .button span {
+
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background-color: #0e1623;
+            transform: translate(-50%, -50%);
+            transition: all 1s;
+            z-index: -1;
+        }
+
+        .button:hover span {
+            width: 250%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+<div class="button">
+    <span></span>
+    POSITION AWARE
+</div>
+<script>
+    const btn = document.querySelector('.button');
+    const span = document.querySelector('.button span');
+
+
+
+    btn.addEventListener('mouseenter', e => {
+
+        // 取得 button 在畫面上的 ( x , y ) 位置
+        var rect = btn.getBoundingClientRect();
+        // console.table(rect.top, rect.right, rect.bottom, rect.left);
+
+        // 取得目前 滑鼠 在畫面上的 ( x , y ) 位置
+        const relX = e.pageX - rect.left;
+        const relY = e.pageY - rect.top;
+
+        span.style.left = `${relX}px`
+        span.style.top = `${relY}px`
+    })
+
+    btn.addEventListener('mouseout', e => {
+
+        // 取得 button 在畫面上的 ( x , y ) 位置
+        var rect = btn.getBoundingClientRect();
+        // console.table(rect.top, rect.right, rect.bottom, rect.left);
+
+        // 取得目前 滑鼠 在畫面上的 ( x , y ) 位置
+        const relX = e.pageX - rect.left;
+        const relY = e.pageY - rect.top;
+
+        span.style.left = `${relX}px`
+        span.style.top = `${relY}px`
+    })
+
+
+</script>
+</body>
+</html>

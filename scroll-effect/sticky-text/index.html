@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sticky Text Full Page Scrolling Effects | Pure CSS Scroll Effects 2</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<section class="container" id="app">
+    <div :id="bgInfo.id" v-for="bgInfo in bgInfos" :key="bgInfo.id" class="sec sec-bg"
+         :style="{'--color':bgInfo.color,'--img':bgInfo.img}">
+        <div v-html="bgInfo.child"></div>
+    </div>
+    <div class="content">
+        <h2>
+            <span v-for="(str ,index) in text.split('')" :style="`--i:${index+startIdx}`" :key="str">
+                {{str}}
+            </span>
+        </h2>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        data() {
+
+            return {
+                startIdx: 1,
+                text: 'Sticky',
+                bgInfos: [
+                    {
+                        id: 'keyboard',
+                        color: '#ff0000',
+                        img: "url('../img/keyboard.jpg')",
+                        child: `<h3>Scroll Down</h3>`
+                    },
+                    {
+                        id: 'girl',
+                        color: '#00ff00',
+                        img: "url('../img/girl-read-book.jpg')",
+                    },
+                    {
+                        id: 'glass',
+                        color: '#ffff00',
+                        img: "url('../img/glass-book.jpg')",
+                    },
+                    {
+                        id: 'plant',
+                        color: '#f436ee',
+                        img: "url('../img/plant.jpg')",
+                    },
+                    {
+                        id: 'work',
+                        color: '#2d2ddc',
+                        img: "url('../img/work.jpg')",
+                    },
+                    {
+                        id: 'many-worker',
+                        color: '#810ccb',
+                        img: "url('../img/many-worker.jpg')",
+                    },
+                    {
+                        id: 'phone-screen',
+                        color: '#22ce54',
+                        img: "url('../img/phone-screen.jpg')",
+                    },
+                    {
+                        id: 'monitor',
+                        color: '#ec9832',
+                        img: "url('../img/monitor.jpg')",
+                        child: `<h3>Thanks For <br>Watching :)</h3>`
+                    },
+                ]
+            }
+        },
+    };
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>
