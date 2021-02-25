@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-image: url("farmer.jpg");
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginBox {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    height: 420px;
+    padding: 80px 40px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h2 {
+    font-size: 30px;
+    margin: 0;
+    padding: 0 0 20px 0;
+    color: #efed40;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-weight: 900;
+    color: #e2f7fa;
+}
+
+form input {
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    height: 40px;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+
+.loginBox input[type="text"],
+.loginBox input[type="password"] {
+
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+    padding-top: 14px;
+}
+
+.loginBox input[type="text"]::placeholder,
+.loginBox input[type="password"]::placeholder {
+
+    color: rgba(255,255,255,0.5);
+}
+
+.loginBox input[type="submit"] {
+
+    cursor: pointer;
+    background-color: #ff0057;
+    border-radius: 20px;
+    transition: all 0.1s;
+}
+
+.loginBox input[type="submit"]:hover {
+
+    background-color: #ff4d89;
+    transform: translateY(-2px);
+}
+
+.loginBox input[type="submit"]:active {
+
+    background-color: #b3003d;
+    transform: translateY(2px);
+}
+
+.loginBox a {
+
+    color: #e2f7fa;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}

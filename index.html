@@ -64,7 +64,7 @@
     <div class="card" v-for="card in infos" :key="card.uuid" @click="openLink(card.link)">
         <div class="img">
             <img v-if="card.imgUrl" :src="card.imgUrl" alt="圖片">
-            <iframe :src="card.link">
+            <iframe :src="card.link" loading="lazy">
                 你的瀏覽器不支援 iframe
             </iframe>
         </div>
@@ -115,7 +115,7 @@
                     cardGenerator('2020-01-18 : JS 拼圖動畫 2', './background-animation-effects/bg-animate-02.gif', './background-animation-effects/second.html'),
                     cardGenerator('2020-01-19 : 閃亮按鈕', './shiny-glass/shiny-glass.gif', './shiny-glass/index.html'),
                     cardGenerator('2020-01-24 : FontAwesome Icon 背景牆', './fontAwesome-icon-background-animation-effects/icon-hover-bg.gif', './fontAwesome-icon-background-animation-effects/index.html'),
-                    cardGenerator('2020-01-27 : Loading 頁面', './loading-animate/loading-animate.gif', './loading-animate/index.html'),
+                    cardGenerator('2020-01-27 : Loading 頁面', '', './loading-animate/index.html'),
                     cardGenerator('2020-01-28 : 白色毛玻璃時鐘', '', './analog-clock/index.html'),
                     cardGenerator('2020-01-29 : Skew 卡片背景', '', './skew-box-border-hover/index.html'),
                     cardGenerator('2020-02-03 : 響應式導航菜單', '', './responsive-navigation-menu/index.html'),
@@ -132,6 +132,7 @@
                     cardGenerator('2020-02-22 : CSS 圖片翻頁效果', './image-filper/image-filper.gif', './image-filper/index.html'),
                     cardGenerator('2020-02-23 : JS 滑鼠轉動眼睛', '', './mouse-move/index.html'),
                     cardGenerator('2020-02-24 : 捲動顯示文字', '', './scroll-effect/sticky-text/index.html'),
+                    cardGenerator('2020-02-25 : 透明的登入表單', '', './login/transparent-login-form/index.html'),
                 ]
             }
         },
