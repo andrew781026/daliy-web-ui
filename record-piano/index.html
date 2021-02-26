@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>電子鋼琴</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            user-select: none;
+            display: flex;
+        }
+
+        .key {
+            cursor: pointer;
+            height: 120px;
+            width: 30px;
+            background-image: linear-gradient(lightgray, white);
+            box-shadow: inset 0 0 4px 1px rgba(0, 0, 0, 0.9);
+            border-radius: 0 0 6px 6px;
+            color: #848282;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px;
+        }
+
+        .key:hover {
+            box-shadow: inset 0 0 4px 3px rgba(0, 0, 0, 0.9);
+        }
+
+        .key:active {
+            transform: translateY(5px);
+        }
+
+        .key.active {
+            background-color: #00b3ff;
+            box-shadow: inset 0 0 4px 3px rgba(0, 0, 0, 0.9);
+            transform: translateY(5px);
+        }
+
+        .key .top {
+            transform: translateY(-30px);
+        }
+
+        .key .big-text {
+
+            font-size: 20px;
+        }
+
+        .key .small-text {
+
+            font-size: 6px;
+        }
+    </style>
+</head>
+<body id="app">
+<div class="container">
+
+    <div class="key" :class="[ activeTexts.includes(key.text) && 'active' ]" v-for="key in keys" :key="key.uuid">
+        <div class="top">{{key.shortcut}}</div>
+        <div class="bottom">
+            <span class="big-text">{{key.text.split('')[0]}}</span>
+            <span class="small-text">{{key.text.split('')[1]}}</span>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    function _uuid() {
+        var d = Date.now();
+        if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+            d += performance.now(); //use high-precision timer if available
+        }
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+    }
+
+    const keyGenerator = (text, shortcut, name, sound) => ({uuid: _uuid(), text, shortcut, name, sound});
+
+    const App = {
+
+        created() {
+
+            document.addEventListener('keydown', this.handleKeyDown)
+        },
+
+        beforeDestroy() {
+
+            document.removeEventListener('keydown', this.handleKeyDown)
+        },
+
+        methods: {
+
+            playTargetKey(text) {
+
+                const item = this.keys.find(item => item.text === text)
+
+                const audio = new Audio(item.sound);
+                audio.play();
+
+                this.activeTexts.push(item.text)
+
+                setTimeout(() => {
+
+                    this.activeTexts = this.activeTexts.filter(text => text !== item.text);
+
+                }, 200)
+            },
+
+            handleKeyDown(event) {
+
+                const keyStr = event.key
+
+                const item = this.keys.find(({shortcut}) => keyStr.toUpperCase() === shortcut)
+
+                if (item) this.playTargetKey(item.text)
+            },
+        },
+
+        data() {
+            return {
+                activeTexts: [],
+                keys: [
+                    keyGenerator('C3', 'Q', 'Do', './sounds/1.wav'),
+                    keyGenerator('D3', 'W', 'Re', './sounds/2.wav'),
+                    keyGenerator('E3', 'E', 'Me', './sounds/3.wav'),
+                    keyGenerator('F3', 'R', 'Fa', './sounds/4.wav'),
+                    keyGenerator('G3', 'T', 'So', './sounds/5.wav'),
+                    keyGenerator('A3', 'Y', 'La', './sounds/6.wav'),
+                    keyGenerator('B3', 'U', 'Si', './sounds/7.wav'),
+                    keyGenerator('C4', 'I', 'Do', './sounds/8.wav'),
+                    keyGenerator('D4', 'O', 'Re', './sounds/9.wav'),
+                    keyGenerator('E4', 'P', 'Me', './sounds/10.wav'),
+                    keyGenerator('F4', '[', 'Fa', './sounds/11.wav'),
+                    keyGenerator('G4', ']', 'So', './sounds/12.wav'),
+                    keyGenerator('A4', '\\', 'La', './sounds/13.wav'),
+                    keyGenerator('B4', '7', 'Si', './sounds/14.wav'),
+                    keyGenerator('C5', '8', 'Do', './sounds/15.wav'),
+                ]
+            }
+        }
+    }
+
+    const app = createApp(App).mount('#app');
+    // app.config.devtools = true
+</script>
+</body>
+</html>
