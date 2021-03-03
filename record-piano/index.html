@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>電子鋼琴</title>
+    <!-- 參考資料 : https://keithwhor.com/music/ -->
     <style>
         * {
             box-sizing: border-box;
@@ -22,6 +23,7 @@
         }
 
         .key {
+            position: relative;
             cursor: pointer;
             height: 120px;
             width: 30px;
@@ -42,6 +44,28 @@
 
         .key:active {
             transform: translateY(5px);
+        }
+
+        .black-key {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 80px;
+            width: 15px;
+            transform: translateX(50%);
+            box-shadow: 0 5px 1px 0 rgba(32, 32 ,32 , 0.2);
+            z-index: 3;
+            background-color: #070707;
+        }
+
+        .black-key:hover {
+            background-color: #f5f509;
+            transform: translateX(50%);
+        }
+
+        .black-key:active {
+            background-color: #e81212;
+            transform: translateX(50%) translateY(5px);
         }
 
         .key.active {
@@ -74,6 +98,7 @@
             <span class="big-text">{{key.text.split('')[0]}}</span>
             <span class="small-text">{{key.text.split('')[1]}}</span>
         </div>
+        <div class="black-key"></div>
     </div>
 
 </div>
@@ -161,7 +186,6 @@
     }
 
     const app = createApp(App).mount('#app');
-    // app.config.devtools = true
 </script>
 </body>
 </html>

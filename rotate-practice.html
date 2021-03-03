@@ -8,6 +8,7 @@
 
     body {
         user-select: none;
+        overflow: hidden;
     }
 
     .outer {
@@ -51,6 +52,48 @@
 
         transform: perspective(250px) rotateY(45deg);
     }
+
+    .box3 {
+        cursor: pointer;
+        border-radius: 6px;
+        position: relative;
+        left: 400px;
+        text-align: center;
+        color: white;
+        font-size: 20px;
+    }
+
+    .box3 .inner{
+        position: absolute;
+        cursor: pointer;
+        background: linear-gradient(90deg,#d017e3, #e7c210);
+        border-radius: 6px;
+        height: 150px;
+        width: 150px;
+        line-height: 150px;
+        text-align: center;
+        color: white;
+        font-size: 20px;
+
+        perspective: 250px;
+        transform-origin: left;
+        transition: transform 3s;
+        transform: rotateX(30deg);
+    }
+
+    /* 參考資料 : https://www.itread01.com/content/1543228804.html */
+    .box3 .inner:active {
+        transform: rotateX(30deg) rotateY(-180deg);
+    }
+
+    .box3 .inner:nth-child(1):active {
+        transition-delay: 0.1s;
+    }
+
+    .box3 .inner:nth-child(2):active {
+        transition-delay: 0.4s;
+    }
+
 </style>
 <body>
 <div class="outer">
@@ -58,6 +101,14 @@
 </div>
 <div class="box2">
     rotateY(45deg)
+</div>
+<div class="box3">
+    <div class="inner">
+        第二頁
+    </div>
+    <div class="inner">
+        旋轉門
+    </div>
 </div>
 </body>
 </html>

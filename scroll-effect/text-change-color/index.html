@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3 Clip-path Transform Effects on Page Scroll 4 | Creative Text Scrolling Parallax Effects</title>
+    <link rel="stylesheet" href="./style/index.css">
+
+</head>
+<body>
+<div class="starter">
+    <h2 class="title">請向下捲動，文字變色 🤩</h2>
+    <p class="text">Scroll To See Magic 4</p>
+</div>
+<section id="bg">
+    <p class="text">Scroll To See Magic 4</p>
+</section>
+<div class="container">
+    <h2>Also Watch Part 1 and 2... Link in Video Description</h2>
+    <!-- 假文產生器 -->
+    <p>生，男人之美，請你以後不要在我面前說英文了，
+        錢不是問題，男孩窮著養，.我允許你走進我的世界，
+        如果多吃魚可以補腦讓人變聰明的話，我希望有一天能用鼠標雙擊我的錢包，
+        你們快點出名吧，就會有別的女人花你的錢，人怕出名豬怕壯，
+        男人之美，念了十幾年書，工作，受傷的總是不願意放手的那一個！
+        記住，你的項目感覺是一個生意，每次失敗好好接受教訓，
+        創業者光有激情和創新是不夠的，這世界上沒有優秀的理念，
+        沒有一個良好的過程，把你太太當合作夥伴，創業者的激情有的在表面上，
+        更不是一種高深空洞的理念，碰到災難第一個想到的是你的客戶，
+        創業者光有激情和創新是不夠的，什麼是團隊呢？
+        記住，你的項目感覺是一個生意，每次失敗好好接受教訓，創業者光有激情和創新是不夠的，
+        這世界上沒有優秀的理念，沒有一個良好的過程，把你太太當合作夥伴，
+        創業者的激情有的在表面上，更不是一種高深空洞的理念，
+        碰到災難第一個想到的是你的客戶，創業者光有激情和創新是不夠的，什麼是團隊呢？
+        不曉得是追慕不返母親的慈愛，透過了衣衫，隨他們任意侮弄蹂躪！
+        她們也使我，小琴，尤在你永不須躊躇你的服色與體態；你不妨搖曳著一頭的蓬草，自由與自在的時候，花草的顏色與香息裡尋得？
+        還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，還不賴，
+        在學期末之後，架構了一個網站寫好原始碼之後過來打分數，請他的交通大學資訊工程系朋友幫忙他，
+        看似完美，甚至他沒有出席過任何一堂課、呵呵，甚至他沒有出席過任何一堂課、呵呵，
+        架構了一個網站寫好原始碼之後過來打分數，看似完美，我是網頁設計課的同學，
+        在學期末之後，老師可不可以補交？</p>
+</div>
+<script>
+    window.addEventListener("scroll", () => {
+
+        const scrollTop = document.documentElement.scrollTop || window.pageYOfset || document.body.scrollTop;
+        const viewHeight = window.innerHeight;
+        const diameter = (scrollTop > 20) ? `${scrollTop - 20}px` : 0;
+        const move = `${(scrollTop / viewHeight) * 180}vw`;
+        document.documentElement.style.setProperty('--diameter', diameter);
+        document.documentElement.style.setProperty('--move', move);
+
+    }, false);
+</script>
+</body>
+</html>
