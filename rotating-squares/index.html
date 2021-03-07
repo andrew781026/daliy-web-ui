@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Colorful Rotating Squares CSS Animation Effect | Html CSS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        section {
+            pointer-events: none;
+            animation: changeBgColor 8s steps(1) infinite;
+        }
+
+        .square {
+            width: 10vmin;
+            height: 10vmin;
+            border: 2px solid black;
+        }
+
+        .inner {
+            animation: inner-rotate 1s linear infinite;
+        }
+
+        .middle {
+            pointer-events: auto;
+            bottom: 0;
+            cursor: pointer;
+            position: relative;
+            background-color: #ecf3f5;
+            animation: outer-rotate 1s linear infinite;
+            transition: all 0.5s;
+        }
+
+        section:hover {
+            animation-play-state: paused;
+        }
+
+        .middle:hover {
+            bottom: 30px;
+            animation-play-state: paused;
+        }
+
+        .middle:hover .inner {
+            animation-play-state: paused;
+        }
+
+        .top {
+            left: -3px;
+            top: calc(-100% - 6px);
+            position: absolute;
+            background-color: #087be0;
+            transform-origin: bottom right;
+        }
+
+        .bottom {
+            left: 0;
+            bottom: calc(-100% - 6px);
+            position: absolute;
+            background-color: #d90de0;
+            transform-origin: top left;
+        }
+
+        .left {
+            top: 0;
+            left: calc(-100% - 6px);
+            position: absolute;
+            background-color: #45ea08;
+            transform-origin: top right;
+        }
+
+        .right {
+            top: -3px;
+            right: calc(-100% - 6px);
+            position: absolute;
+            background-color: #fae902;
+            transform-origin: bottom left;
+        }
+
+        @keyframes outer-rotate {
+            0% {
+                transform: rotate(90deg);
+            }
+            50%, 100% {
+                transform: rotate(0);
+            }
+        }
+
+        @keyframes inner-rotate {
+            0% {
+                transform: rotate(0);
+            }
+            50%, 100% {
+                transform: rotate(180deg);
+            }
+        }
+
+        @keyframes changeBgColor {
+            0% {
+                background-color: #ecf3f5;
+            }
+            25% {
+                background-color: #087be0;
+            }
+            50% {
+                background-color: #d90de0;
+            }
+            75% {
+                background-color: #45ea08;
+            }
+            100% {
+                background-color: #fae902;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<section>
+    <div class="middle square">
+        <div class="inner top square"></div>
+        <div class="inner bottom square"></div>
+        <div class="inner left square"></div>
+        <div class="inner right square"></div>
+    </div>
+</section>
+</body>
+</html>
