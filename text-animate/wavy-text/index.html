@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Javascript | Wavy Text CSS Animation Effects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #0c1b21;
+        }
+
+        section {
+            overflow-y: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        h2 {
+            white-space: nowrap;
+        }
+
+        #wave-1 span {
+            font-size: 5vw;
+            margin-left: 10px;
+            display: inline-block;
+            animation: wavy 2s ease-in-out infinite;
+            transform: translateY(10vh);
+            color: #69e7c1;
+        }
+
+        #wave-2 span {
+            font-size: 5vw;
+            margin-left: 10px;
+            display: inline-block;
+            animation: wavy-end 3s ease-in-out infinite;
+            color: #0ee8d6;
+        }
+
+        @keyframes wavy {
+            0% {
+                transform: translateY(10vh);
+                color: #69e7c1;
+            }
+            50% {
+                transform: translateY(-10vh);
+                color: #1953e7;
+            }
+            100% {
+                transform: translateY(10vh);
+                color: #0ee8d6;
+            }
+        }
+
+        @keyframes wavy-end {
+            0% {
+                transform: translateY(0);
+                color: #0ee8d6;
+            }
+            20% {
+                transform: translateY(-100px);
+                color: #0ee8d6;
+            }
+            60%, 100% {
+                transform: translateY(0);
+                color: #114de5;
+            }
+        }
+    </style>
+</head>
+<body>
+<section id="app">
+    <h2 id="wave-1">Effect 01 : 跳動的文字</h2>
+    <h2 id="wave-2">Effect 02 : 跳動的文字</h2>
+</section>
+
+<script>
+    const splitAndDelay = (id, delay) => {
+
+        // split text into letters
+        const text = document.querySelector(id);
+        const str = text.innerHTML;
+        text.innerHTML = str.replace(/\S/g, '<span>$&</span>');
+
+        const spans = text.querySelectorAll('span');
+
+        spans.forEach((span, i) => {
+            span.style.animationDelay = `${delay * i}ms`
+        })
+    }
+
+    splitAndDelay('#wave-1',100)
+    splitAndDelay('#wave-2',70)
+</script>
+</body>
+</html>
