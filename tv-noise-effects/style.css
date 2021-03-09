@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+section {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: calc(100% + 100px);
+    height: calc(100% + 100px);
+    background-image: repeating-linear-gradient(#111, #111 50%, #fff 50%, #fff);
+
+    /* 两个值 */
+    /* 第一个值指定图片的宽度，第二个值指定图片的高度 */
+    background-size: 5px 5px;
+
+    filter: url(#noise);
+}
+
+svg{
+
+}
