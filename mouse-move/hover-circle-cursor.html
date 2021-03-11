@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hover Circle Cursor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            cursor: none;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color: #333333;
+            color: white;
+        }
+
+        i {
+            font-size: 50px;
+            margin: 30px;
+        }
+
+        ul li {
+            display: inline;
+            list-style: none;
+        }
+
+        ul li:hover {
+            color: #1fe3e3;
+            transition: color 0.2s;
+        }
+
+        /* 	Selects every <ul> element that are preceded by a <p> element */
+        ul li:hover ~ .cursor-point {
+            height: 60px;
+            width: 60px;
+        }
+
+        .cursor-point {
+            left: 0;
+            top: 0;
+            height: 1px;
+            width: 1px;
+            border-radius: 50%;
+            position: fixed;
+            border: 2px solid white;
+            transition: width 0.3s, height 0.3s;
+            transform: translate(-50%,-50%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>
+        <i class="fas fa-home"></i>
+    </li>
+    <li>
+        <i class="fas fa-heart"></i>
+    </li>
+    <li>
+        <i class="fas fa-music"></i>
+    </li>
+    <li>
+        <i class="fas fa-mug-hot"></i>
+    </li>
+    <li>
+        <i class="fas fa-apple-alt"></i>
+    </li>
+    <div class="cursor-point"></div>
+</ul>
+<script>
+    document.querySelector('body').addEventListener('mousemove', e => {
+
+        document.querySelector('.cursor-point').style.left = `${e.clientX}px`;
+        document.querySelector('.cursor-point').style.top = `${e.clientY}px`;
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Animated Circle Text Effects using CSS & Javascript</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        section {
+            overflow: hidden;
+            cursor: none;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #111;
+        }
+
+        .text {
+
+            position: absolute;
+            color: white;
+            font-size: 1.5em;
+            user-select: none;
+            pointer-events: none;
+            animation: rotate-text 7.5s linear alternate infinite;
+        }
+
+        .text span {
+
+            position: absolute;
+            display: inline-block;
+            top: -110px;
+            transform-origin: 0 110px;
+        }
+
+        @keyframes rotate-text {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<section>
+    <h2 class="text">--\--/--圓圈形狀的文字--\--/--</h2>
+</section>
+
+<script>
+
+    // split text into letters
+    const text = document.querySelector('.text');
+    const str = text.innerHTML;
+    text.innerHTML = str.replace(/\S/g, '<span>$&</span>');
+
+    const spans = text.querySelectorAll('span');
+
+    spans.forEach((span, i) => {
+        span.style.transform = `rotate(${i * (360 / spans.length)}deg)`
+    })
+
+    document.querySelector('body').addEventListener('mousemove', e => {
+
+        document.querySelector('.text').style.left = `${e.clientX}px`;
+        document.querySelector('.text').style.top = `${e.clientY}px`;
+    })
+
+</script>
+</body>
+</html>
