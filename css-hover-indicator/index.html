@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animated Menu Indicator using CSS & Javascript | CSS Hover indicator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div id="app" class="navigation">
+    <ul>
+        <li class="list" v-for="menu in menus" :key="menu.id">
+            <a href="#">
+                <span class="icon" @mouseenter="changeBgColor(menu.color)">
+                    <i class="fa fas" :class="menu.icon"></i>
+                </span>
+                <span class="title">{{menu.label}}</span>
+            </a>
+        </li>
+    </ul>
+    <div class="bg" :style="{backgroundColor:bgColor}"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        mounted() {
+
+            this.loading = false;
+        },
+        methods:{
+            changeBgColor(bgColor){
+                this.bgColor = bgColor;
+            },
+        },
+        data() {
+            return {
+                bgColor: '#f53b57',
+                menus: [
+                    {
+                        id: 1,
+                        icon: 'fa-home',
+                        label: 'HOME',
+                        color:'#0ee8d6',
+                    },
+                    {
+                        id: 2,
+                        icon: 'fa-user',
+                        label: 'Profile',
+                        color:'#e214d7',
+                    },
+                    {
+                        id: 3,
+                        icon: 'fa-comment',
+                        label: 'Message',
+                        color:'#218cee',
+                    },
+                    {
+                        id: 4,
+                        icon: 'fa-question-circle',
+                        label: 'Help',
+                        color:'#ece92e',
+                    },
+                    {
+                        id: 5,
+                        icon: 'fa-cog',
+                        label: 'Setting',
+                        color:'#e02005',
+                    }
+                ]
+            }
+        },
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>

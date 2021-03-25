@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: all 0.5s;
+    background-color: #f53b57;
+}
+
+.navigation {
+    position: relative;
+    width: 350px;
+    height: 70px;
+    border-radius: 999px;
+    background-color: #ffffff;
+
+    /* offset-x | offset-y | blur-radius | color */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+}
+
+.navigation ul li {
+    position: relative;
+    list-style: none;
+    width: 70px;
+    height: 70px;
+    z-index: 1;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    color: #333;
+    font-weight: 700;
+}
+
+.navigation ul {
+    margin: 0;
+    padding: 0;
+}
+
+.icon {
+    position: relative;
+    display: block;
+    line-height: 75px;
+    text-align: center;
+    transition: all 0.5s;
+}
+
+.icon:hover ~ .title{
+    top: -70px;
+    opacity: 1;
+}
+
+.title {
+    position: absolute;
+    opacity: 0;
+    top: -50px;
+    left: 50%;
+    transform: translate(-50%, 15%);
+    background-color: #ffffff;
+    padding: 8px;
+    border-radius: 5px;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+    transition: all 0.5s;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: #ffffff transparent transparent transparent;
+}
+
+.fa.fas {
+    font-size: 24px;
+}
+
+
+.icon .fa{
+    border-radius: 50%;
+    padding: 12px;
+}
+
+.list:nth-child(1) .icon:hover .fa{
+    background-color: #0ee8d6;
+}
+
+.list:nth-child(2) .icon:hover .fa{
+    background-color: #e214d7;
+}
+
+.list:nth-child(3) .icon:hover .fa{
+    background-color: #218cee;
+}
+
+.list:nth-child(4) .icon:hover .fa{
+    background-color: #ece92e;
+}
+
+.list:nth-child(5) .icon:hover .fa{
+    background-color: #e02005;
+}
+
+.bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    transition: background-color 0.3s;
+}
