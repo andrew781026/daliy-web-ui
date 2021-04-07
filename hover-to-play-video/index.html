@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animated Hot Cup of Tea using Html & CSS only | CSS Animation Effects</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<main id="app">
+    <div class="container">
+        <div class="box">
+            <video class="clip" src="videos/clip1.mp4" muted loop></video>
+        </div>
+        <div class="box">
+            <video class="clip" src="videos/clip2.mp4" muted loop></video>
+        </div>
+        <div class="box">
+            <video class="clip" src="videos/clip3.mp4" muted loop></video>
+        </div>
+        <div class="box">
+            <video class="clip" src="videos/clip4.mp4" muted loop></video>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const clips = document.querySelectorAll('.clip');
+    for (const clip of clips) {
+        clip.addEventListener('mouseenter', () => clip.play());
+        clip.addEventListener('mouseout', () => clip.pause());
+    }
+</script>
+</body>
+</html>
