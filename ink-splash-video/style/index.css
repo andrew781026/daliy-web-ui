@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.container video {
+    position: absolute;
+    min-height: 100vh;
+    max-height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+.container video.mask {
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode */
+    mix-blend-mode: screen; /* 圖層混合模式 */
+    filter: brightness(2);
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Only Ink Splash Video Manipulation | CSS Effect</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div id="app" class="container">
+    <video src="./clip.mp4" type="video/mp4" autoplay muted loop></video>
+    <video class="mask" :src="videoSrc" autoplay muted loop></video>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const maskArr = [
+        './ink.mp4',
+        './Ink-Drop-1.mov',
+        './Ink-Drop-2.mp4',
+        './Ink-Drop-3.mp4',
+        './Ink-Drop-4.mp4',
+        './Flare.mov',
+        './Particles.mp4',
+        './Transition-1.mp4',
+    ];
+
+    const App = {
+
+        mounted() {
+
+            this.changeMask();
+            setInterval(() => this.changeMask(), 9000);
+        },
+        updated(){
+            console.log('videoSrc = ',this.videoSrc);
+        },
+        data() {
+
+            return {
+                videoSrc: ''
+            }
+        },
+        methods: {
+            changeMask() {
+                this.videoSrc = maskArr[Math.floor(Math.random() * 30) % maskArr.length];
+            }
+        }
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>
