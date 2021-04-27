@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 需要捲動時 , 利用 translate 做一頁一頁的切換 , 一般沒太大的問題 , 可是 ! 當最後一筆 , 換到第一筆時 , 這就有問題了 ! -->
+    <title>無限捲動的輪播動畫</title>
+    <!-- 參考資料 : https://css-tricks.com/infinite-all-css-scrolling-slideshow/ -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .tech-slideshow {
+            user-select: none;
+            height: 200px;
+            width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .container {
+            height: 100%;
+            transition: transform 0.3s;
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .tech-slideshow > .container > .slider {
+            height: 100%;
+            width: 800px;
+            margin-right: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid black;
+            font-size: 40px;
+        }
+
+        .tech-slideshow .btn {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            border-radius: 50%;
+            background-color: #9ca7a8;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+        }
+
+        .tech-slideshow .btn:hover {
+            background-color: #6d7475;
+        }
+
+        .tech-slideshow .btn:active {
+            background-color: #3e4243;
+            color: #f3faf3;
+        }
+
+        .tech-slideshow .goPrev {
+            left: 20px;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .tech-slideshow .goNext {
+            right: 20px;
+            transform: translateY(-50%);
+        }
+
+        /*
+        @media (max-width: 800px) {
+
+            .tech-slideshow {
+                width: 100vh;
+            }
+
+            .tech-slideshow > .container > .slider {
+                width: 100vh;
+            }
+        }
+         */
+    </style>
+</head>
+<body>
+<div class="tech-slideshow" id="app">
+    <div class="container" :style="{transitionDuration: `${duration}ms`,transform : `translateX(${translateX}px)`}">
+        <div class="slider">{{sliders[sliders.length - 1]}}</div>
+        <div v-for="(slide,index) in sliders" :key="index" class="slider">{{slide}}</div>
+        <div class="slider">{{sliders[0]}}</div>
+    </div>
+    <div class="btn goPrev" @click="goPrev">➤</div>
+    <div class="btn goNext" @click="goNext">➤</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+        methods: {
+            goPrev() {
+
+                this.translateX += this.sliderWidth;
+            },
+            goNext() {
+
+                this.translateX -= this.sliderWidth;
+            },
+        },
+        computed: {
+            sliderWidth() {
+                return (800 + 30);
+            },
+            firstMove() {
+                return this.sliderWidth * (-1);
+            },
+            twoLastMove() {
+                return this.sliderWidth * this.sliders.length * (-1);
+            },
+            lastMove() {
+                return this.sliderWidth * (this.sliders.length + 1) * (-1);
+            },
+        },
+        watch: {
+            duration(newValue, oldValue) {
+
+
+            },
+            translateX(newValue, oldValue) {
+
+                if (newValue === 0 && oldValue === this.firstMove) {
+
+                    this.duration = 0;
+                    this.translateX = this.lastMove;
+
+                } else if (newValue === this.lastMove && oldValue === this.twoLastMove) {
+
+                    this.duration = 0;
+                    this.translateX = 0;
+
+                } else if (newValue === 0 && oldValue === this.lastMove) {
+
+                    setTimeout(() => {
+                        this.duration = 300;
+                        this.translateX = this.firstMove;
+                    }, 50)
+
+                } else if (newValue === this.lastMove && oldValue === 0) {
+
+                    setTimeout(() => {
+                        this.duration = 300;
+                        this.translateX = this.twoLastMove;
+                    }, 50)
+
+                } else this.duration = 300;
+            }
+        },
+        data() {
+
+            const geneSliders = length => Array(length).fill('').map((item, index) => `Slider_${index + 1}`);
+
+            return {
+                duration: 0,
+                translateX: this.sliderWidth * (-1),
+                sliders: geneSliders(5)
+            }
+        }
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>
