@@ -87,7 +87,6 @@
     <div class="btn goNext" @click="goNext">➤</div>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
 <script>
     const {createApp} = Vue;
@@ -104,9 +103,6 @@
             },
         },
         computed: {
-            sliderWidth() {
-                return (800 + 30);
-            },
             firstMove() {
                 return this.sliderWidth * (-1);
             },
@@ -118,10 +114,6 @@
             },
         },
         watch: {
-            duration(newValue, oldValue) {
-
-
-            },
             translateX(newValue, oldValue) {
 
                 if (newValue === 0 && oldValue === this.firstMove) {
@@ -153,11 +145,13 @@
         },
         data() {
 
+            const sliderWidth = Math.min(800 + 30);
             const geneSliders = length => Array(length).fill('').map((item, index) => `Slider_${index + 1}`);
 
             return {
+                sliderWidth,
                 duration: 0,
-                translateX: this.sliderWidth * (-1),
+                translateX: sliderWidth * (-1),
                 sliders: geneSliders(5)
             }
         }
