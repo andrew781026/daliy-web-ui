@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ring Of Fire | CSS and SVG Animation Effects</title>
+    <link rel="stylesheet" href="style/index.css">
+</head>
+<body>
+<div class="container">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <svg>
+        <filter id="wavy">
+            <feTurbulence x="0" y="0" baseFrequency="0.009" numOctaves="5" seed="2"></feTurbulence>
+            <feDisplacementMap in="SourceGraphic" scale="30"></feDisplacementMap>
+        </filter>
+    </svg>
+</div>
+</body>
+</html>
