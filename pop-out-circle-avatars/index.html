@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--    參考資料 : https://www.youtube.com/watch?v=mi-p_q2J8Ek-->
+    <title>CSS Only Pop-Out Circle Avatars | Circle Pop Out Image Effect</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            min-height: 100vh;
+            background-color: #555454;
+        }
+
+        .box {
+            position: relative;
+            width: 300px;
+            height: 450px;
+            overflow: hidden;
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: transparent;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 100px 0 40px #555454;
+        }
+
+        .box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            box-sizing: border-box;
+            border-radius: 50%;
+            border: 6px solid transparent;
+            border-bottom: 6px solid #000;
+        }
+
+        .circle {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background-color: #ffff5c;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid black;
+        }
+
+        .box > .img,
+        .circle > .img {
+            position: absolute;
+            bottom: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="circle">
+        <img class="img" src="./man.png" alt="man">
+    </div>
+    <img class="img" src="./man.png" alt="man">
+</div>
+<div class="box">
+    <div class="circle">
+        <img class="img" src="./woman.png" alt="woman">
+    </div>
+    <img class="img" src="./woman.png" alt="woman">
+</div>
+</body>
+</html>
