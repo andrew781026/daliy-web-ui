@@ -35,10 +35,9 @@
         .bg {
             display: none;
             position: fixed;
-            left: -50vh;
-            top: -50vw;
-            width: 300vw;
-            height: 300vh;
+            left: -50vw;
+            top: -50vh;
+            width: 200vw;
             transform: rotate(-45deg);
         }
 
@@ -79,7 +78,7 @@
     </div>
 
     <div class="bg">
-        <img src="./bg-watermark.png" v-for="i in 1000" :key="`watermark-${i}`">
+        <img src="./bg-watermark.png" v-for="i in 200" :key="`watermark-${i}`">
     </div>
 
 </div>
