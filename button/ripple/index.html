@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 參考影片 : https://www.youtube.com/watch?v=QrizeQUOzcQ&t=521s -->
+    <title>Button Ripple Animation in HTML CSS and JavaScript</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div id="app">
+    <div class="buttons">
+        <a class="button" href="#">Button</a>
+        <a class="button" href="#">Button</a>
+        <button class="button">Button</button>
+        <button class="button">Button</button>
+    </div>
+</div>
+<script type="text/javascript">
+
+    const buttons = document.querySelectorAll('.button');
+
+    for (const button of buttons) {
+
+        button.addEventListener('click', e => {
+
+            e.preventDefault()
+
+            const overlay = document.createElement('span');
+            overlay.classList.add('overlay')
+
+            overlay.style.left = e.offsetX + 'px';
+            overlay.style.top = e.offsetY + 'px';
+
+            button.appendChild(overlay);
+
+            setTimeout(() => overlay.remove(), 500);
+        })
+
+    }
+</script>
+</body>
+</html>
