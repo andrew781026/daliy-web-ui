@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation Menu Using Html CSS & Javascript | Curved Outside in Active Tab</title>
+
+    <!-- ionicons : https://ionic.io/ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div id="app">
+    <div class="navigation">
+        <ul>
+            <li v-for="(nav,index) in navs"
+                :key="nav.id"
+                :class="[(active === index) && 'active']"
+                @mouseenter="active = index"
+            >
+                <a :href="nav.link">
+                    <ion-icon class="icon" :name="nav.icon"></ion-icon>
+                    <span class="list">{{nav.name}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        data() {
+            return {
+                active:0,
+                navs: [
+                    {
+                        id: 1,
+                        name: 'Home',
+                        link: '#',
+                        icon: 'home-outline',
+                    },
+                    {
+                        id: 2,
+                        name: 'Profile',
+                        link: '#',
+                        icon: 'person-outline',
+                    },
+                    {
+                        id: 3,
+                        name: 'Messages',
+                        link: '#',
+                        icon: 'chatbubbles-outline',
+                    },
+                    {
+                        id: 4,
+                        name: 'Settings',
+                        link: '#',
+                        icon: 'settings-outline',
+                    },
+                    {
+                        id: 5,
+                        name: 'Help',
+                        link: '#',
+                        icon: 'help-outline',
+                    },
+                    {
+                        id: 6,
+                        name: 'Password',
+                        link: '#',
+                        icon: 'lock-closed-outline',
+                    },
+                    {
+                        id: 7,
+                        name: 'Sign Out',
+                        link: '#',
+                        icon: 'log-out-outline',
+                    },
+                ]
+            }
+        }
+    }
+
+    createApp(App).mount('.navigation');
+</script>
+</body>
+</html>
