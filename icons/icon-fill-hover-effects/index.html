@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <!--
+     參考資料 :
+
+        https://www.youtube.com/watch?v=zB07dcKX9FA
+        https://www.youtube.com/watch?v=SVY3Mbq2L_I
+        https://www.youtube.com/watch?v=5OZAgdYmiHQ
+
+     -->
+    <meta charset="UTF-8">
+    <title>CSS Magic Line Icon Fill Hover Effects | Social Media Buttons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000400;
+        }
+
+        ul {
+            display: flex;
+            position: relative;
+        }
+
+        ul > li {
+            position: relative;
+            list-style-type: none;
+            margin: 0 20px;
+            cursor: pointer;
+        }
+
+        ul > li i.front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 6em;
+            height: 0;
+            overflow: hidden;
+            transition: 0.5s ease-in-out;
+            border-bottom: 4px solid transparent;
+        }
+
+        ul > li:hover i.front {
+            height: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .fab {
+            font-size: 6em;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li v-for="item in items" :key="item.id">
+        <a href="#">
+            <i class="fab front" :class="item.icon" :style="{color:item.color,borderColor:item.color}"></i>
+            <i class="fab back" :class="item.icon"></i>
+        </a>
+    </li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+
+
+    const App = {
+        data() {
+
+            return {
+                items: [
+                    {
+                        id: 1,
+                        icon: 'fa-twitter',
+                        color: '#1da1f2',
+                    },
+                    {
+                        id: 2,
+                        icon: 'fa-whatsapp',
+                        color: '#25d366',
+                    },
+                    {
+                        id: 3,
+                        icon: 'fa-youtube',
+                        color: '#ff0000',
+                    },
+                    {
+                        id: 4,
+                        icon: 'fa-facebook',
+                        color: '#1a4eea',
+                    },
+                    {
+                        id: 5,
+                        icon: 'fa-amazon',
+                        color: '#ead30c',
+                    },
+                ]
+            }
+        }
+    }
+
+    createApp(App).mount('ul');
+</script>
+</body>
+</html>
