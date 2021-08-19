@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 影片連結 : https://www.youtube.com/watch?v=C-FT0znGGHw&t=104s -->
+    <title>2D to 3D | CSS 3D Layered Image Hover Effects</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div class="imgBx">
+    <img :src="`./cat-img-${randomNum}.jpg`" alt="cat-img.jpg"
+         v-for="id in layers" :key="id" :style="`--i:${id}`">
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        data() {
+            return {
+                layers: [-2, -1, 0, 1, 2],
+                randomNum: Math.floor(Math.random() * 20) % 4 + 1
+            }
+        }
+    }
+
+    createApp(App).mount('.imgBx');
+</script>
+</body>
+</html>

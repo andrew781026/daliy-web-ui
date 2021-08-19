@@ -1,0 +1,39 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgBx {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: all 0.5s;
+}
+
+.imgBx:hover img {
+    top: calc(var(--i) * -50px);
+    left: 0;
+    transform: rotate(-30deg) skew(30deg);
+    box-shadow: -20px 20px 20px rgba(0, 0, 0, 0.4);
+    opacity: calc((var(--i) + 4) * 0.17);
+}
