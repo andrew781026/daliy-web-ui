@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Text Typing Menu Item Hover Effects | CSS Typewriter Animation</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+
+<ul>
+    <li v-for="(menu,index) in menus" :key="index">
+        <span>&times;</span>
+        <a href="#" :data-text="menu" :style="`--i:${getLength(menu)}`">{{menu}}</a>
+    </li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        methods: {
+            getLength(word = '') {
+                return word.split('').length;
+            }
+        },
+
+        data() {
+            return {
+                menus: ['Home', 'About', 'Services', 'Typing Menu', 'Our Team', 'Contact Us']
+            }
+        }
+    }
+
+    const app = createApp(App).mount('body');
+</script>
+</body>
+</html>
