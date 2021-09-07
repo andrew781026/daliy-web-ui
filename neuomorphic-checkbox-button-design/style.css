@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ebf5fc;
+}
+
+ul {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    padding: 20px;
+    width: 240px;
+    background-color: #ebf5fc;
+    box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
+    3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul li {
+    position: relative;
+    list-style: none;
+    text-align: center;
+    margin: 15px;
+}
+
+ul li label {
+    position: relative;
+}
+
+
+ul li label input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+ul li label .icon-box {
+    width: 60px;
+    height: 60px;
+    background-color: #ebf5fc;
+    box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
+    3px 3px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+ul li label .icon-box i {
+    font-size: 2em;
+    color: #6a9bd8;
+}
+
+ul li label input[type='checkbox']:checked ~ .icon-box {
+    box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 1),
+    inset 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul li label input[type='checkbox']:checked ~ .icon-box i {
+    transform: scale(0.95);
+    filter: hue-rotate(90deg);
+}
