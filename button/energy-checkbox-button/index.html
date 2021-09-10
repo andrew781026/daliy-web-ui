@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <!-- https://www.youtube.com/watch?v=EQVXzwTilkY -->
+    <title>CSS Glowing Check Box Button Design | CSS Custom Checkbox Style with Fontawesome Icon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app">
+
+    <ul>
+        <li v-for="(icon,index) in icons" :key="index">
+            <label>
+                <input type="checkbox" name="">
+                <div class="icon-box">
+                    <i :class="icon"></i>
+                </div>
+            </label>
+        </li>
+    </ul>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        data() {
+
+            return {
+                icons: [
+                    'fas fa-phone',
+                    'fas fa-plane',
+                    'fas fa-moon',
+                    'fas fa-wifi',
+                    'fas fa-volume-up',
+                    'fab fa-bluetooth',
+                ]
+            }
+        },
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>
