@@ -2,17 +2,105 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>Pure Css Water Wave Loading Animation - Css Wave Effects - No Image or SVG for Wave effects</title>
+    <!-- 參考影片 : https://www.youtube.com/watch?v=K49-9Tfb6JU&t=304s -->
+    <title>CSS Pixel Image Effects | CSS Only Pixelated Tiles Image Art</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="wrap">
     <div class="box">
-        <img src="monalisa.jpg" alt="big">
+        <img src="monalisa.jpg" alt="big" class="origin">
     </div>
+    <!--
     <div class="box pixel">
         <img src="monalisa_pixel.jpg" alt="small">
     </div>
+    -->
+    <div class="box pixel">
+        <img class="no-img" alt="small">
+    </div>
+
+    <!--    <img src="//i.imgur.com/SHo6Fub.jpg" alt="big" width="300" height="234">-->
+    <!--    <canvas id="canvas" width=300></canvas>-->
+
+    <script>
+        // 參考資料 : https://stackoverflow.com/questions/19262141/resize-image-with-javascript-canvas-smoothly
+
+        // https://cloudinary.com/blog/cool_tricks_for_resizing_images_in_javascript
+        // https://www.liip.ch/en/blog/resizing-images-with-javascript
+
+        const getHalfQuality = (img, quality) => {
+
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            console.table({height: img.height, width: img.width})
+
+            // 設定目標的寬高
+            canvas.width = img.width * quality
+            canvas.height = img.height * quality
+
+            // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+            /**
+             * sx : 裁切 X 軸
+             * sy : 裁切 Y 軸
+             * sWidth : 裁切的範圍寬度
+             * sHeight : 裁切的範圍高度
+             */
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            // output the canvas pixels as an image. params: format, quality
+            const base64ResizedImage = canvas.toDataURL('image/jpeg', quality);
+            return base64ResizedImage
+        }
+
+        setTimeout(() => {
+
+            const aa = getHalfQuality(document.querySelector('img'), 0.2)
+            console.log('aa', aa)
+            document.querySelector('.no-img').src = aa;
+
+        }, 0)
+
+        /*
+        var img = new Image();
+
+        img.onload = function () {
+
+            // 1. 取得 image 的寬跟高 - 400 * 600
+
+            // 2. 將其轉換成 40 * 60 的 canvas
+
+            // 3. 將 canvas 中的資料轉換成圖片取出
+
+            var canvas = document.createElement("canvas");
+            canvas.width = 40
+            var ctx = canvas.getContext("2d");
+
+            // set size proportional to image
+            canvas.height = canvas.width * (img.height / img.width);
+
+            // step 1 - resize to 50%
+            var oc = document.createElement('canvas'),
+                octx = oc.getContext('2d');
+
+            oc.width = img.width * 0.5;
+            oc.height = img.height * 0.5;
+            octx.drawImage(img, 0, 0, oc.width, oc.height);
+
+            // step 2
+            octx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5);
+
+            // step 3, resize to final size
+            ctx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5, 0, 0, canvas.width, canvas.height);
+
+            // output the canvas pixels as an image. params: format, quality
+            this.base64ResizedImage = octx.toDataURL('image/jpeg', 0.85);
+        }
+        img.src = "//i.imgur.com/SHo6Fub.jpg";
+
+         */
+    </script>
 </div>
 </body>
 </html>
