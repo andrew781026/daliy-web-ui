@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- 參考影片 : https://www.youtube.com/watch?v=VircQpNTG1w -->
+    <title>CSS Only Intro Text Animation Effects | Simple Text Animation</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: radial-gradient(#93d9f9, #0c80b5);
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 70vh;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .text {
+
+            position: relative;
+            margin-top: 0;
+            color: #e0e9f4;
+            font-size: 8em;
+            user-select: none;
+            pointer-events: none;
+            animation: rotate-text 4s linear forwards infinite;
+        }
+
+        /* the text shadow */
+        .text::before {
+
+            position: absolute;
+            content: '';
+            top: calc(100% + 10vh);
+            left: -50%;
+            height: 70px;
+            width: 200%;
+            border-radius: 50%;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.2), transparent, transparent, transparent);
+        }
+
+        @keyframes rotate-text {
+            0% {
+                transform: rotateY(0) scale(20);
+                opacity: 0;
+            }
+            10% {
+                transform: rotateY(0) scale(1);
+                opacity: 1;
+            }
+            20% {
+                transform: rotateY(180deg) scale(1);
+                opacity: 1;
+            }
+            30% {
+                transform: rotateY(360deg) scale(1);
+                opacity: 1;
+            }
+            45% {
+                transform: rotateY(180deg) scale(1);
+                opacity: 1;
+            }
+            60% {
+                transform: rotateY(0) scale(1);
+                opacity: 1;
+            }
+            75% {
+                transform: rotateY(180deg) scale(1);
+                opacity: 1;
+            }
+            90% {
+                transform: rotateY(360deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: rotateY(360deg) scale(20);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<section>
+    <h2 class="text">Rotate Text</h2>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const textEl = document.querySelector('.text');
+
+        const doRotate = () => {
+
+            // 10 % -> 0deg   ->  Autumn
+            // 20 % -> 180deg ->  Spring
+            // 30 % -> 360deg ->  Autumn
+            // 45 % -> 180deg ->  Spring
+            // 60 % -> 0deg   ->  Autumn
+            // 75 % -> 180deg ->  Spring
+            // 90 % -> 360deg ->  Autumn
+
+            const setChangeFn = (percent, text) => setTimeout(() => textEl.innerHTML = text, (percent - 3) * 0.04 * 1000);
+
+            setChangeFn(10, 'Spring')
+            setChangeFn(20, 'Autumn')
+            setChangeFn(30, 'Spring')
+            setChangeFn(45, 'Autumn')
+            setChangeFn(60, 'Spring')
+            setChangeFn(75, 'Autumn')
+            setChangeFn(90, 'Spring')
+            setChangeFn(100, 'Autumn')
+        }
+
+        setInterval(doRotate, 4000)
+        doRotate()
+    })
+</script>
+</body>
+</html>
