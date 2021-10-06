@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 參考影片 : https://www.youtube.com/watch?v=LYgQXOV-x24 -->
+    <title>Awesome CSS Border Animation | Quick CSS3 Animation Effects</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #0e1538;
+        }
+
+        .box {
+            overflow: hidden;
+            position: relative;
+            width: 40vmin;
+            height: 50vmin;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+        }
+
+        .box h2 {
+            color: #fff;
+            font-size: 20vmin;
+            z-index: 10;
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 40%;
+            height: 200%;
+            width: 20vmin;
+            background-image: linear-gradient(#00ccff, #d400d4);
+            animation: rotate 2s linear infinite forwards;
+        }
+
+        .box::after {
+            content: '';
+            position: absolute;
+            width: calc(100% - 10px);
+            height: calc(100% - 10px);
+            background-color: #000;
+            border-radius: 16px;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<section>
+    <div class="box">
+        <h2>02</h2>
+    </div>
+</section>
+</body>
+</html>
