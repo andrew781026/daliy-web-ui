@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 參考影片 : https://www.youtube.com/watch?v=H7AAuNIPL7Q&ab_channel=OnlineTutorials -->
+    <title>Corner Text Parallax Effects using CSS & Vanilla Javascript | Website Header Effects</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div id="app">
+    <section @mousemove="mousemove">
+        <div class="skew1">
+            <h2 class="layer" :style="`--i:${x}px`">Corner Text</h2>
+        </div>
+        <div class="textBox">
+            <div class="skew2">
+                <h2 class="layer" :style="`--i:${x}px`">Corner Text</h2>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script type="text/javascript">
+
+    const {createApp} = Vue;
+
+    const App = {
+
+        methods: {
+            mousemove(e) {
+
+                this.x = window.innerWidth/2 - e.pageX;
+            },
+        },
+        data() {
+            return {
+                x: 0,
+            }
+        }
+    }
+
+    const app = createApp(App).mount('#app');
+</script>
+</body>
+</html>
