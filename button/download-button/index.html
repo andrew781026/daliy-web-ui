@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 參考影片 : https://www.youtube.com/watch?v=H7AAuNIPL7Q&ab_channel=OnlineTutorials -->
+    <title>Corner Text Parallax Effects using CSS & Vanilla Javascript | Website Header Effects</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<div id="app">
+    <section>
+        <div class="skew1">
+            <h2>Corner Text</h2>
+        </div>
+        <div class="textBox">
+            <div class="skew2">
+                <h2>Corner Text</h2>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+
+    const buttons = document.querySelectorAll('.button');
+
+    for (const button of buttons) {
+
+        button.addEventListener('click', e => {
+
+            e.preventDefault()
+
+            const overlay = document.createElement('span');
+            overlay.classList.add('overlay')
+
+            overlay.style.left = e.offsetX + 'px';
+            overlay.style.top = e.offsetY + 'px';
+
+            button.appendChild(overlay);
+
+            setTimeout(() => overlay.remove(), 500);
+        })
+
+    }
+</script>
+</body>
+</html>

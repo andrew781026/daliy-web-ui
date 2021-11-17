@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- https://stackoverflow.com/questions/19363759/how-to-make-rounded-tabs-with-css -->
+    <title>CSS | tabs-beveled-corners</title>
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body id="app">
+<div class="tabs">
+    <div class="tab" v-for="(tab,index) in tabs" :key="index" :class="(active === index) &&'active'">{{tab}}</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+    const {createApp} = Vue;
+
+    const App = {
+
+        data() {
+            return {
+                tabs: ['一般', '特殊', '雷電', '火焰', '冰凍',],
+                active: 2,
+            }
+        }
+    }
+
+    createApp(App).mount('#app');
+</script>
+</body>
+</html>

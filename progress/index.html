@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 參考資料 : https://codepen.io/Curlmuhi/pen/YzqpmZe -->
+    <meta charset="UTF-8">
+    <title>SVG Circle Progress Bar</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+        background: #03a9f4;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        display: flex;
+    }
+
+    .box {
+        background: #fff;
+        width: 300px;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        flex-direction: column;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, .4);
+        transition: transform .2s;
+    }
+
+    .box .percent {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    .box .percent svg {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    .box .percent svg circle {
+        width: 100%;
+        height: 100%;
+        fill: none;
+        stroke-width: 10;
+        stroke: #000;
+        transform: translate(5px, 5px);
+        stroke-dasharray: 440;
+        stroke-dashoffset: 440;
+        stroke-linecap: round;
+        transition: all 0.3s;
+    }
+
+    #back-circle {
+        stroke-dashoffset: 0;
+        stroke: #f3f3f3;
+    }
+
+    #front-circle {
+        stroke-dashoffset: calc(440 - (440 * 87) / 100); /* 全滿為 stroke-dashoffset : 440 , 440-440*87% = 剩下的部分  */
+        stroke: #03a9f4;
+    }
+
+    svg:hover #front-circle {
+        stroke-dashoffset: 0;
+    }
+
+    .box .percent .num {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        color: #111;
+    }
+
+    .box .percent .num h2 {
+        font-size: 48px;
+    }
+
+    .box .percent .num h2 span {
+        font-size: 24px;
+    }
+
+    .box .text {
+        padding: 10px 0 0;
+        color: #999;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+</style>
+<body>
+<div class="box">
+    <div class="percent">
+        <svg>
+            <circle cx="70" cy="70" r="70" id="back-circle"></circle>
+            <circle cx="70" cy="70" r="70" id="front-circle"></circle>
+        </svg>
+        <div class="num">
+            <h2>87<span>%</span></h2>
+        </div>
+    </div>
+    <h2 class="text">Progress</h2>
+</div>
+</body>
+</html>
