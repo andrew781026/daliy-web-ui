@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+section {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    background-color: #000;
+}
+
+div {
+    position: absolute;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(mariro.png);
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+p {
+    margin: 0;
+    font-size: 1.5em;
+    letter-spacing: -0.05em;
+    line-height: 0.7em;
+    background-image: url(mariro.png), url(mariro.png), url(mariro.png);
+    background-position: center;
+    background-attachment: fixed;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-blend-mode: color-dodge;
+    -webkit-background-clip: text;
+    color: transparent;
+}
