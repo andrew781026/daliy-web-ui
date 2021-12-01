@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    position: relative;
+    height: 60vh;
+    width: 20vw;
+    border-radius: 8px;
+    box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+
+.card .box {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.card .box .ribbon {
+    position: absolute;
+    transform: rotate(-45deg) translateY(-50%);
+    height: 40px;
+    width: 150%;
+    background-color: #62baea;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.card .box .square-left {
+    position: absolute;
+    left:0;
+    bottom:0;
+    height: 10px;
+    width:10px;
+    background-color: #4a98bf;
+}
+
+.card .box .square-top {
+    position: absolute;
+    right:0;
+    top:0;
+    height: 10px;
+    width:10px;
+    background-color: #4a98bf;
+}
