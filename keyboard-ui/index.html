@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <!-- 參考影片 : https://www.youtube.com/watch?v=H_vE1mY2j2g -->
+  <title>CSS Only Keyboard Keys UI Design | CSS Speed Code</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+  <template v-for="(v,i) in keys" :key="i">
+    <br v-if="v.label === '\n'">
+    <span v-else :class="`${v.class} ${v.key === pressedKey ?'keydown':''}`">
+      <i>{{v.label}}</i>
+    </span>
+  </template>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+  const {createApp} = Vue;
+
+  const App = {
+
+    mounted() {
+
+      document.addEventListener('keydown', this.handleKeyDown)
+      document.addEventListener('keyup', this.handleKeyUp)
+    },
+    beforeDestroy() {
+
+      document.removeEventListener('keydown', this.handleKeyDown)
+      document.removeEventListener('keyup', this.handleKeyUp)
+    },
+
+    methods: {
+      handleKeyDown(e) {
+
+        if (e.key) this.pressedKey = e.key.toUpperCase();
+      },
+      handleKeyUp() {
+
+        this.pressedKey = null
+      },
+    },
+
+    data() {
+      return {
+        pressedKey: null,
+        keys: [
+          {label: 'C', key: 'C'},
+          {label: 'S', key: 'S'},
+          {label: 'S', key: 'S'},
+          {label: '\n'},
+          {label: 'o', key: 'O'},
+          {label: 'n', key: 'N'},
+          {label: 'l', key: 'L'},
+          {label: 'y', key: 'Y'},
+          {label: '', class: 'w-full', key: ' '},
+        ]
+      }
+    }
+  }
+
+  createApp(App).mount('.wrapper');
+</script>
+</body>
+</html>
