@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 參考文章 : https://ld246.com/article/1607394370445 -->
+    <title>列印樣板</title>
+    <link href="https://printjs-4de6.kxcdn.com/print.min.css" rel="stylesheet"/>
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js" type="text/javascript"></script>
+    <style>
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            box-sizing: border-box
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+            display: block
+        }
+
+        body {
+            line-height: 1;
+            font-size: 12px;
+            font-family: PingFangTC, Verdana, Arial, Helvetica, sans-serif, "新細明體"
+        }
+
+        ol, ul {
+            list-style: none
+        }
+
+        blockquote, q {
+            quotes: none
+        }
+
+        blockquote:before, blockquote:after {
+            content: '';
+            content: none
+        }
+
+        q:before, q:after {
+            content: '';
+            content: none
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        input[type=submit], input[type=reset], input[type=button] {
+            filter: chroma(color=#000)
+        }
+
+        img {
+            vertical-align: bottom
+        }
+
+        h1 {
+            font-size: 18px
+        }
+
+        h2 {
+            font-size: 14px
+        }
+
+        h3 {
+            font-size: 12px
+        }
+
+        .mb-1 {
+            margin-bottom: 10px
+        }
+
+        .mb-2 {
+            margin-bottom: 20px
+        }
+
+        .main {
+            position: relative;
+            text-align: center;
+            margin: auto;
+            width: 647px;
+            height: 1024px;
+            padding-top: 20px
+        }
+
+        .main .title-box {
+            margin-bottom: 30px
+        }
+
+        .main .buyer-box {
+            position: relative;
+            padding: 0 20px;
+            text-align: left;
+            margin-bottom: 10px
+        }
+
+        .main .buyer-box p {
+            font-size: 12px;
+            margin-bottom: 5px
+        }
+
+        .main .buyer-box span {
+            position: absolute;
+            right: 20px;
+            bottom: -5px
+        }
+
+        .main .copy-mask {
+            position: absolute;
+            top: 400px;
+            left: 230px;
+            display: inline-block;
+            width: 200px;
+            height: 150px;
+            background: url("../../images/member/watermark-copy.png") no-repeat center/200px;
+            -webkit-print-color-adjust: exact
+        }
+
+        .main .receipt-table {
+            padding: 0 10px
+        }
+
+        .main .receipt-table .main-table {
+            width: 100%;
+            border: 2px solid #000;
+            font-size: 12px
+        }
+
+        .main .receipt-table .main-table #trTable td:last-child {
+            padding: 0 2px
+        }
+
+        .main .receipt-table .main-table th {
+            border: 1px solid #000;
+            line-height: 24px;
+            font-size: 12px
+        }
+
+        .main .receipt-table .main-table th:first-child {
+            width: 200px
+        }
+
+        .main .receipt-table .main-table th:nth-of-type(2) {
+            width: 75px
+        }
+
+        .main .receipt-table .main-table th:nth-of-type(3), .main .receipt-table .main-table th:nth-of-type(4) {
+            width: 93px
+        }
+
+        .main .receipt-table .main-table th:last-child {
+            width: 160px
+        }
+
+        .main .receipt-table .main-table td {
+            text-align: left;
+            border: 1px solid #000;
+            padding: 10px 2px;
+            word-break: break-all
+        }
+
+        .main .receipt-table .main-table td.inner {
+            padding: 0
+        }
+
+        .main .receipt-table .main-table td.tr {
+            text-align: right
+        }
+
+        .main .receipt-table .prd-table {
+            width: 100%;
+            height: 100%
+        }
+
+        .main .receipt-table .prd-table tr:last-child {
+            height: 100%
+        }
+
+        .main .receipt-table .prd-table td {
+            border-top: 0;
+            border-bottom: 0;
+            word-break: break-all;
+            padding: 5px 2px
+        }
+
+        .main .receipt-table .prd-table td:first-child {
+            border-left: 0;
+            padding: 0 5px;
+            width: 200px
+        }
+
+        .main .receipt-table .prd-table td:nth-of-type(2) {
+            width: 75px;
+            text-align: right
+        }
+
+        .main .receipt-table .prd-table td:nth-of-type(3), .main .receipt-table .prd-table td:nth-of-type(4) {
+            width: 93px;
+            text-align: right
+        }
+
+        .main .receipt-table .prd-table td:last-child {
+            border-right: 0
+        }
+
+        .main .receipt-table .inner-table {
+            border: none !important;
+            width: 100%
+        }
+
+        .main .receipt-table .inner-table td {
+            border-top: 0;
+            border-bottom: 0;
+            border-right: 0
+        }
+
+        .main .receipt-table .inner-table td:first-child {
+            border-left: 0
+        }
+
+        .main .receipt-table .inner-table td:first-of-type {
+            width: 120px !important
+        }
+
+        .main .receipt-table .inner-table td:nth-of-type(even) {
+            text-align: center;
+            width: 50px
+        }
+
+        .main .receipt-table .inner-table td:nth-of-type(odd) {
+            text-align: center;
+            width: 30px
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="title-box"><h1 class="mb-1">遠時數位科技股份有限公司</h1>
+        <h2 class="mb-1">電 子 發 票 證 明 聯</h2>
+        <h3>2021-11-17 格式 25</h3></div>
+    <div class="buyer-box"><p>發票號碼：HZ36215600</p>
+        <p>買　　方：新世紀資通股份有限公司</p>
+        <p>統一編號：70774626</p><span><p>第1頁/共3頁</p></span></div>
+    <div class="receipt-table">
+        <table class="main-table">
+            <tbody>
+            <tr>
+                <th>品　　　　　　　　　　名</th>
+                <th>數　量</th>
+                <th>單　價</th>
+                <th>金　額</th>
+                <th>備　　註</th>
+            </tr>
+            <tr id="trTable">
+                <td colspan="4" class="inner">
+                    <table class="prd-table" id="prdTable">
+                        <tbody>
+                        <tr>
+                            <td>三聯線上列印商品1</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品1</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品2</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品商品商品商品3</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品商品商品商品3</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品4一二三四五六</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品5一二三四五六</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品6一二三四五六</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品7一二三四五六</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品8商品商品商品</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品8商品商品商品</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品9_商品商品商品</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品9_商品商品商品</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品10_xxxx</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品10_xxxx</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品11_xxxx</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品11_xxxx</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品12</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品12</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品13</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品13</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品14</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品14</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品15</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品15</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品16</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品17_商品商品商</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品17_商品商品商</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品17_商品商品商</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品17_商品商品商</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>20211112500558<br>備註:friDay購物</td>
+            </tr>
+            <tr>
+                <td colspan="3">銷　　　　售　　　　額　　　　合　　　　計</td>
+                <td class="tr">5412</td>
+                <td>營業人蓋統一發票專用章</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="inner">
+                    <table class="inner-table" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td>營　業　稅</td>
+                            <td>應　稅</td>
+                            <td>✓</td>
+                            <td>零稅率</td>
+                            <td></td>
+                            <td>免　稅</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td class="tr">271</td>
+                <td rowspan="3">賣　　方:遠時數位科技股份有限公司<br><br> 統一編號:54349098<br><br> 地　　址:台北市內湖區瑞光路468號7樓</td>
+            </tr>
+            <tr>
+                <td colspan="3">總　　　　　　　　　　　　　　　　　　　計</td>
+                <td class="tr">5683</td>
+            </tr>
+            <tr>
+                <td colspan="4">總計新臺幣:伍仟陸佰捌拾參元整</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+<div class="main">
+    <div class="title-box" style="visibility: hidden;"><h1 class="mb-1">遠時數位科技股份有限公司</h1>
+        <h2 class="mb-1">電 子 發 票 證 明 聯</h2>
+        <h3>2021-11-17 格式 25</h3></div>
+    <div class="buyer-box"><span><p>第2頁/共3頁</p></span></div>
+    <div class="receipt-table">
+        <table class="main-table">
+            <tbody>
+            <tr>
+                <th>品　　　　　　　　　　名</th>
+                <th>數　量</th>
+                <th>單　價</th>
+                <th>金　額</th>
+                <th>備　　註</th>
+            </tr>
+            <tr id="trTable">
+                <td colspan="4" class="inner">
+                    <table class="prd-table" id="prdTable">
+                        <tbody>
+                        <tr>
+                            <td>三聯線上列印商品18_商品商品商</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品19_商品商品商</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品19_商品商品商</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品19_商品商品商</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品19_商品商品商</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品20_AAA</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品28_cccc</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品28_cccc</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品28_cccc</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品28_cccc</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品29_cccc</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品30_cccc</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品30_cccc</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品30_cccc</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品31_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品31_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品31_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品32_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品32_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品32_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品32_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品33_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品33_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品33_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品34_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品34_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品34_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品34_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品35_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>三聯線上列印商品35_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="tr"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="tr"></td>
+                <td rowspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="tr"></td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+<div class="main">
+    <div class="title-box" style="visibility: hidden;"><h1 class="mb-1">遠時數位科技股份有限公司</h1>
+        <h2 class="mb-1">電 子 發 票 證 明 聯</h2>
+        <h3>2021-11-17 格式 25</h3></div>
+    <div class="buyer-box"><span><p>第3頁/共3頁</p></span></div>
+    <div class="receipt-table">
+        <table class="main-table">
+            <tbody>
+            <tr>
+                <th>品　　　　　　　　　　名</th>
+                <th>數　量</th>
+                <th>單　價</th>
+                <th>金　額</th>
+                <th>備　　註</th>
+            </tr>
+            <tr id="trTable">
+                <td colspan="4" class="inner">
+                    <table class="prd-table" id="prdTable">
+                        <tbody>
+                        <tr>
+                            <td>三聯線上列印商品35_有加購</td>
+                            <td>1</td>
+                            <td>95.0</td>
+                            <td>95</td>
+                        </tr>
+                        <tr>
+                            <td>促銷(抵用券)折扣</td>
+                            <td>0</td>
+                            <td>0.0</td>
+                            <td>-305</td>
+                        </tr>
+                        <tr>
+                            <td>福利金折抵金額</td>
+                            <td>0</td>
+                            <td>0.0</td>
+                            <td>-78</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="tr"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="tr"></td>
+                <td rowspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="tr"></td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

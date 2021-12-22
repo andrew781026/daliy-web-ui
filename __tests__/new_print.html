@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列印樣板 - 2</title>
+    <style>
+
+        *, *::before, *::after {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            display: block;
+            background-color: #fff;
+            line-height: 1;
+            font-size: 12px;
+            font-family: PingFangTC, "微軟正黑體", Arial, Helvetica, sans-serif, "新細明體"
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        h1 {
+            font-size: 18px
+        }
+
+        h2 {
+            font-size: 14px
+        }
+
+        h3 {
+            font-size: 12px
+        }
+
+        .mt4 {
+            margin-top: 4px
+        }
+
+        .ml-12 {
+            margin-left: 12px
+        }
+
+        .w200 {
+            width: 200px
+        }
+
+        .w230 {
+            width: 230px
+        }
+
+        .mb-5 {
+            margin-bottom: 5px
+        }
+
+        .main {
+            position: relative;
+            text-align: center;
+            margin: auto;
+            width: 647px;
+            height: 1024px;
+            padding-top: 20px
+        }
+
+        .main .title-box {
+            margin-bottom: 30px
+        }
+
+        .main .buyer-box {
+            padding: 0 20px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            text-align: left
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact
+            }
+
+            .main {
+                page-break-after: always
+            }
+        }
+
+        .print-box {
+            position: relative;
+            padding: 0 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            text-align: left
+        }
+
+        .print-box p {
+            font-size: 12px;
+            margin-bottom: 5px
+        }
+
+        .print-box .right {
+            width: 230px
+        }
+
+        .print-box .right *:nth-child(2) {
+            margin-left: 12px
+        }
+
+        .stat-box {
+            display: flex;
+            justify-content: space-between
+        }
+
+        .stat-box > *:first-child {
+            width: 250px
+        }
+
+        .stat-box > *:last-child {
+            width: 285px
+        }
+
+        .receipt-table .main-table {
+            width: 100%;
+            border: 2px solid #000;
+            font-size: 12px
+        }
+
+        .receipt-table .main-table th {
+            vertical-align: middle;
+            border: 1px solid #000;
+            line-height: 24px;
+            font-size: 12px
+        }
+
+        .receipt-table .main-table th:nth-child(1) {
+            width: 100px
+        }
+
+        .receipt-table .main-table th:nth-child(2) {
+            width: 110px
+        }
+
+        .receipt-table .main-table th:nth-child(3) {
+            width: 115px
+        }
+
+        .receipt-table .main-table th:nth-child(4) {
+            width: 155px
+        }
+
+        .receipt-table .main-table th:nth-child(5) {
+            width: 167px
+        }
+
+        .receipt-table .main-table td {
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #000;
+            padding: 4px 2px;
+            word-break: break-all
+        }
+
+        .receipt-table .main-table td.text-left {
+            text-align: left
+        }
+
+        .receipt-table .main-table td.text-right {
+            text-align: right
+        }
+
+        .signature-box {
+            display: flex;
+            justify-content: flex-end
+        }
+
+        .signature-box p {
+            margin: 60px 10px 0;
+            padding-bottom: 10px;
+            width: 300px;
+            color: #9b9b9b;
+            border-bottom: 2px solid #000;
+            letter-spacing: 1px
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="title-box">
+        <h1 class="mb-1">遠時數位科技股份有限公司</h1>
+    </div>
+    <div class="buyer-box">
+        <div class="w200">
+            <p class="mb-5">供應商名稱：全虹企業股份有限公司</p>
+            <p class="ml-12 mb-5">統一編號：36057744</p>
+        </div>
+        <div class="w230">
+            <p class="mb-5">供應商編號：SEC040710000</p>
+            <p class="ml-12 mb-5">帳務區間：2021/09/30~2021/10/31</p>
+        </div>
+    </div>
+    <div class="stat-box">
+        <div class="receipt-table">
+            <table class="main-table">
+                <thead>
+                <tr>
+                    <th colspan="2">本期發票開立資訊</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="text-right">應開立未稅金額：</td>
+                    <td class="text-left">105,695,431</td>
+                </tr>
+                <tr>
+                    <td class="text-right">應開立稅額：</td>
+                    <td class="text-left">52,847,155</td>
+                </tr>
+                <tr>
+                    <td class="text-right">應開立含稅金額：</td>
+                    <td class="text-left">107,809,340</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="receipt-table">
+            <table class="main-table">
+                <thead>
+                <tr>
+                    <th colspan="2">遠時發票資訊</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="text-right">遠時公司抬頭：</td>
+                    <td class="text-left">遠時科技股份有限公司</td>
+                </tr>
+                <tr>
+                    <td class="text-right">遠時統一編號：</td>
+                    <td class="text-left">54349098</td>
+                </tr>
+                <tr>
+                    <td class="text-right">發票寄送地址：</td>
+                    <td class="text-left">114 台北市內湖區瑞光路468號7F</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="print-box">
+        <div class="left"></div>
+        <div class="right">
+            <p></p>
+            <p>列印時間：2021/11/26 19:10:05</p>
+        </div>
+    </div>
+    <div class="receipt-table">
+        <table class="main-table">
+            <thead>
+            <tr>
+                <th rowspan="2">項目</th>
+                <th colspan="2">訂單資料</th>
+                <th rowspan="2">調整金額(含稅)</th>
+                <th rowspan="2">應付金額(含稅)</th>
+            </tr>
+            <tr>
+                <th>訂單數</th>
+                <th>金額(含稅)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>本期託售出貨</td>
+                <td>6,117</td>
+                <td>74,034,804</td>
+                <td rowspan="4">-3,051</td>
+                <td rowspan="4">72,810,127</td>
+            </tr>
+            <tr>
+                <td>本期託售退貨</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>本期寄倉出貨</td>
+                <td>115</td>
+                <td>1,221,626</td>
+            </tr>
+            <tr>
+                <td>本期寄倉退貨</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="bg-gray-light">
+                <td colspan="4"><span>廠商開立 發票金額</span><span class="text-red">(含稅)</span><span>--請單獨開立發票</span></td>
+                <td>72,810,127</td>
+            </tr>
+            <tr>
+                <td>代收運費</td>
+                <td></td>
+                <td>2,476</td>
+                <td>-2,476</td>
+                <td>0</td>
+            </tr>
+            <tr class="bg-gray-light">
+                <td colspan="4"><span>廠商開立 發票金額</span><span class="text-red">(含稅)</span><span>--請單獨開立發票</span></td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>代收款</td>
+                <td></td>
+                <td>--</td>
+                <td>4,251</td>
+                <td>4,251</td>
+            </tr>
+            <tr class="bg-gray-light">
+                <td colspan="4"><span>廠商開立 發票金額</span><span class="text-red">(含稅)</span><span>--請單獨開立發票</span></td>
+                <td>4,251</td>
+            </tr>
+            <tr>
+                <td colspan="4"><span>廠商開立 發票金額</span><span class="text-red">(含稅)</span><span> 小計</span></td>
+                <td>72,814,378</td>
+            </tr>
+            <tr>
+                <td>活動贊助費</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>滿額折扣贊助費</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>折扣碼贊助費</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>折價券贊助費</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td rowspan="4">物流處理費</td>
+                <td>寄倉-物流費</td>
+                <td>0</td>
+                <td rowspan="3">0</td>
+                <td rowspan="3">7,257</td>
+            </tr>
+            <tr>
+                <td>寄倉-倉儲費</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>逆物流費用</td>
+                <td>7,257</td>
+            </tr>
+            <tr>
+                <td>託售-店配物流費</td>
+                <td>8,033</td>
+                <td>0</td>
+                <td>8,033</td>
+            </tr>
+            <tr>
+                <td>包裝耗材費</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>其他</td>
+                <td>懲罰性罰金</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>成交手續費</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>金流處理費</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>系統使用費</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>訂單處理費</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>銷售獎勵金</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>年度銷售獎勵金</td>
+                <td></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td colspan="4"><span>遠傳 friDay 開立 發票金額</span><span class="text-red">(含稅)</span></td>
+                <td>15,290</td>
+            </tr>
+            <tr>
+                <td colspan="4"><span>實際支付金額</span><span class="text-red">(含稅)</span></td>
+                <td>72,799,088</td>
+            </tr>
+            </tbody>
+        </table>
+        <p class="mt4">金流人員聯繫資訊：泰瑞莎、電話：02-7712-3838 分機 13799、電子信箱：christine_huang@friday.tw</p>
+    </div>
+    <div class="signature-box">
+        <p>供應商核對確認後用印處(大小章或發票章)</p>
+    </div>
+</div>
+</body>
+</html>
