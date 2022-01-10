@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  <title>建立一個 Alert 樣式</title>
+  <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+<button onclick="openErrorAlert()">錯誤</button>
+<button onclick="openSuccessAlert()">正確</button>
+<button onclick="openInfoAlert()">訊息</button>
+<button onclick="openWarningAlert()">警告</button>
+<div class="pop-up-container hide">
+  <div class="pop-up-container-root">
+    <div class="pop-up-box">
+      <div class="pop-up-icon">
+        <div class="alert-icons"></div>
+      </div>
+      <div class="pop-up-title">
+        這是 Modal
+      </div>
+      <div class="pop-up-content">
+        這是 pop-up-content
+        <br>
+        元神優道。
+
+        善比花的個身前子本過不快痛物。
+      </div>
+      <div class="pop-up-action">
+        <button onclick='closeModal()'>確定送出</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+  function openWarningAlert() {
+
+    showModal('warning');
+  }
+
+  function openErrorAlert() {
+
+    showModal('error');
+  }
+
+  function openSuccessAlert() {
+    showModal('success');
+  }
+
+  function openInfoAlert() {
+    showModal('info');
+  }
+
+  /**
+   * 顯示訊息處理狀況
+   * @param type 有 4 種 : success . warning . error . info
+   */
+  function showModal(type='success') {
+
+    const modalWrap = document.querySelector('.pop-up-container');
+    const alertIcon = document.querySelector('.alert-icons');
+
+    const popup = modalWrap.querySelector('.pop-up-box');
+
+    // modalWrap.style.display = 'flex';
+    modalWrap.classList.remove('hide');
+    // popup.style.transform = 'scale(0)';
+
+    alertIcon.classList.add(`alert-${type}`)
+
+    // setTimeout(() => popup.style.transform = 'scale(1)', 0)
+    popup.classList.add('bounceIn');
+    setTimeout(() => popup.classList.remove('bounceIn'), 800)
+  }
+
+  function closeModal() {
+
+    const modalWrap = document.querySelector('.pop-up-container');
+
+    const popup = modalWrap.querySelector('.pop-up-box');
+
+    // popup.style.transform = 'scale(0)';
+    popup.classList.add('bounceOut');
+
+    setTimeout(() => {
+      popup.classList.remove('bounceOut');
+      modalWrap.classList.add('hide');
+    }, 550)
+  }
+</script>
+</body>
+</html>
