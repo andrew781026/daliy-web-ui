@@ -34,42 +34,26 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
 <script>
-  function openWarningAlert() {
-
-    showModal('warning');
-  }
-
-  function openErrorAlert() {
-
-    showModal('error');
-  }
-
-  function openSuccessAlert() {
-    showModal('success');
-  }
-
-  function openInfoAlert() {
-    showModal('info');
-  }
+  const openWarningAlert = () => showModal('warning');
+  const openErrorAlert = () => showModal('error');
+  const openSuccessAlert = () => showModal('success');
+  const openInfoAlert = () => showModal('info');
 
   /**
    * 顯示訊息處理狀況
    * @param type 有 4 種 : success . warning . error . info
    */
-  function showModal(type='success') {
+  function showModal(type = 'success') {
 
     const modalWrap = document.querySelector('.pop-up-container');
     const alertIcon = document.querySelector('.alert-icons');
 
     const popup = modalWrap.querySelector('.pop-up-box');
 
-    // modalWrap.style.display = 'flex';
     modalWrap.classList.remove('hide');
-    // popup.style.transform = 'scale(0)';
 
-    alertIcon.classList.add(`alert-${type}`)
+    alertIcon.className = `alert-icons alert-${type}`
 
-    // setTimeout(() => popup.style.transform = 'scale(1)', 0)
     popup.classList.add('bounceIn');
     setTimeout(() => popup.classList.remove('bounceIn'), 800)
   }
@@ -80,7 +64,6 @@
 
     const popup = modalWrap.querySelector('.pop-up-box');
 
-    // popup.style.transform = 'scale(0)';
     popup.classList.add('bounceOut');
 
     setTimeout(() => {
