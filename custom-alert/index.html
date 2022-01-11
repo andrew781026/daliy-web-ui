@@ -10,23 +10,23 @@
 <button onclick="openSuccessAlert()">正確</button>
 <button onclick="openInfoAlert()">訊息</button>
 <button onclick="openWarningAlert()">警告</button>
-<div class="pop-up-container hide">
-  <div class="pop-up-container-root">
-    <div class="pop-up-box">
-      <div class="pop-up-icon">
+<div class="alert-container hide">
+  <div class="alert-container-root">
+    <div class="alert-box">
+      <div class="alert-icons-wrap">
         <div class="alert-icons"></div>
       </div>
-      <div class="pop-up-title">
+      <div class="alert-title">
         這是 Modal
       </div>
-      <div class="pop-up-content">
+      <div class="alert-content">
         這是 pop-up-content
         <br>
         元神優道。
 
         善比花的個身前子本過不快痛物。
       </div>
-      <div class="pop-up-action">
+      <div class="alert-action">
         <button onclick='closeModal()'>確定送出</button>
       </div>
     </div>
@@ -45,10 +45,10 @@
    */
   function showModal(type = 'success') {
 
-    const modalWrap = document.querySelector('.pop-up-container');
+    const modalWrap = document.querySelector('.alert-container');
     const alertIcon = document.querySelector('.alert-icons');
 
-    const popup = modalWrap.querySelector('.pop-up-box');
+    const popup = modalWrap.querySelector('.alert-box');
 
     modalWrap.classList.remove('hide');
 
@@ -60,9 +60,9 @@
 
   function closeModal() {
 
-    const modalWrap = document.querySelector('.pop-up-container');
+    const modalWrap = document.querySelector('.alert-container');
 
-    const popup = modalWrap.querySelector('.pop-up-box');
+    const popup = modalWrap.querySelector('.alert-box');
 
     popup.classList.add('bounceOut');
 

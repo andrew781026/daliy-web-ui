@@ -25,7 +25,7 @@ button:active {
   color: #fff;
 }
 
-.pop-up-container {
+.alert-container {
   min-height: 100vh;
   z-index: 4;
   display: flex;
@@ -36,7 +36,7 @@ button:active {
   top: 0;
 }
 
-.pop-up-container::before {
+.alert-container::before {
   content: "";
   position: fixed;
   width: 100%;
@@ -47,7 +47,7 @@ button:active {
   background-color: rgba(86, 86, 86, 0.75);
 }
 
-.pop-up-container-root {
+.alert-container-root {
   height: 100vh;
   width: 100vw;
   overflow: auto;
@@ -57,7 +57,7 @@ button:active {
   align-items: center;
 }
 
-.pop-up-box {
+.alert-box {
   margin: 2rem;
   border-radius: 0.5rem;
   z-index: 6;
@@ -66,13 +66,13 @@ button:active {
   min-width: 40rem;
 }
 
-.pop-up-box > .pop-up-icon {
+.alert-box > .alert-icons-wrap {
   padding: 3rem 1rem 0 1rem;
   display: flex;
   justify-content: center;
 }
 
-.pop-up-box > .pop-up-title {
+.alert-box > .alert-title {
   padding: 1rem;
   font-weight: bold;
   font-size: 2.5rem;
@@ -80,7 +80,7 @@ button:active {
   justify-content: center;
 }
 
-.pop-up-box > .pop-up-content {
+.alert-box > .alert-content {
   padding: 0 1rem;
   text-align: center;
   font-size: 1rem;
@@ -89,7 +89,7 @@ button:active {
   max-height: 600px;
 }
 
-.pop-up-box > .pop-up-action {
+.alert-box > .alert-action {
   display: flex;
   justify-content: center;
 }
@@ -322,4 +322,51 @@ button:active {
   }
 }
 
-/* --- .alert-icons ---- */
+/* --- button ---- */
+
+.alert-box button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+.alert-box button {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.alert-box button:disabled {
+  cursor: not-allowed;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.alert-box button {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.alert-box button:hover, .alert-box button:active {
+  color: #fff;
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.alert-box button:focus {
+  color: #fff;
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+  box-shadow: 0 0 0 0.25rem #98c1fe;
+}
