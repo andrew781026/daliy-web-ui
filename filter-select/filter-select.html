@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>可篩選下選單 WC 元件</title>
+  <link rel="stylesheet" href="./filter-select.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+
+    * {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: #64cfff;
+      margin: 0;
+    }
+
+  </style>
+
+</head>
+<body>
+
+<filter-select
+  placeholder='Search..'
+  scroll-height='130px'
+  allow-create
+  data-value='JQuery'
+  data-json='
+            [
+              {"value":"JQuery","text":"JQuery"},
+              {"value":"js","text":"JavaScript"},
+              {"value":"java","text":"Java"},
+              {"value":"Python","text":"python"},
+              {"value":"react","text":"React"},
+              {"value":"vue","text":"vue"},
+              {"value":"go","text":"go 🐈"},
+              {"value":"c++","text":"C++"},
+              {"value":"c#","text":"C#"}
+            ]
+          '
+>
+</filter-select>
+
+
+<filter-select placeholder='Search..'></filter-select>
+
+<script src="./dropdown-list.js" type="module"></script>
+<script src="./filter-select.js" type="module"></script>
+</body>
+</html>
