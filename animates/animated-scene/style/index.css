@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #eaeef0;
+}
+
+.scene {
+  position: relative;
+  width: 350px;
+  height: 250px;
+  background-color: #eaeef0;
+  border-radius: 20px;
+  box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.9),
+  8px 8px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sun {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 40px #ffff5b, 0 0 60px #ffff5b, 0 0 80px #ffff5b, 0 0 100px #ffff5b;
+}
+
+.road {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #333;
+}
+
+.road::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 10px;
+  background-color: #0d9e0d;
+}
+
+.road .road_line {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent 50%, #fff 50%, #fff 100%);
+  background-size: 20px;
+  animation: roadLine 0.2s linear infinite;
+}
+
+@keyframes roadLine {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: -20px;
+  }
+}
+
+.fa-van-shuttle {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  color: #fff;
+  font-size: 3.5em;
+  -webkit-text-stroke: 2px #000;
+  animation: animationVan 0.2s linear infinite;
+}
+
+@keyframes animationVan {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1px);
+  }
+}
+
+.fa-cloud {
+  position: absolute;
+  top: calc(15px * var(--i));
+  left: calc(15px * var(--i));
+  font-size: 2.5em;
+  color: #fff;
+  -webkit-text-stroke: 2px #000;
+  animation: animationCloud 3.5s linear infinite;
+  animation-delay: calc(-1s * var(--i));
+}
+
+@keyframes animationCloud {
+  0% {
+    transform: translateX(350px);
+  }
+  100% {
+    transform: translateX(-350px);
+  }
+}
+
+.fa-tree {
+  position: absolute;
+  bottom: 60px;
+  font-size: 2em;
+  color: #0d9e0d;
+  -webkit-text-stroke: 2px #000;
+  animation: animationCloud 7s linear infinite;
+  animation-delay: calc(-1s * var(--i));
+}
+
+.fa-mountain {
+  position: absolute;
+  bottom: 0;
+  font-size: 10em;
+  color: #8b3c23;
+  -webkit-text-stroke: 2px #000;
+  animation: animationCloud 15s linear infinite;
+  animation-delay: calc(-3s * var(--i));
+}

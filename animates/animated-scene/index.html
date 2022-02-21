@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- 參考資料 : https://www.youtube.com/watch?v=qta2QuYdMxk -->
+  <title>Html CSS Animation Effects | Animated Scene using FontAweosme</title>
+  <link rel="stylesheet" href="style/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+<div class="scene" id="app">
+  <div class="sun"></div>
+  <i class="fa-solid fa-mountain" v-for="m in mountains" :key="`mountain-${m}`" :style="`--i:${m}`"></i>
+  <div class="road">
+    <div class="road_line"></div>
+  </div>
+  <i class="fa-solid fa-cloud" v-for="c in clouds" :key="`cloud-${c}`" :style="`--i:${c}`"></i>
+  <i class="fa-solid fa-tree" v-for="t in trees" :key="`tree-${t}`" :style="`--i:${t}`"></i>
+  <i class="fa-solid fa-van-shuttle"></i>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+  const {createApp} = Vue;
+
+  const App = {
+
+    data() {
+      return {
+        clouds: [1, 2, 3, 4, 5],
+        trees: [1, 2, 3, 4, 5, 6, 7],
+        mountains: [1, 2, 3],
+      }
+    }
+  }
+
+  createApp(App).mount('#app');
+</script>
+</body>
+</html>
