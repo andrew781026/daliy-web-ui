@@ -1,184 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>每日練習 UI 設計</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <title>每日練習 UI 設計</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        .container {
+    .container {
 
-            /* 參考資料 : https://stackoverflow.com/questions/32802202/how-to-center-a-flex-container-but-left-align-flex-items#answer-60870221 */
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, max-content));
-            grid-gap: 16px;
-            justify-content: center;
-            min-height: 100vh;
-        }
+      /* 參考資料 : https://stackoverflow.com/questions/32802202/how-to-center-a-flex-container-but-left-align-flex-items#answer-60870221 */
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, max-content));
+      grid-gap: 16px;
+      justify-content: center;
+      min-height: 100vh;
+    }
 
-        .card {
-            cursor: pointer;
-            width: 400px;
-            height: 300px;
-            border-radius: 7px;
-            /* x-位移 y-位移 模糊量 陰影長 陰影顏色 */
-            box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin: 10px;
-        }
+    .card {
+      cursor: pointer;
+      width: 400px;
+      height: 300px;
+      border-radius: 7px;
+      /* x-位移 y-位移 模糊量 陰影長 陰影顏色 */
+      box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 10px;
+    }
 
-        .card .img {
-            overflow: hidden;
-            min-height: 250px;
-            max-height: 250px;
-            background-color: #555454;
-            border-radius: 7px 7px 0 0;
-        }
+    .card .img {
+      overflow: hidden;
+      min-height: 250px;
+      max-height: 250px;
+      background-color: #555454;
+      border-radius: 7px 7px 0 0;
+    }
 
-        .card img {
-            width: 400px;
-            height: 250px;
-            object-fit: contain;
-            transition: transform 0.3s;
-        }
+    .card img {
+      width: 400px;
+      height: 250px;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
 
-        .card:hover img {
-            transform: scale(1.4);
-        }
+    .card:hover img {
+      transform: scale(1.4);
+    }
 
-        .title {
-            line-height: 50px;
-        }
+    .title {
+      line-height: 50px;
+    }
 
-        iframe{
-            width: 400px;
-            height: 250px;
-        }
-    </style>
+    iframe {
+      width: 400px;
+      height: 250px;
+    }
+  </style>
 </head>
 <body>
 <h1>挑戰每日製作 UI 設計</h1>
 <div class="container">
-    <div class="card" v-for="card in infos" :key="card.uuid" @click="openLink(card.link)">
-        <div class="img">
-            <img v-if="card.imgUrl" :src="card.imgUrl" alt="圖片">
-            <iframe :src="card.link" loading="lazy">
-                你的瀏覽器不支援 iframe
-            </iframe>
-        </div>
-        <span class="title">{{card.title}}</span>
+  <div class="card" :ref="card.uuid" v-for="card in infos" :key="card.uuid" @click="openLink(card.link)">
+    <div class="img">
+      <img v-if="card.imgUrl" :src="card.imgUrl" alt="圖片">
+      <iframe loading="lazy" :data-src="card.link">
+        你的瀏覽器不支援 iframe
+      </iframe>
     </div>
+    <span class="title">{{card.title}}</span>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
 <script>
-    const {createApp} = Vue;
+  const {createApp} = Vue;
 
-    function _uuid() {
-        var d = Date.now();
-        if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
-            d += performance.now(); //use high-precision timer if available
-        }
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = (d + Math.random() * 16) % 16 | 0;
-            d = Math.floor(d / 16);
-            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-        });
+  function _uuid() {
+    var d = Date.now();
+    if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+      d += performance.now(); //use high-precision timer if available
     }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  }
 
-    const cardGenerator = (title, imgUrl, link) => ({uuid: _uuid(), imgUrl, link, title});
+  const cardGenerator = (title, imgUrl, link) => ({uuid: _uuid(), imgUrl, link, title});
 
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      const iframeEl = entry.target.querySelector('iframe');
+      if (entry.isIntersecting) iframeEl.src = iframeEl.dataset.src
+      else iframeEl.src = ''
+    });
+  });
 
-    const App = {
+  const App = {
 
-        methods:{
+    mounted() {
+      Object.values(this.$refs).forEach(el => observer.observe(el));
+    },
+    methods: {
 
-            openLink(link){
+      openLink(link) {
 
-                window.open(link);
-            }
-        },
+        window.open(link);
+      }
+    },
 
-        data() {
+    data() {
 
-            return {
-                infos: [
-                    cardGenerator('2021-01-01 : 毛玻璃卡片', '', './glass-morphism-user-card/index.html'),
-                    cardGenerator('2021-01-03 : 會放大縮小的圓形鼠標', '', './mouse-move/hover-circle-cursor.html'),
-                    cardGenerator('2021-01-05 : 旋轉相簿', './rotating-image-gallery/rotate-imgs.gif', './rotating-image-gallery/index.html'),
-                    cardGenerator('2021-01-07 : 能量按鈕', './energy-button-hover-effect/energy-button.gif', './energy-button-hover-effect/index.html'),
-                    cardGenerator('2021-01-08 : Clip-path 按鈕', './clip-path-button-hover-effects/clip-path-button.gif', './clip-path-button-hover-effects/index.html'),
-                    cardGenerator('2021-01-11 : 客製化單選按鈕(Custom Radio)', './custom-radio-button/energy-switcher.gif', './custom-radio-button/index.html'),
-                    cardGenerator('2021-01-14 : 流水效果 (Gooey)', './liquid-loader-animation-effects/gooey-liquid.gif', './liquid-loader-animation-effects/index.html'),
-                    cardGenerator('2021-01-15 : JS 拼圖動畫', './background-animation-effects/bg-animate-01.gif', './background-animation-effects/index.html'),
-                    cardGenerator('2021-01-18 : JS 拼圖動畫 2', './background-animation-effects/bg-animate-02.gif', './background-animation-effects/second.html'),
-                    cardGenerator('2021-01-19 : 閃亮按鈕', './shiny-glass/shiny-glass.gif', './shiny-glass/index.html'),
-                    cardGenerator('2021-01-24 : FontAwesome Icon 背景牆', './icons/fontAwesome-icon-background-animation-effects/icon-hover-bg.gif', './icons/fontAwesome-icon-background-animation-effects/index.html'),
-                    cardGenerator('2021-01-27 : Loading 頁面 - 閃亮邊界', '', './loading-animate/linear-energy/index.html'),
-                    cardGenerator('2021-01-28 : 白色毛玻璃時鐘', '', './animates/analog-clock/index.html'),
-                    cardGenerator('2021-01-29 : Skew 卡片背景', '', './skew-box-border-hover/index.html'),
-                    cardGenerator('2021-02-03 : 響應式導航菜單', '', './responsive-navigation-menu/index.html'),
-                    cardGenerator('2021-02-08 : CSS 冒煙動畫', './hot-cup-css-animate/hot-cup-coffee.gif', './hot-cup-css-animate/index.html'),
-                    cardGenerator('2021-02-09 : hover 改變背景圖片', '', './change-bg-image-on-hover/index.html'),
-                    cardGenerator('2021-02-11 : 圓形進度條', '', './circular-progress-bar/index.html'),
-                    cardGenerator('2021-02-12 : 泡泡效果顯示圖片', '', './bubbly-background-animation/index.html'),
-                    cardGenerator('2021-02-14 : 霓虹燈文字', '', './neon-effect/neon-light-text/index.html'),
-                    cardGenerator('2021-02-15 : 愛心背景動畫', '', './animates/animated-heart/index.html'),
-                    cardGenerator('2021-02-16 : 捲動飛行的飛機', '', './scroll-effect/airplane/index.html'),
-                    cardGenerator('2021-02-17 : 文字動畫', '', './text-animate/first.html'),
-                    cardGenerator('2021-02-18 : 散亂的文字', '', './text-animate/second.html'),
-                    cardGenerator('2021-02-21 : 捲動揭密藏鏡人', '', './scroll-effect/clip-path/index.html'),
-                    cardGenerator('2021-02-22 : CSS 圖片翻頁效果', './image-filper/image-filper.gif', './image-filper/index.html'),
-                    cardGenerator('2021-02-23 : JS 滑鼠轉動眼睛', '', './mouse-move/index.html'),
-                    cardGenerator('2021-02-24 : 捲動顯示文字', '', './scroll-effect/sticky-text/index.html'),
-                    cardGenerator('2021-02-25 : 透明的登入表單', '', './login/transparent-login-form/index.html'),
-                    cardGenerator('2021-02-26 : 彈奏的鋼琴', '', './record-piano/index.html'),
-                    cardGenerator('2021-03-01 : 捲動的變色文字', '', './scroll-effect/text-change-color/index.html'),
-                    cardGenerator('2021-03-02 : Loading 頁面 - 搖晃湖面', '', './loading-animate/wavy/index.html'),
-                    cardGenerator('2021-03-03 : 404 頁面 - 動畫文字', '', './page-404/animated-404-text/index.html'),
-                    cardGenerator('2021-03-06 : 動畫 - 旋轉的方塊', '', './rotating-squares/index.html'),
-                    cardGenerator('2021-03-08 : 跳動的文字', '', './text-animate/wavy-text/index.html'),
-                    cardGenerator('2021-03-09 : 電視雜訊', '', './tv-noise-effects/index.html'),
-                    cardGenerator('2021-03-10 : 旋轉的圓形文字', '', './text-animate/circle-text/index.html'),
-                    cardGenerator('2021-03-14 : Loading 頁面 - 閃亮圓形', '', './loading-animate/circle-energy/index.html'),
-                    cardGenerator('2021-03-24 : hover 改變背景顏色', '', './css-hover-indicator/index.html'),
-                    cardGenerator('2021-04-07 : hover 撥放影片', '', './hover-to-play-video/index.html'),
-                    cardGenerator('2021-04-23 : 影片與潑墨效果', '', './ink-splash-video/index.html'),
-                    cardGenerator('2021-04-26 : 頭尾相接的輪播', '', './scroll-effect/infinite-slider/index.html'),
-                    cardGenerator('2021-05-07 : 火焰圓環', '', './ring-of-fire/index.html'),
-                    cardGenerator('2021-05-12 : 圓形全身像', '', './pop-out-circle-avatars/index.html'),
-                    cardGenerator('2021-05-26 : 列印顯示浮水印', '', './print-as-watermark/index.html'),
-                    cardGenerator('2021-06-09 : 閃爍的文字', '', './neon-effect/glowing-text/index.html'),
-                    cardGenerator('2021-06-25 : 閃爍的捲動提示', '', './scroll-effect/page-scroll/index.html'),
-                    cardGenerator('2021-08-06 : 按鈕 Click 水波紋效果', '', './button/ripple/index.html'),
-                    cardGenerator('2021-08-09 : 有顏色的側選單', '', './curved-outside-in-active-tab/index.html'),
-                    cardGenerator('2021-08-14 : 會變色的 ICON', '', './icons/icon-fill-hover-effects/index.html'),
-                    cardGenerator('2021-08-19 : 2D - 3D 圖片變換', './image-3D-hover/CSS-3D-Layered-Image-Hover-Effects.gif', './image-3D-hover/index.html'),
-                    cardGenerator('2021-08-21 : CSS text Typing', './css-typing-text/css-typing-text.gif', './css-typing-text/index.html'),
-                    cardGenerator('2021-09-07 : neuomorphic 切換按鈕', './neuomorphic-checkbox-button-design/showcase.png', './neuomorphic-checkbox-button-design/index.html'),
-                    cardGenerator('2021-09-10 : energy 切換按鈕', './button/energy-checkbox-button/showcase.png', './button/energy-checkbox-button/index.html'),
-                    cardGenerator('2021-09-20 : 電影模式的倒數計時', '', './count-down/film-countdown-timer/index.html'),
-                    cardGenerator('2021-09-22 : 像素風蒙娜麗莎', '', './pixel-image/index.html'),
-                    cardGenerator('2021-10-01 : 文字旋轉變換', '', './text-animate/rotate-change/index.html'),
-                    cardGenerator('2021-10-06 : 旋轉的邊線', '', './border-animation/index.html'),
-                    cardGenerator('2021-10-12 : 按鈕 hover 顯示黑圈', '', './button/button-hover/position-aware.html'),
-                    cardGenerator('2021-11-03 : 轉角的移動文字', '', './text-animate/corner-text/index.html'),
-                    cardGenerator('2021-11-04 : 圖片的組合顯示', '', './ripped-paper/index.html'),
-                    cardGenerator('2021-11-17 : 發光的正方體', '', './rotate-3D-cube/index.html'),
-                    cardGenerator('2021-11-22 : 變換的 menu icon', '', './button/animated-menu/index.html'),
-                    cardGenerator('2021-11-23 : 變換的文字填滿圖片', '', './text-animate/text-portrait-effects/index.html'),
-                    cardGenerator('2021-12-01 : 緞帶效果', '', './ribbon/index.html'),
-                    cardGenerator('2021-12-22 : 鍵盤畫面', '', './keyboard-ui/index.html'),
-                    cardGenerator('2022-01-10 : Sweetalert 風格的 Alert', '', './custom-alert/index.html'),
-                    cardGenerator('2022-02-21 : 存 CSS 的開車場景', '', './animates/animated-scene/index.html'),
-                ]
-            }
-        },
-    }
+      return {
+        infos: [
+          cardGenerator('2021-01-01 : 毛玻璃卡片', '', './glass-morphism-user-card/index.html'),
+          cardGenerator('2021-01-03 : 會放大縮小的圓形鼠標', '', './mouse-move/hover-circle-cursor.html'),
+          cardGenerator('2021-01-05 : 旋轉相簿', './rotating-image-gallery/rotate-imgs.gif', './rotating-image-gallery/index.html'),
+          cardGenerator('2021-01-07 : 能量按鈕', './energy-button-hover-effect/energy-button.gif', './energy-button-hover-effect/index.html'),
+          cardGenerator('2021-01-08 : Clip-path 按鈕', './clip-path-button-hover-effects/clip-path-button.gif', './clip-path-button-hover-effects/index.html'),
+          cardGenerator('2021-01-11 : 客製化單選按鈕(Custom Radio)', './custom-radio-button/energy-switcher.gif', './custom-radio-button/index.html'),
+          cardGenerator('2021-01-14 : 流水效果 (Gooey)', './liquid-loader-animation-effects/gooey-liquid.gif', './liquid-loader-animation-effects/index.html'),
+          cardGenerator('2021-01-15 : JS 拼圖動畫', './background-animation-effects/bg-animate-01.gif', './background-animation-effects/index.html'),
+          cardGenerator('2021-01-18 : JS 拼圖動畫 2', './background-animation-effects/bg-animate-02.gif', './background-animation-effects/second.html'),
+          cardGenerator('2021-01-19 : 閃亮按鈕', './shiny-glass/shiny-glass.gif', './shiny-glass/index.html'),
+          cardGenerator('2021-01-24 : FontAwesome Icon 背景牆', './icons/fontAwesome-icon-background-animation-effects/icon-hover-bg.gif', './icons/fontAwesome-icon-background-animation-effects/index.html'),
+          cardGenerator('2021-01-27 : Loading 頁面 - 閃亮邊界', '', './loading-animate/linear-energy/index.html'),
+          cardGenerator('2021-01-28 : 白色毛玻璃時鐘', '', './animates/analog-clock/index.html'),
+          cardGenerator('2021-01-29 : Skew 卡片背景', '', './skew-box-border-hover/index.html'),
+          cardGenerator('2021-02-03 : 響應式導航菜單', '', './responsive-navigation-menu/index.html'),
+          cardGenerator('2021-02-08 : CSS 冒煙動畫', './hot-cup-css-animate/hot-cup-coffee.gif', './hot-cup-css-animate/index.html'),
+          cardGenerator('2021-02-09 : hover 改變背景圖片', '', './change-bg-image-on-hover/index.html'),
+          cardGenerator('2021-02-11 : 圓形進度條', '', './circular-progress-bar/index.html'),
+          cardGenerator('2021-02-12 : 泡泡效果顯示圖片', '', './bubbly-background-animation/index.html'),
+          cardGenerator('2021-02-14 : 霓虹燈文字', '', './neon-effect/neon-light-text/index.html'),
+          cardGenerator('2021-02-15 : 愛心背景動畫', '', './animates/animated-heart/index.html'),
+          cardGenerator('2021-02-16 : 捲動飛行的飛機', '', './scroll-effect/airplane/index.html'),
+          cardGenerator('2021-02-17 : 文字動畫', '', './text-animate/first.html'),
+          cardGenerator('2021-02-18 : 散亂的文字', '', './text-animate/second.html'),
+          cardGenerator('2021-02-21 : 捲動揭密藏鏡人', '', './scroll-effect/clip-path/index.html'),
+          cardGenerator('2021-02-22 : CSS 圖片翻頁效果', './image-filper/image-filper.gif', './image-filper/index.html'),
+          cardGenerator('2021-02-23 : JS 滑鼠轉動眼睛', '', './mouse-move/index.html'),
+          cardGenerator('2021-02-24 : 捲動顯示文字', '', './scroll-effect/sticky-text/index.html'),
+          cardGenerator('2021-02-25 : 透明的登入表單', '', './login/transparent-login-form/index.html'),
+          cardGenerator('2021-02-26 : 彈奏的鋼琴', '', './record-piano/index.html'),
+          cardGenerator('2021-03-01 : 捲動的變色文字', '', './scroll-effect/text-change-color/index.html'),
+          cardGenerator('2021-03-02 : Loading 頁面 - 搖晃湖面', '', './loading-animate/wavy/index.html'),
+          cardGenerator('2021-03-03 : 404 頁面 - 動畫文字', '', './page-404/animated-404-text/index.html'),
+          cardGenerator('2021-03-06 : 動畫 - 旋轉的方塊', '', './rotating-squares/index.html'),
+          cardGenerator('2021-03-08 : 跳動的文字', '', './text-animate/wavy-text/index.html'),
+          cardGenerator('2021-03-09 : 電視雜訊', '', './tv-noise-effects/index.html'),
+          cardGenerator('2021-03-10 : 旋轉的圓形文字', '', './text-animate/circle-text/index.html'),
+          cardGenerator('2021-03-14 : Loading 頁面 - 閃亮圓形', '', './loading-animate/circle-energy/index.html'),
+          cardGenerator('2021-03-24 : hover 改變背景顏色', '', './css-hover-indicator/index.html'),
+          cardGenerator('2021-04-07 : hover 撥放影片', '', './hover-to-play-video/index.html'),
+          cardGenerator('2021-04-23 : 影片與潑墨效果', '', './ink-splash-video/index.html'),
+          cardGenerator('2021-04-26 : 頭尾相接的輪播', '', './scroll-effect/infinite-slider/index.html'),
+          cardGenerator('2021-05-07 : 火焰圓環', '', './ring-of-fire/index.html'),
+          cardGenerator('2021-05-12 : 圓形全身像', '', './pop-out-circle-avatars/index.html'),
+          cardGenerator('2021-05-26 : 列印顯示浮水印', '', './print-as-watermark/index.html'),
+          cardGenerator('2021-06-09 : 閃爍的文字', '', './neon-effect/glowing-text/index.html'),
+          cardGenerator('2021-06-25 : 閃爍的捲動提示', '', './scroll-effect/page-scroll/index.html'),
+          cardGenerator('2021-08-06 : 按鈕 Click 水波紋效果', '', './button/ripple/index.html'),
+          cardGenerator('2021-08-09 : 有顏色的側選單', '', './curved-outside-in-active-tab/index.html'),
+          cardGenerator('2021-08-14 : 會變色的 ICON', '', './icons/icon-fill-hover-effects/index.html'),
+          cardGenerator('2021-08-19 : 2D - 3D 圖片變換', './image-3D-hover/CSS-3D-Layered-Image-Hover-Effects.gif', './image-3D-hover/index.html'),
+          cardGenerator('2021-08-21 : CSS text Typing', './css-typing-text/css-typing-text.gif', './css-typing-text/index.html'),
+          cardGenerator('2021-09-07 : neuomorphic 切換按鈕', './neuomorphic-checkbox-button-design/showcase.png', './neuomorphic-checkbox-button-design/index.html'),
+          cardGenerator('2021-09-10 : energy 切換按鈕', './button/energy-checkbox-button/showcase.png', './button/energy-checkbox-button/index.html'),
+          cardGenerator('2021-09-20 : 電影模式的倒數計時', '', './count-down/film-countdown-timer/index.html'),
+          cardGenerator('2021-09-22 : 像素風蒙娜麗莎', '', './pixel-image/index.html'),
+          cardGenerator('2021-10-01 : 文字旋轉變換', '', './text-animate/rotate-change/index.html'),
+          cardGenerator('2021-10-06 : 旋轉的邊線', '', './border-animation/index.html'),
+          cardGenerator('2021-10-12 : 按鈕 hover 顯示黑圈', '', './button/button-hover/position-aware.html'),
+          cardGenerator('2021-11-03 : 轉角的移動文字', '', './text-animate/corner-text/index.html'),
+          cardGenerator('2021-11-04 : 圖片的組合顯示', '', './ripped-paper/index.html'),
+          cardGenerator('2021-11-17 : 發光的正方體', '', './rotate-3D-cube/index.html'),
+          cardGenerator('2021-11-22 : 變換的 menu icon', '', './button/animated-menu/index.html'),
+          cardGenerator('2021-11-23 : 變換的文字填滿圖片', '', './text-animate/text-portrait-effects/index.html'),
+          cardGenerator('2021-12-01 : 緞帶效果', '', './ribbon/index.html'),
+          cardGenerator('2021-12-22 : 鍵盤畫面', '', './keyboard-ui/index.html'),
+          cardGenerator('2022-01-10 : Sweetalert 風格的 Alert', '', './custom-alert/index.html'),
+          cardGenerator('2022-02-21 : 存 CSS 的開車場景', '', './animates/animated-scene/index.html'),
+        ]
+      }
+    },
+  }
 
-    createApp(App).mount('.container');
+  createApp(App).mount('.container');
 </script>
 </body>
 </html>
