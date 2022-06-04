@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -161,7 +161,6 @@ button:active {
 }
 
 .alert-icons::before {
-  font-family: 'Be Vietnam Pro', sans-serif;
   align-items: center;
   font-size: 3.75em;
 }
@@ -172,7 +171,14 @@ button:active {
 }
 
 .alert-icons.alert-question::before {
-  content: '?';
+  content: '';
+  height: 80%;
+  width: 80%;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg id='Layer_1' enable-background='new 0 0 2000 2000' height='512' viewBox='0 0 2000 2000' width='512' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2387adbd'%3E%3Cpath d='m953.2 1383.7c-29.8 0-53.9-24.1-53.9-53.9 0-70.5 10-131.4 29.9-182.6 14.6-38.6 38.3-77.5 70.9-116.8 24-28.6 67-70.4 129.2-125.2 62.2-54.9 102.6-98.6 121.3-131.2s27.9-68.2 27.9-106.8c0-69.9-27.3-131.2-81.8-184.1s-121.4-79.3-200.6-79.3c-76.5 0-140.4 24-191.6 71.9-37.4 35-65.5 84.4-84.1 148.2-12.8 43.8-55.5 71.8-100.8 66.4-57.4-6.8-95.2-63.6-78.8-119.1 25.2-85.3 67.4-154 126.5-206.2 82.1-72.7 190.7-109 325.8-109 143 0 257.1 38.9 342.3 116.8s127.7 172 127.7 282.4c0 63.9-15 122.8-44.9 176.6-29.9 53.9-88.5 119.4-175.6 196.6-58.5 51.9-96.8 90.2-114.8 114.8s-31.3 52.9-39.9 84.8c-6.4 23.7-10.8 58.5-13.2 104.2-1.5 28.8-25.4 51.4-54.2 51.4h-67.3zm-63.9 258c0-56.5 45.8-102.3 102.3-102.3 56.5 0 102.3 45.8 102.3 102.3 0 56.5-45.8 102.3-102.3 102.3-56.5 0-102.3-45.8-102.3-102.3z'/%3E%3C/g%3E%3C/svg%3E");
+
   animation: alert-animate-question-mark .8s;
 }
 
@@ -203,7 +209,14 @@ button:active {
 }
 
 .alert-icons.alert-error::before {
-  content: 'X';
+  content: '';
+  height: 55%;
+  width: 55%;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg height='329pt' viewBox='0 0 329.26933 329' width='329pt' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f27474'%3E%3Cpath d='m21.339844 329.398438c-5.460938 0-10.925782-2.089844-15.082032-6.25-8.34375-8.339844-8.34375-21.824219 0-30.164063l286.589844-286.59375c8.339844-8.339844 21.824219-8.339844 30.164063 0 8.34375 8.339844 8.34375 21.824219 0 30.164063l-286.589844 286.59375c-4.183594 4.179687-9.621094 6.25-15.082031 6.25zm0 0'/%3E%3Cpath d='m307.929688 329.398438c-5.460938 0-10.921876-2.089844-15.082032-6.25l-286.589844-286.59375c-8.34375-8.339844-8.34375-21.824219 0-30.164063 8.339844-8.339844 21.820313-8.339844 30.164063 0l286.589844 286.59375c8.34375 8.339844 8.34375 21.824219 0 30.164063-4.160157 4.179687-9.621094 6.25-15.082031 6.25zm0 0'/%3E%3C/g%3E%3C/svg%3E");
+
   animation: alert-animate-error-X-mark 0.5s;
 }
 
@@ -235,7 +248,14 @@ button:active {
 }
 
 .alert-icons.alert-info::before {
-  content: 'i';
+  content: '';
+  height: 60%;
+  width: 35%;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg width='300' height='500' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Crect height='350' width='50' y='140' x='126' fill='%233fc3ee' /%3E%3Cellipse ry='33' rx='33' cy='40' cx='150' fill='%233fc3ee' /%3E%3C/g%3E%3C/svg%3E");
+
   animation: alert-animate-info-i-mark .8s
 }
 
@@ -267,9 +287,20 @@ button:active {
   color: #f8bb86;
 }
 
+/*
+SVG 相關工具 :
+  - 設計工具 : https://editor.method.ac/
+  - URL 轉換工具 : https://yoksel.github.io/url-encoder/
+ */
 .alert-icons.alert-warning::before {
-  content: '!';
-  animation: alert-animate-info-i-mark 0.4s 0.2s
+  content: '';
+  height: 70%;
+  width: 40%;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg width='300' height='500' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Crect height='350' width='50' y='40' x='126' fill='%23f8bb86' /%3E%3Cellipse ry='33' rx='33' cy='465' cx='150' fill='%23f8bb86' /%3E%3C/g%3E%3C/svg%3E");
+  animation: alert-animate-info-i-mark 0.4s 0.2s;
 }
 
 .alert-icons.alert-success {

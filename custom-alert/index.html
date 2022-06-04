@@ -10,6 +10,7 @@
 <button onclick="openSuccessAlert()">正確</button>
 <button onclick="openInfoAlert()">訊息</button>
 <button onclick="openWarningAlert()">警告</button>
+<button onclick="openQuestionAlert()">問號</button>
 <div class="alert-container hide">
   <div class="alert-container-root">
     <div class="alert-box">
@@ -38,6 +39,7 @@
   const openErrorAlert = () => showModal('error');
   const openSuccessAlert = () => showModal('success');
   const openInfoAlert = () => showModal('info');
+  const openQuestionAlert = () => showModal('question');
 
   /**
    * 顯示訊息處理狀況
