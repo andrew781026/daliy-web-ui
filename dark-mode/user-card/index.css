@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --black: #333333;
+  --light-black: #585858;
+  --blue: #09b5ee;
+  --light-blue: #6dccef;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--black);
+  flex-direction: column;
+}
+
+.card .tumbler__wrapper {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 60px;
+  height: 30px;
+  border-radius: 999px;
+  padding: 5px 7px;
+  background-color: var(--black);
+}
+
+.card .tumbler__wrapper svg#sun {
+  height: 20px;
+}
+
+.card .tumbler__wrapper svg#moon {
+  height: 20px;
+}
+
+.card .tumbler__wrapper .tumbler {
+  top: 2.5px;
+  left: 30px;
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: var(--white);
+  transition: 0.3s;
+}
+
+section .card {
+  height: 400px;
+  width: 300px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  background-color: var(--light-black);
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card img.avatar {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--blue);
+}
+
+.description {
+  color: var(--white);
+}
+
+.imgWrap {
+  display: flex;
+  justify-content: space-evenly;
+  width: 200px;
+  margin-top: 10px;
+}
+
+.imgWrap .icon {
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  background-color: #9ca2a6;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgWrap .icon:hover {
+  background-color: #d5dada;
+}
+
+.imgWrap .icon img {
+  height: 30px;
+  width: 30px;
+}
