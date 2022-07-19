@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- 參考影片 : https://www.youtube.com/watch?v=I90no1eQ45E -->
+  <title>CSS Creative Menu Hover Text Animation Effects | Amazing Animated Text using Html & CSS</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- use https://metatags.io/ make SEO meta tags -->
+  <!-- Primary Meta Tags -->
+  <title>CSS Creative Menu Hover Text Animation Effects | Amazing Animated Text using Html & CSS</title>
+  <meta name="title" content="CSS Creative Menu Hover Text Animation Effects | Amazing Animated Text using Html & CSS">
+  <meta name="description" content="ref video : https://www.youtube.com/watch?v=I90no1eQ45E">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.youtube.com/watch?v=I90no1eQ45E">
+  <meta property="og:title" content="CSS Creative Menu Hover Text Animation Effects | Amazing Animated Text using Html & CSS">
+  <meta property="og:description" content="ref video : https://www.youtube.com/watch?v=I90no1eQ45E">
+  <meta property="og:image" content="https://andrew781026.github.io/daliy-web-ui/text-animate/hover-change/seo-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.youtube.com/watch?v=I90no1eQ45E">
+  <meta property="twitter:title" content="CSS Creative Menu Hover Text Animation Effects | Amazing Animated Text using Html & CSS">
+  <meta property="twitter:description" content="ref video : https://www.youtube.com/watch?v=I90no1eQ45E">
+  <meta property="twitter:image" content="https://andrew781026.github.io/daliy-web-ui/text-animate/hover-change/seo-image.jpg">
+</head>
+<body>
+<div class="container">
+  <ul>
+    <li v-for="item in items" :key="item.text">
+      <a href="#" :data-text="`&nbsp;${item.text}&nbsp;`" :style="`--color:${item.color}`">
+        &nbsp;{{item.text}}&nbsp;
+      </a>
+    </li>
+  </ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+  const {createApp} = Vue;
+
+  const App = {
+    data() {
+
+      return {
+        items: [
+          {text: 'Home', color: '#00ade1'},
+          {text: 'About', color: '#ff6493'},
+          {text: 'Service', color: '#ffdd1c'},
+          {text: 'Team', color: '#00dc82'},
+          {text: 'Contact', color: '#dc00d4'},
+        ]
+      }
+    },
+  }
+
+  createApp(App).mount('.container');
+</script>
+</body>
+</html>
