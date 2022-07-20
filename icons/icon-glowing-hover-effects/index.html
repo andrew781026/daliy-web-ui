@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+
+  <!-- 參考影片 : https://www.youtube.com/watch?v=dTSXlDTNvaQ -->
+  <meta charset="UTF-8">
+  <title>CSS Magic Line Icon Fill Hover Effects | Social Media Buttons</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Primary Meta Tags -->
+  <title>CSS Glowing Social Media Icon Hover Effects using Fontawesome Icon @Online Tutorials</title>
+  <meta name="title" content="CSS Glowing Social Media Icon Hover Effects using Fontawesome Icon">
+  <meta name="description" content="ref video : https://www.youtube.com/watch?v=dTSXlDTNvaQ">
+
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.youtube.com/watch?v=dTSXlDTNvaQ">
+  <meta property="og:title"
+        content="CSS Glowing Social Media Icon Hover Effects using Fontawesome Icon @Online Tutorials">
+  <meta property="og:description" content="ref video : https://www.youtube.com/watch?v=dTSXlDTNvaQ">
+  <meta property="og:image" content="https://andrew781026.github.io/daliy-web-ui/icons/icon-glowing-hover-effects/seo-image.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.youtube.com/watch?v=dTSXlDTNvaQ">
+  <meta property="twitter:title"
+        content="CSS Glowing Social Media Icon Hover Effects using Fontawesome Icon @Online Tutorials">
+  <meta property="twitter:description" content="ref video : https://www.youtube.com/watch?v=dTSXlDTNvaQ">
+  <meta property="twitter:image" content="https://andrew781026.github.io/daliy-web-ui/icons/icon-glowing-hover-effects/seo-image.png">
+</head>
+<body>
+<ul>
+  <li v-for="item in items" :key="item.id" :style="`--color:${item.color}`">
+    <a href="#">
+      <i class="fab front" :class="item.icon"></i>
+    </a>
+  </li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+  const {createApp} = Vue;
+
+
+  const App = {
+    data() {
+
+      return {
+        items: [
+          {
+            id: 1,
+            icon: 'fa-twitter',
+            color: '#1da1f2',
+          },
+          {
+            id: 2,
+            icon: 'fa-whatsapp',
+            color: '#25d366',
+          },
+          {
+            id: 3,
+            icon: 'fa-youtube',
+            color: '#ff0000',
+          },
+          {
+            id: 4,
+            icon: 'fa-facebook',
+            color: '#1a4eea',
+          },
+          {
+            id: 5,
+            icon: 'fa-amazon',
+            color: '#ead30c',
+          },
+        ]
+      }
+    }
+  }
+
+  createApp(App).mount('ul');
+</script>
+</body>
+</html>
