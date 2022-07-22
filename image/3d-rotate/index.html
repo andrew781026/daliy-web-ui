@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<title>CSS 3D Text Rotation</title>
+  <title>CSS 3D Text Rotation</title>
 
   <!-- 參考影片 : https://www.youtube.com/watch?v=POWTSH1fG2M -->
-<link rel="stylesheet" type="text/css" href="style.css">
-
+  <link rel="stylesheet" type="text/css" href="style.css">
 
   <!-- Primary Meta Tags -->
   <title>CSS Only 3D Text Rotation Animation Effects | Html CSS @Online Tutorials</title>
@@ -27,26 +26,26 @@
   <meta property="twitter:image" content="https://andrew781026.github.io/daliy-web-ui/image/3d-rotate/seo-image.jpg">
 </head>
 <body>
-	<div class="box">
-		<div>
-			<span v-for="item in items" :key="item" :style="`--i:${item}`"></span>
-		</div>
-	</div>
+<div class="box">
+  <div>
+    <span v-for="item in items" :key="item" :style="`--i:${item}`"></span>
+  </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
-  <script>
-    const {createApp} = Vue;
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+<script>
+  const {createApp} = Vue;
 
-    const App = {
-      data() {
+  const App = {
+    data() {
 
-        return {
-          items: new Array(24).fill('').map((v,i)=>i)
-        }
-      },
-    }
+      return {
+        items: new Array(12).fill('').map((v, i) => i)
+      }
+    },
+  }
 
-    createApp(App).mount('.box');
-  </script>
+  createApp(App).mount('.box');
+</script>
 </body>
 </html>
