@@ -90,7 +90,7 @@
 
   const cardGenerator = (title, imgUrl, link) => ({uuid: _uuid(), imgUrl, link, title});
 
-  const observer = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries /*, observer */) => {
     entries.forEach(entry => {
       const iframeEl = entry.target.querySelector('iframe');
       if (entry.isIntersecting) iframeEl.src = iframeEl.dataset.src
@@ -185,6 +185,7 @@
           cardGenerator('2022-02-21 : 存 CSS 的開車場景', '', './animates/animated-scene/index.html'),
           cardGenerator('2022-07-19 : hover 文字變化', './text-animate/hover-change/seo-image.jpg', './text-animate/hover-change/index.html'),
           cardGenerator('2022-07-20 : Glowing Icons', './icons/icon-glowing-hover-effects/seo-image.png', './icons/icon-glowing-hover-effects/index.html'),
+          cardGenerator('2022-07-22 : 3d 旋轉圖片', './image/3d-rotate/seo-image.jpg', './image/3d-rotate/index.html'),
         ]
       }
     },

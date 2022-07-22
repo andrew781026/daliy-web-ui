@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<title>CSS 3D Text Rotation</title>
+
+  <!-- 參考影片 : https://www.youtube.com/watch?v=POWTSH1fG2M -->
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+  <!-- Primary Meta Tags -->
+  <title>CSS Only 3D Text Rotation Animation Effects | Html CSS @Online Tutorials</title>
+  <meta name="title" content="CSS Only 3D Text Rotation Animation Effects | Html CSS @Online Tutorials">
+  <meta name="description" content="ref video : https://www.youtube.com/watch?v=POWTSH1fG2M">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.youtube.com/watch?v=POWTSH1fG2M">
+  <meta property="og:title" content="CSS Only 3D Text Rotation Animation Effects | Html CSS @Online Tutorials">
+  <meta property="og:description" content="ref video : https://www.youtube.com/watch?v=POWTSH1fG2M">
+  <meta property="og:image" content="https://andrew781026.github.io/daliy-web-ui/text-animate/3d-rotate/seo-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.youtube.com/watch?v=POWTSH1fG2M">
+  <meta property="twitter:title" content="CSS Only 3D Text Rotation Animation Effects | Html CSS @Online Tutorials">
+  <meta property="twitter:description" content="ref video : https://www.youtube.com/watch?v=POWTSH1fG2M">
+  <meta property="twitter:image" content="https://andrew781026.github.io/daliy-web-ui/text-animate/3d-rotate/seo-image.jpg">
+</head>
+<body>
+	<div class="box">
+		<div>
+			<span v-for="item in items" :key="item" :style="`--i:${item}`"></span>
+		</div>
+	</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.0.5/dist/vue.global.prod.js"></script>
+  <script>
+    const {createApp} = Vue;
+
+    const App = {
+      data() {
+
+        return {
+          items: new Array(24).fill('').map((v,i)=>i)
+        }
+      },
+    }
+
+    createApp(App).mount('.box');
+  </script>
+</body>
+</html>
