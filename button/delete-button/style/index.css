@@ -70,7 +70,7 @@ a p {
   margin: 0;
   background-color: #fff;
   border-radius: 0 0 3px 3px;
-  transition: all 0.5s;
+  transition: all 0.5s , opacity 0s;
 }
 
 a p::before {
@@ -80,7 +80,7 @@ a p::before {
   width: 100%;
   height: 2px;
   background-color: #fff;
-  transition: all 0.5s;
+  transition: all 0.5s, opacity 0s;
   box-shadow: 12px -2px 0 #333,
   6px -2px 0 #fff;
 }
@@ -105,7 +105,7 @@ a text {
   color: #fff;
   position: absolute;
   right: 40px;
-  transition: all 0.5s;
+  transition: all 0.5s, opacity 0s;
 }
 
 a:hover text {
@@ -117,5 +117,18 @@ a.active {
 }
 
 a.active text {
+  opacity: 0;
+}
+
+a svg{
+  fill: #476ace;
+  opacity: 0;
+}
+
+a.loading svg {
+  opacity: 1;
+}
+
+a.loading p , a.loading text {
   opacity: 0;
 }
