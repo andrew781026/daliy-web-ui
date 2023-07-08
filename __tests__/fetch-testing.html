@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Using Fetch in Electron Defined Protocol</title>
+  <style>
+    .success {
+      color: green;
+    }
+
+    .failed {
+      color: red;
+    }
+  </style>
 </head>
 <body>
 <h1>
@@ -10,6 +19,12 @@
 </h1>
 <script>
   fetch('tmcopwin.oidc://activeProtal?access_token=xxxxx')
+    .then(() => document.body.insertAdjacentHTML('beforeend', '<p class="success">fetch oidc success</p>'))
+    .catch(() => document.body.insertAdjacentHTML('beforeend', '<p class="failed">fetch oidc failed</p>'))
+
+  fetch('tmcopwin.test://activeProtal?access_token=xxxxx')
+    .then(() => document.body.insertAdjacentHTML('beforeend', '<p class="success">fetch test success</p>'))
+    .catch(() => document.body.insertAdjacentHTML('beforeend', '<p class="failed">fetch test failed</p>'))
 </script>
 </body>
 </html>
