@@ -21,8 +21,8 @@
 <h1>
   Using Fetch in Electron Defined Protocol
 </h1>
-<button class="btn btn-primary" onclick="location.assign('www.google.com')">location.assign</button>
-<button class="btn btn-secondary" onclick="window.open('www.google.com','_self')">window.open self</button>
+<button class="btn btn-primary" onclick="location.assign('https://www.google.com')">location.assign</button>
+<button class="btn btn-secondary" onclick="window.open('https://www.google.com','_self')">window.open self</button>
 <script>
   fetch('tmcopwin.oidc://activeProtal?access_token=xxxxx')
     .then(() => document.body.insertAdjacentHTML('beforeend', '<p class="success">fetch oidc success</p>'))
