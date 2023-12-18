@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Link</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+<!-- Modify only link with id custom_link -->
+<div id="app">
+  <a id="custom_link" :href="link" :style="{color}" v-html="rawContent"></a>
+</div>
+<script>
+  var vue = new Vue({
+    el: '#custom_link',
+    data: {
+      link: "https://www.testdome.com/",
+      color: "blue",
+      rawContent: '<abbr title="More tests">TestDome.com</abbr>'
+    }
+  });
+
+  // Example case
+  console.log(document.getElementById("app").innerHTML);
+</script>
+</body>
+</html>

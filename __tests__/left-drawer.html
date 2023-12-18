@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .drawer {
+      position: fixed;
+      left: 0;
+      top: 0;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      width: 200px;
+    }
+
+    .drawer.close {
+      width: 0;
+    }
+
+    .menu {
+      width: 200px;
+      height: 100%;
+      background-color: #f00;
+    }
+
+    body {
+      margin: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<button>開關</button>
+<div class="drawer">
+  <div class="menu">
+    HAHAHAHAHAHAHAHA
+  </div>
+</div>
+<script>
+  document.querySelector('button').addEventListener('click', function () {
+    document.querySelector('.drawer').classList.toggle('close')
+  })
+</script>
+</body>
+</html>
