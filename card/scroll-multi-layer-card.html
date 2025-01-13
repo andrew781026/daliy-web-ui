@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  <title>Scroll Multi Layer Card</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <style>
+    .pink-box {
+      height: 100vh;
+      background-color: lightpink;
+    }
+
+    .serveCard {
+      background: #b5b5ba;
+      height: 90vh;
+      border-radius: 1rem;
+      margin: 1rem;
+      padding: 1rem;
+      position: sticky;
+      top: 2rem;
+    }
+  </style>
+</head>
+<body id="app">
+<div class="pink-box"></div>
+
+<div class="serves">
+  <div class="serveCard first"></div>
+  <div class="serveCard second"></div>
+  <div class="serveCard third"></div>
+  <div class="serveCard fourth"></div>
+</div>
+
+<div style="height: 200px"></div>
+
+<script>
+  // https://www.youtube.com/watch?v=SCfZBtedicw&list=PLMPgoZdlPumexxtvuPUB3TY7LExI1N_Xp&index=4&ab_channel=TheCodeCreative
+  setTimeout(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const serveCardEls = [...document.querySelectorAll(".serveCard")];
+
+    for (let i = 0; i < serveCardEls.length; i++) {
+      const el = serveCardEls[i];
+      const nextEl = serveCardEls[i+1];
+      if (nextEl) {
+
+        gsap.fromTo(el,
+          {
+            scale: 1,
+            filter: "brightness(1)",
+          },
+          {
+            scrollTrigger: {
+              trigger: nextEl,   // next-serveCard as trigger
+              start: 'top bottom',
+              end: 'top top',
+              scrub: true,
+              markers: true,
+            },
+            scale: 0.95,
+            filter: "brightness(0.7)",
+            duration: 3,
+          });
+      }
+    }
+
+  }, 100);
+</script>
+</body>
+</html>
