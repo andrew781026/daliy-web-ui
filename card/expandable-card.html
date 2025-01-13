@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  <title>Expandable Card</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <style>
+    /* 參考資料 : https://codepen.io/ChandaAbdul/pen/Rwexapv */
+    *, ::before, ::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+    }
+  </style>
+
+  <style>
+    .expandable-wrapper {
+      display: flex;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 1.5rem;
+    }
+
+    .expandable-card:nth-child(1) {
+      background-color: red;
+    }
+
+    .expandable-card:nth-child(2) {
+      background-color: green;
+    }
+
+    .object-gradient-cover {
+      position: absolute;
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      background-image: linear-gradient(#0000004d 41.38%, #00000080);
+    }
+
+    .object-fit-cover {
+      position: absolute;
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+
+    .expandable-card.mask .blur-cover {
+      opacity: 1;
+    }
+
+    .blur-cover {
+      z-index: 2;
+      opacity: 0;
+      backdrop-filter: blur(6px);
+      object-fit: cover;
+      background-image: linear-gradient(#0003, #0003);
+      width: 100%;
+      height: 100%;
+      transition: opacity .7s;
+      position: absolute;
+      inset: 0%;
+    }
+
+    .expandable-card.mask .expandable-left-col {
+      opacity: 0;
+    }
+
+    .expandable-card {
+      color: #fff;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 33%;
+      min-height: 30rem;
+      transition: width .7s;
+      display: flex;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .expandable-card:hover {
+      /*width: 300%;*/
+      width: 100%;
+    }
+
+    .expandable-inner-card {
+      position: relative;
+      display: flex;
+      height: 100%;
+    }
+
+    .expandable-left-col {
+      padding: 1rem;
+      gap: 1rem;
+      flex-direction: column;
+      flex: none;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      min-width: 20rem;
+      max-width: 20rem;
+      transition: opacity .7s;
+      display: flex;
+      position: relative;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .expandable-right-col {
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      height: calc(100% - 2rem);
+      min-width: 20rem;
+      max-width: 20rem;
+      transition: transform 0.8s 0.2s, opacity 0.3s 0.2s;
+      opacity: 0;
+
+      padding: 1rem;
+      background-color: white;
+      border-radius: 1rem;
+      color: black;
+      margin: 1rem;
+      transform: translateX(-50%);
+    }
+
+    .expandable-card:hover .expandable-right-col {
+      transition: transform 0.8s 0.2s, opacity 0.8s 400ms;
+      opacity: 1;
+      transform: translateX(0%);
+    }
+
+    .expandable-card-button {
+      background-color: white;
+      border-radius: 2rem;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      align-items: center;
+      color: black;
+    }
+
+  </style>
+</head>
+<body id="app">
+<h1>參考資料：https://codepen.io/ChandaAbdul/pen/Rwexapv</h1>
+<h2>模仿 https://www.delto.com/en 的卡片行為</h2>
+
+<div class="expandable-wrapper">
+  <div class="expandable-card"
+       @mouseenter="active = card.id"
+       @mouseleave="active = null"
+       :class="{'mask': active ? (card.id !== active) : false}"
+       v-for="card in cards" :key="card.id">
+    <div class="expandable-inner-card">
+      <div class="expandable-left-col">
+        <div class="text-2xl">{{card.left.title}}</div>
+        <p class="flex-1 text-md">
+          {{card.left.description}}
+        </p>
+        <a :href="card.left.link" class="expandable-card-button">
+          <div>Learn more</div>
+          <div class="button-icon_wrapper h-6 w-6"
+               style="transform: translate3d(0rem, 0rem, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none">
+              <path d="M5.83203 14.1693L14.1654 5.83594" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+              <path d="M5.83203 5.83594H14.1654V14.1693" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+            </svg>
+          </div>
+        </a>
+      </div>
+      <div class="expandable-right-col">
+        <h2 class="flex-1">{{card.right.description}}</h2>
+        <p>{{card.right.author}}</p>
+      </div>
+      <div class="blur-cover"></div>
+      <img :src="card.bg"
+           loading="lazy"
+           alt="" class="object-fit-cover">
+      <div class="object-gradient-cover"></div>
+    </div>
+  </div>
+</div>
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        active: null,
+        cards: [
+          {
+            id: '1',
+            left: {
+              title: 'Banking AI',
+              description: 'Specific solutions for industries such as banking and commerce',
+              link: 'https://www.delto.com/en/solutions/banking-ai/'
+            },
+            right: {
+              description: 'Delto\'s solutions have enabled Infocorp\'s clients to generate more transactions in new channels.',
+              author: 'Ana Inés Echevarren - CEO at INFOCORP'
+            },
+            bg: 'https://cdn.prod.website-files.com/669585ee3343614df2f26ed1/669ae9576680cb4396cce600_image-1-p-500.webp'
+          },
+          {
+            id: '2',
+            left: {
+              title: 'Banking AI',
+              description: 'Specific solutions for industries such as banking and commerce',
+              link: 'https://www.delto.com/en/solutions/banking-ai/'
+            },
+            right: {
+              description: 'Delto\'s solutions have enabled Infocorp\'s clients to generate more transactions in new channels.',
+              author: 'Ana Inés Echevarren - CEO at INFOCORP'
+            },
+            bg: 'https://cdn.prod.website-files.com/669585ee3343614df2f26ed1/669ae9580f8d2dd9f598e601_image-2-p-500.webp'
+          },
+          {
+            id: '3',
+            left: {
+              title: 'Banking AI',
+              description: 'Specific solutions for industries such as banking and commerce',
+              link: 'https://www.delto.com/en/solutions/banking-ai/'
+            },
+            right: {
+              description: 'Delto\'s solutions have enabled Infocorp\'s clients to generate more transactions in new channels.',
+              author: 'Ana Inés Echevarren - CEO at INFOCORP'
+            },
+            bg: 'https://cdn.prod.website-files.com/669585ee3343614df2f26ed1/669ae95701c4bd3dc33e09a1_image-3.webp'
+          },
+        ]
+      }
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

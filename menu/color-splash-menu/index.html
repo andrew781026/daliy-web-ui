@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Splash</title>
+  <style>
+    *, ::before, ::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background-color: #24e3dc;
+    }
+  </style>
+
+  <style>
+    .menu-container {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .close {
+      cursor: pointer;
+      position: absolute;
+      color: white;
+      right: 12px;
+      top: 12px;
+      border-radius: 50%;
+      padding: 10px;
+      height: 50px;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2bace0;
+    }
+
+    .menu.active .close .line:first-child {
+      transform: rotate(45deg);
+    }
+
+    .menu.active .close .line:last-child {
+      transform: rotate(-45deg);
+    }
+
+    .close .line {
+      position: absolute;
+      left: 14px;
+      height: 1px;
+      width: 22px;
+      background-color: white;
+      transition: all 0.5s;
+      transform-origin: left;
+    }
+
+    .close .line:first-child {
+      top: 16px;
+    }
+
+    .close .line:last-child {
+      top: 32px;
+    }
+
+    .mask-bottom {
+      position: fixed;
+      overflow: hidden;
+      right: -100px;
+      top: -100px;
+      border-radius: 50%;
+      height: 30px; /* vmax是當前 vw 和 vh 中較大的一個值 */
+      width: 30px;
+      background-color: #2bace0;
+      transition: transform 0.5s;
+    }
+
+    .menu.active .mask-bottom {
+      transform: scale(200);
+    }
+
+    .menu-content {
+      color: white;
+      font-size: 30px;
+      padding: 8px;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .menu.active .menu-content {
+      opacity: 1;
+    }
+
+    .menu-content:hover {
+      background-color: magenta;
+    }
+
+    .height {
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+<h1>This is a splash menu - menu mimic with https://wearecomotion.com/</h1>
+<div class="menu">
+  <div class="mask-bottom"></div>
+  <div class="close" onclick="activeIt()">
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+  <div class="menu-container">
+    <div class="menu-content">Home</div>
+    <div class="menu-content">About</div>
+    <div class="menu-content">Service</div>
+    <div class="menu-content">Contact</div>
+  </div>
+</div>
+<div class="height"></div>
+
+<script>
+  function activeIt() {
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('active');
+  }
+</script>
+</body>
+</html>
