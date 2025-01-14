@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infinite Marquee</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .relative {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .wrapper {
+            width: fit-content; /* 寬度要 fit 內容物 */
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            animation: marquee-horizontal 10s linear infinite;
+        }
+
+        .img-gallery {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .img-gallery img {
+            height: 200px;
+            width: 200px;
+            border-radius: 1rem;
+        }
+
+        /* 重複的 img-gallery + 50% 寬度的捲動 */
+        @keyframes marquee-horizontal {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="padding-left: 2rem">
+    mimic <a href="https://www.delto.com/en">https://www.delto.com/en</a> of Infinite Marquee on Hero Section
+</h1>
+
+<div id="app" class="w-full relative">
+    <div class="wrapper">
+        <div class="img-gallery"
+             v-for="n in 2"
+             :key="`img-gallery-${n}`">
+            <img
+                class="img"
+                v-for="m in 10"
+                :key="`img-${n}-${m}`"
+                :src="`https://picsum.photos/200/200?random=${m}`"
+                alt="random img">
+        </div>
+    </div>
+</div>
+
+<script>
+    Vue.createApp().mount('#app');
+</script>
+</body>
+</html>

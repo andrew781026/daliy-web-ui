@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>horizontal-parallax</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    #horizontal-wrap {
+      display: flex;
+      overflow-y: auto;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .card {
+      height: 300px;
+      min-width: 300px;
+      border-right: 1px solid white;
+      position: relative;
+    }
+
+    .img {
+      position: absolute;
+      width: 500px;
+      max-width: unset;
+      transform: translateX(-100px);
+      transition: transform 0.2s;
+
+      user-drag: none; /* Disable image dragging */
+      user-select: none; /* Prevent text selection */
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="horizontal-wrap">
+  <div class="card bg-red-100 overflow-hidden">
+    <img class="img" src="https://picsum.photos/500/300?random=1" alt="random img">
+  </div>
+  <div class="card bg-red-200 overflow-hidden">
+    <img class="img" src="https://picsum.photos/500/300?random=2" alt="random img">
+  </div>
+  <div class="card bg-red-300 overflow-hidden">
+    <img class="img" src="https://picsum.photos/500/300?random=3" alt="random img">
+  </div>
+  <div class="card bg-red-400 overflow-hidden">
+    <img class="img" src="https://picsum.photos/500/300?random=4" alt="random img">
+  </div>
+  <div class="card bg-red-500 overflow-hidden">
+    <img class="img" src="https://picsum.photos/500/300?random=5" alt="random img">
+  </div>
+  <div class="card bg-red-600 overflow-hidden">
+    <img class="img" src="https://picsum.photos/500/300?random=6" alt="random img">
+  </div>
+  <div class="card bg-red-700 overflow-hidden">
+    <img class="img" src="https://picsum.photos/500/300?random=7" alt="random img">
+  </div>
+  <div class="card bg-red-800 overflow-hidden">
+    <img class="img" src="https://picsum.photos/500/300?random=8" alt="random img">
+  </div>
+  <div class="card bg-red-900 overflow-hidden">
+    <img class="img" src="https://picsum.photos/500/300?random=9" alt="random img">
+  </div>
+</div>
+
+<script type="text/javascript">
+  //  translate-x="600"
+  /*
+  1. 左右滑動 , 讓圖片有往左位移的效果
+  2. drag , 左右滑動
+  3. hover 時的圖片效果(水波紋) -> https://www.oxxostudio.tw/articles/201407/css-water-wave.html
+   */
+
+  /**
+   * 左右滑動 , 讓圖片有往左位移的效果
+   */
+  function scrollToShift() {
+
+    const imgEls = [...document.querySelectorAll('#horizontal-wrap .img')];
+    const shiftBase = 100; // 位移基準值
+
+    document.querySelector('#horizontal-wrap').addEventListener('scroll', event => {
+      const scrollLeft = event.target.scrollLeft;
+      const scrollWidth = event.target.scrollWidth;
+      const clientWidth = event.target.clientWidth;
+
+      // scrollWidth = clientWidth + scrollLeft
+      const canScrollWidth = scrollWidth - clientWidth;
+      const scrollPercent = scrollLeft / canScrollWidth;
+
+      const shiftLeft = Math.floor(scrollPercent * shiftBase) * (-1) - 100;
+      imgEls.forEach(imgEl => {
+        imgEl.style.transform = `translateX(${shiftLeft}px)`;
+      })
+    });
+  }
+
+  function dragToScroll(container) {
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // Mouse events
+    container.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      container.style.cursor = 'grabbing';
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isDown = false;
+      container.style.cursor = 'grab';
+    });
+
+    container.addEventListener('mouseup', () => {
+      isDown = false;
+      container.style.cursor = 'grab';
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed
+      container.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch events
+    container.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      const x = e.touches[0].pageX - container.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed
+      container.scrollLeft = scrollLeft - walk;
+    });
+
+  }
+
+  scrollToShift();
+  dragToScroll(document.querySelector('#horizontal-wrap'));
+</script>
+</body>
+</html>

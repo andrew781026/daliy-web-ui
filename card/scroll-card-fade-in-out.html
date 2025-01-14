@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scroll Pin</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .pink-box {
+      padding: 1rem;
+      height: 100vh;
+      background-color: lightpink;
+    }
+
+    .container {
+      position: relative;
+    }
+
+    .sticky {
+      position: sticky;
+      top: 0;
+    }
+
+    .serveCard {
+      height: 80vh;
+      border-radius: 1rem;
+      margin: 1rem;
+      padding: 2rem;
+      background-color: #0d6efd;
+      font-size: 3rem;
+      color: white;
+      font-weight: 900;
+      position: absolute;
+      top: 32px;
+      border: 3px solid white;
+      opacity: 0;
+      transition: opacity 1s;
+      width: 80%;
+    }
+
+    .serveCard.active {
+      opacity: 1;
+    }
+
+    .timeline {
+      height: 80vh;
+      width: 20px;
+      background-color: #25e334;
+    }
+  </style>
+</head>
+<body>
+<div class="pink-box">
+  <h1>
+    Mimic Card Of - <a href="https://www.delto.com/en/our-suite" target="_blank">
+    https://www.delto.com/en/our-suite
+  </a>
+  </h1>
+</div>
+
+<div class="container">
+  <div class="sticky">
+    <div class="serveCard first active">
+      First
+    </div>
+    <div class="serveCard second">
+      Second
+    </div>
+    <div class="serveCard third">
+      Third
+    </div>
+    <div class="serveCard fourth">
+      Fourth
+    </div>
+  </div>
+
+  <div class="timeline first"></div>
+  <div class="timeline second"></div>
+  <div class="timeline third"></div>
+  <div class="timeline fourth"></div>
+</div>
+
+<div style="height: 200px"></div>
+
+<script type="text/javascript">
+  // https://www.delto.com/en/our-suite
+  gsap.registerPlugin(ScrollTrigger);
+
+  const serveCards = [...document.querySelectorAll('.serveCard')];
+
+  [...document.querySelectorAll('.timeline')].forEach((element, index) => {
+
+    ScrollTrigger.create({
+      id: `scrollTrigger-${index}`,
+      trigger: element,
+      start: "top top",
+      end: "bottom top",
+      // markers: true,
+      onEnter: () => {
+        serveCards[index].classList.add('active');
+      },
+      onLeave: () => {
+        serveCards[index].classList.remove('active');
+      },
+      onEnterBack: () => {
+        serveCards[index].classList.add('active');
+      },
+      onLeaveBack: () => {
+        if (index > 0) serveCards[index].classList.remove('active');
+      },
+    });
+  });
+
+  //
+  //
+  // // Solutions scroll interaction
+  // $(".new__functionalities__section").each(function(index) {
+  //   let childTriggers = $(this).find(".new__solutions-interaction-trigger");
+  //   let childTargets1 = $(this).find(".solutions-interaction-list-image_wapper .solutions-list-img");
+  //   let childTargets2 = $(this).find(".new__solutions-interaction-content_relative-wrapper .new__solutions-interaction-list-content_wrapper");
+  //   let childTargets3 = $(this).find(".new__solutions_indicator_wrapper .new__solutions_indicator_ball");
+  //
+  //   //switch active class
+  //   function makeItemActive(index) {
+  //     childTriggers.removeClass("is-active");
+  //     childTargets1.removeClass("is-active");
+  //     childTargets2.removeClass("is-active");
+  //     childTargets3.removeClass("is-active");
+  //     childTriggers.eq(index).addClass("is-active");
+  //     childTargets1.eq(index).addClass("is-active");
+  //     childTargets2.eq(index).addClass("is-active");
+  //     childTargets3.eq(index).addClass("is-active");
+  //   }
+  //
+  //   makeItemActive(0);
+  //
+  //   //create scroll trigger
+  //   childTriggers.each(function(index) {
+  //     ScrollTrigger.create({
+  //       trigger: $(this),
+  //       start: "top center",
+  //       end: "bottom center",
+  //       markers: false,
+  //       onToggle: (isActive) => {
+  //         if (isActive) {
+  //           makeItemActive(index);
+  //         }
+  //       }
+  //     })
+  //   })
+
+</script>
+</body>
+</html>
