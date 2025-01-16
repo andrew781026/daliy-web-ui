@@ -55,17 +55,31 @@
     .timeline {
       height: 80vh;
       width: 20px;
+    }
+
+    .timeline:nth-child(odd) {
       background-color: #25e334;
     }
+
+    .timeline:nth-child(even) {
+      background-color: #67fbeb;
+    }
+
   </style>
 </head>
 <body>
 <div class="pink-box">
   <h1>
-    Mimic Card Of - <a href="https://www.delto.com/en/our-suite" target="_blank">
-    https://www.delto.com/en/our-suite
-  </a>
+    Mimic Card Of -
+    <a href="https://www.delto.com/en/our-suite" target="_blank">
+      https://www.delto.com/en/our-suite
+    </a>
   </h1>
+  <ul>
+    <li>捲動做到特定位置，指定區塊 fade-in / fade-out</li>
+    <li>利用 timeline 來偵測需要 fade-in/out 的位置</li>
+    <li>使用 gsap + ScrollTrigger 製作</li>
+  </ul>
 </div>
 
 <div class="container">
@@ -120,44 +134,6 @@
       },
     });
   });
-
-  //
-  //
-  // // Solutions scroll interaction
-  // $(".new__functionalities__section").each(function(index) {
-  //   let childTriggers = $(this).find(".new__solutions-interaction-trigger");
-  //   let childTargets1 = $(this).find(".solutions-interaction-list-image_wapper .solutions-list-img");
-  //   let childTargets2 = $(this).find(".new__solutions-interaction-content_relative-wrapper .new__solutions-interaction-list-content_wrapper");
-  //   let childTargets3 = $(this).find(".new__solutions_indicator_wrapper .new__solutions_indicator_ball");
-  //
-  //   //switch active class
-  //   function makeItemActive(index) {
-  //     childTriggers.removeClass("is-active");
-  //     childTargets1.removeClass("is-active");
-  //     childTargets2.removeClass("is-active");
-  //     childTargets3.removeClass("is-active");
-  //     childTriggers.eq(index).addClass("is-active");
-  //     childTargets1.eq(index).addClass("is-active");
-  //     childTargets2.eq(index).addClass("is-active");
-  //     childTargets3.eq(index).addClass("is-active");
-  //   }
-  //
-  //   makeItemActive(0);
-  //
-  //   //create scroll trigger
-  //   childTriggers.each(function(index) {
-  //     ScrollTrigger.create({
-  //       trigger: $(this),
-  //       start: "top center",
-  //       end: "bottom center",
-  //       markers: false,
-  //       onToggle: (isActive) => {
-  //         if (isActive) {
-  //           makeItemActive(index);
-  //         }
-  //       }
-  //     })
-  //   })
 
 </script>
 </body>

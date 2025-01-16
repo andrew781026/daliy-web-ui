@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gsap Two Column Pin</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #EEF4FF;
+      margin: 0;
+      font-family: sans-serif;
+      color: #333;
+    }
+
+    .spacer {
+      width: 100%;
+      height: 50vh;
+      background: #ddd;
+    }
+
+    .gallery h1 {
+      font-size: clamp(2em, 4vw, 6em);
+    }
+
+    .gallery p {
+      font-size: clamp(1.4em, 2.5vw, 3.5em);
+      line-height: 1.4;
+    }
+
+    .gallery {
+      display: flex;
+      /* outline:1px solid red; */
+    }
+
+    .left {
+      width: 50%;
+    }
+
+    .right {
+      height: 100vh;
+      /* outline:1px solid purple; */
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .desktopContent {
+      margin: auto;
+      width: 80%;
+    }
+
+    .desktopContentSection {
+      min-height: 100vh;
+      /* outline:1px solid green; */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .desktopPhotos {
+      width: 40vw;
+      height: 25vw;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      border: 0.75rem solid darkgray;
+    }
+
+    .desktopPhoto {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      //border-radius:24px;
+    }
+
+    .desktopPhoto img {
+      width: 100%;
+    }
+
+    .magnifierPhotos {
+      --image-width: 40vw;
+      --image-height: 25vw;
+      --magnifierSize: 6vw;
+      border-radius: 50%;
+      position: absolute;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, .1);
+      border: 1px solid darkgray;
+      height: var(--magnifierSize);
+      width: var(--magnifierSize);
+    }
+
+    .magnifierPhoto {
+      /* height: fit-content;
+       width: fit-content; */
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .magnifierPhoto img {
+      width: calc((40vw - 0.75rem * 2) * 1.5);
+      height: auto;
+    }
+
+    /* small screen / mobile layout */
+    .mobileContent {
+      display: none;
+      width: 80vw;
+    }
+
+    .mobilePhoto {
+      width: 80vw;
+      height: 80vw;
+      margin-top: 5em;
+      border-radius: 6vw;
+    }
+
+    /* defines styles for screens up to 599px wide */
+    @media screen and (max-width: 599px) {
+      .left {
+        display: none;
+      }
+
+      .right {
+        height: auto;
+        width: 100%;
+        align-items: center;
+      }
+
+      .desktopPhotos {
+        display: none;
+      }
+
+      .mobileContent {
+        display: block;
+      }
+
+
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="spacer"></div>
+
+<div class="gallery">
+
+  <div class="right">
+
+    <!-- mobile content -->
+    <div class="mobileContent">
+      <div class="mobilePhoto red"></div>
+      <h1>Red</h1>
+      <p>Red is a color often associated with strong emotions such as passion, love, and anger. It's a bold and
+        attention-grabbing color that can evoke feelings of excitement, warmth, and energy.</p>
+
+      <div class="mobilePhoto green"></div>
+      <h1>Green</h1>
+      <p>Green is a color that is often associated with nature, growth, and harmony. It is a calming and relaxing color
+        that can evoke feelings of balance, stability, and freshness. In color psychology, green is said to represent
+        balance and stability, making it a popular choice for branding and marketing in the health and wellness
+        industry. </p>
+
+      <div class="mobilePhoto pink"></div>
+      <h1>Pink</h1>
+      <p>Pink is a color that is often associated with femininity, romance, and sweetness. It is a softer and more
+        delicate shade of red that can evoke feelings of warmth, love, and nurturing. In the world of branding and
+        marketing, pink is often used to target a female audience or to promote products that are associated with
+        beauty, love, or romance.</p>
+
+      <div class="mobilePhoto blue"></div>
+      <h1>Blue</h1>
+      <p>Blue is a color that is often associated with calmness, trust, and reliability. It is a peaceful and serene
+        color that can evoke feelings of stability, security, and professionalism. In color psychology, blue is said to
+        represent loyalty and trust, making it a popular choice for branding and marketing in the finance and technology
+        industries.</p>
+    </div>
+
+    <!-- desktop content -->
+
+    <div class="desktopPhotos">
+      <div class="desktopPhoto">
+        <img class="tour-img" src="https://videoapply.io/assets/images/landing/4.steps/step-1@xs.webp" alt="left img 1">
+        <!--        <img class="tour-img" src="https://www.tutieshi.com/images/grid9.jpg" alt="left img 1">-->
+      </div>
+      <div class="desktopPhoto">
+        <img class="tour-img" src="https://videoapply.io/assets/images/landing/4.steps/step-2@xs.webp" alt="left img 1">
+      </div>
+      <div class="desktopPhoto">
+        <img class="tour-img" src="https://videoapply.io/assets/images/landing/4.steps/step-3@xs.webp" alt="left img 1">
+      </div>
+      <div class="desktopPhoto">
+        <img class="tour-img" src="https://videoapply.io/assets/images/landing/4.steps/step-4@xs.webp" alt="left img 1">
+      </div>
+
+      <!-- magnifier content -->
+      <div class="magnifierPhotos">
+        <div class="magnifierPhoto red">
+          <img class="tour-img" src="https://videoapply.io/assets/images/landing/4.steps/step-1@xs.webp"
+               alt="left img 1">
+          <!--          <img class="tour-img" src="https://www.tutieshi.com/images/grid9.jpg" alt="left img 1">-->
+        </div>
+        <div class="magnifierPhoto">
+          <img class="tour-img" src="https://videoapply.io/assets/images/landing/4.steps/step-2@xs.webp"
+               alt="left img 1">
+        </div>
+        <div class="magnifierPhoto">
+          <img class="tour-img" src="https://videoapply.io/assets/images/landing/4.steps/step-3@xs.webp"
+               alt="left img 1">
+        </div>
+        <div class="magnifierPhoto">
+          <img class="tour-img" src="https://videoapply.io/assets/images/landing/4.steps/step-4@xs.webp"
+               alt="left img 1">
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="left">
+    <div class="desktopContent">
+      <div class="desktopContentSection">
+        <h1>Red</h1>
+        <p>Red is a color often associated with strong emotions such as passion, love, and anger. It's a bold and
+          attention-grabbing color that can evoke feelings of excitement, warmth, and energy.</p>
+      </div>
+      <div class="desktopContentSection">
+        <h1>Green</h1>
+        <p>Green is a color that is often associated with nature, growth, and harmony. It is a calming and relaxing
+          color that can evoke feelings of balance, stability, and freshness. In color psychology, green is said to
+          represent balance and stability, making it a popular choice for branding and marketing in the health and
+          wellness industry. </p>
+      </div>
+      <div class="desktopContentSection">
+        <h1>Pink</h1>
+        <p>Pink is a color that is often associated with femininity, romance, and sweetness. It is a softer and more
+          delicate shade of red that can evoke feelings of warmth, love, and nurturing.</p>
+        <p>In the world of branding and marketing, pink is often used to target a female audience or to promote products
+          that are associated with beauty, love, or romance.</p>
+        <p>Pink is also used in the food industry, as it is associated with sweetness and desserts. Pink is often used
+          in breast cancer awareness campaigns, as it has become the signature color of the movement. </p>
+        <p>Pink is also commonly used in baby showers and weddings, as it symbolizes love, innocence, and new
+          beginnings.</p>
+      </div>
+      <div class="desktopContentSection">
+        <h1>Blue</h1>
+        <p>Blue is a color that is often associated with calmness, trust, and reliability. It is a peaceful and serene
+          color that can evoke feelings of stability, security, and professionalism. In color psychology, blue is said
+          to represent loyalty and trust, making it a popular choice for branding and marketing in the finance and
+          technology industries.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+
+<script type="text/javascript">
+
+  const moveJson = [
+    {
+      // "from": {"x": 50, "y": 50,},
+      // "to": {"x": 100, "y": 100,}
+      "from": {"xPercent": 0.91, "yPercent": 0.3},
+      "to": {"xPercent": 0.86, "yPercent": 0.55}
+    },
+    {
+      // "from": {"x": 100, "y": 100,},
+      // "to": {"x": 200, "y": 80,}
+      "from": {"xPercent": 0.86, "yPercent": 0.55},
+      "to": {"xPercent": 0.55, "yPercent": 0.7}
+    },
+    {
+      // "from": {"x": 200, "y": 80,},
+      // "to": {"x": 80, "y": 200,}
+      "from": {"xPercent": 0.55, "yPercent": 0.7},
+      "to": {"xPercent": 0.88, "yPercent": 0.8}
+    }
+  ];
+
+  // magnifier - 放大鏡
+
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // video tour - https://www.youtube.com/watch?v=CQHvWqYXI5s&ab_channel=snorklTV
+  // demo - https://codepen.io/snorkltv/pen/RwYdVyK
+  //        https://codepen.io/snorkltv/pen/vYVBPJq?editors=1000
+  // learn what all this code means at
+  // https://www.creativecodingclub.com/bundles/creative-coding-club
+  // unlock over 250 GSAP lessons today
+
+  const details = gsap.utils.toArray(".desktopContentSection:not(:first-child)")
+  const photos = gsap.utils.toArray(".desktopPhoto:not(:first-child)")
+  const magnifierPhotos = gsap.utils.toArray(".magnifierPhoto")
+  const magnifier = document.querySelector('.magnifierPhotos');
+  const magnifierSize = magnifier.getBoundingClientRect().height;
+  const photoRect = document.querySelector('.desktopPhoto').getBoundingClientRect();
+  let photoHeight = photoRect.height;
+  let photoWidth = photoRect.width;
+  const scale = 1.5;
+
+  window.addEventListener("resize", function (event) {
+    const photoRect = document.querySelector('.desktopPhoto').getBoundingClientRect();
+    photoHeight = photoRect.height;
+    photoWidth = photoRect.width;
+  });
+
+  gsap.set(photos, {yPercent: 0, opacity: 0});
+  gsap.set(gsap.utils.toArray(".magnifierPhoto:not(:first-child)"), {yPercent: 0, opacity: 0});
+
+  // create
+  let mm = gsap.matchMedia();
+
+  function moveMagnifierPosition(index = 0, self) {
+    const progress = self ? self.progress : 0;
+    const moveInfo = moveJson[index];
+    const xPercentShift = moveInfo.to.xPercent - moveInfo.from.xPercent;
+    const yPercentShift = moveInfo.to.yPercent - moveInfo.from.yPercent;
+    const xPercent = moveInfo.from.xPercent + xPercentShift * progress;
+    const yPercent = moveInfo.from.yPercent + yPercentShift * progress;
+    const magnifierRadius = magnifierSize / 2;
+    const x = xPercent * photoWidth;
+    const y = yPercent * photoHeight;
+    const centerX = x - magnifierRadius;
+    const centerY = y - magnifierRadius;
+    console.log('scroll', photoWidth, photoHeight);
+
+    // 水平偏移量 translateX = (W * 1.2 - W) / 2 = W * 0.1
+    // 垂直偏移量 translateY = (H * 1.2 - H) / 2 = H * 0.1
+
+    const magnifierTl = gsap.timeline();
+    magnifierTl.to(magnifier, {x: centerX, y: centerY}, 'same'); // 算出向右向下多少
+    magnifierPhotos.forEach((magnifierImg) => {
+      magnifierTl.to(magnifierImg, {
+        // x: centerX * (-1),
+        // y: centerY * (-1),
+        x: photoWidth * xPercent * (1 - scale) - centerX,
+        y: photoHeight * yPercent * (1 - scale) - centerY
+      }, 'same'); // 算出往回拉多少
+    });
+  }
+
+  // add a media query. When it matches, the associated function will run
+  mm.add("(min-width: 600px)", () => {
+
+    // this setup code only runs when viewport is at least 600px wide
+    console.log("desktop");
+    moveMagnifierPosition(0);
+
+    ScrollTrigger.create({
+      trigger: ".gallery",
+      start: "top top",
+      end: "bottom bottom",
+      pin: ".right"
+    })
+
+    //create scrolltrigger for each details section
+    //trigger photo animation when headline of each details section
+    //reaches 80% of window height
+    details.forEach((detail, index) => {
+
+      let headline = detail.querySelector("h1")
+      let animation = gsap.timeline()
+        .to(photos[index], {opacity: 1}, 'start')
+        .to(magnifierPhotos[index + 1], {opacity: 1}, 'start');
+
+      ScrollTrigger.create({
+        trigger: headline,
+        start: "top 80%",
+        end: "top 50%",
+        animation: animation,
+        scrub: true,
+        onUpdate: (self) => {
+          moveMagnifierPosition(index, self);
+        },
+      })
+
+    })
+
+    return () => { // optional
+      // custom cleanup code here (runs when it STOPS matching)
+      console.log("mobile")
+    };
+  });
+
+
+  /* ScrollTrigger Docs
+
+  https://greensock.com/docs/v3/Plugins/ScrollTrigger
+
+  */
+
+
+
+
+
+  /*
+
+  learn more GreenSock and ScrollTrigger
+
+  https://www.creativeCodingClub.com
+
+  new lessons weekly
+  less than $1 per week
+
+  */
+</script>
+</body>
+</html>
