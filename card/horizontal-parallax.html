@@ -14,6 +14,46 @@
 
   <style>
 
+    .scroll-baseline{
+      position: fixed;
+      height: calc(100vh - 6rem);
+      top: 6rem;
+      width: 2px;
+      background-color: red;
+    }
+
+    .scroll-baseline.left{
+      left: 0;
+    }
+
+    .scroll-baseline.center{
+      left: 50%;
+    }
+
+    .scroll-baseline.right{
+      right: 0;
+    }
+
+    .scroll-baseline::before{
+      content: '位移基準線';
+      position: absolute;
+      top: -2rem;
+      white-space: nowrap;
+      color: red;
+    }
+
+    .scroll-baseline.left::before{
+      left: 0;
+    }
+
+    .scroll-baseline.center::before{
+      transform: translateX(-50%);
+    }
+
+    .scroll-baseline.right::before{
+      right: 0;
+    }
+
     #horizontal-wrap {
       display: flex;
       overflow-y: auto;
@@ -76,6 +116,10 @@
 
   <div class="flex mb-4 flex-col gap-2">
 
+    <div class="scroll-baseline" :class="{[scrollBaseAlign]:true}"></div>
+
+    <div class="h-8"></div>
+
     <div class="row">
       <label>捲軸基準線位置：</label>
       <div class="join gap-0">
@@ -103,6 +147,11 @@
     </div>
 
     <div class="row">
+      <label>卡片寬度：</label>
+      <span>{{ cardWidth }}</span>
+    </div>
+
+    <div class="row">
       <label>位移方向：</label>
       <label>
         <input type="radio" name="shiftDirectionLeft" id="shiftDirectionLeft"
@@ -116,9 +165,9 @@
 
     <div class="row">
       <label class="w-32">位移量基準：</label>
-      <input type="range" :min="100" :max="8000" :step="100"
+      <input type="range" :min="100" :max="2000" :step="100"
              v-model="shiftBase" class="w-96"/>
-      <span>{{ shiftBase }} / 4000</span>
+      <span>{{ shiftBase }} / 2000</span>
     </div>
   </div>
 
@@ -129,8 +178,6 @@
          class="card rounded-none overflow-hidden">
       <div class="shift">
         位移量：
-        {{ `left: ${leftPercent}` }}
-        +
         {{`translateX(${countShift($refs.card && $refs.card[idx])}px)`}}
       </div>
       <img class="img"
@@ -145,7 +192,7 @@
   //  translate-x="600"
   /*
   1. 左右滑動 , 讓圖片有往左位移的效果
-  2. drag , 左右滑動
+  2. drag , 左右滑動 => 底圖比例 : 1300 (W) x 800 (H)
   3. hover 時的圖片效果(水波紋) -> https://www.oxxostudio.tw/articles/201407/css-water-wave.html
    */
 
@@ -176,9 +223,9 @@
         shiftLeft: 0,
         scrollPercent: 0,
         shiftBase: 600,
-        bgImageAlign: 'left', // left . right . center
-        scrollBaseAlign: 'right', // left . right . center
-        shiftDirection: 'left', // left . right
+        bgImageAlign: 'center', // left . right . center
+        scrollBaseAlign: 'center', // left . right . center
+        shiftDirection: 'right', // left . right
       }
     },
     computed: {
