@@ -13,6 +13,7 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
   <style>
+
     #horizontal-wrap {
       display: flex;
       overflow-y: auto;
@@ -34,6 +35,10 @@
       margin-left: 32px;
     }
 
+    .row label {
+      width: 130px;
+    }
+
     .shift {
       color: white;
       font-size: 1.2rem;
@@ -46,7 +51,8 @@
     .img {
       position: absolute;
       max-width: unset;
-      transition: transform 0.2s;
+      transition: left 0.2s, right 0.2s;
+      height: 100%;
 
       user-drag: none; /* Disable image dragging */
       user-select: none; /* Prevent text selection */
@@ -69,44 +75,71 @@
 <div id="app">
 
   <div class="flex mb-4 flex-col gap-2">
+
     <div class="row">
-      <label class="w-32">背景圖片大小：</label>
-      <input type="range" min="800" max="4000"
-             v-model="imgWidth" class="range range-primary w-96"/>
-      <span>{{ imgWidth }} / 2000</span>
+      <label>捲軸基準線位置：</label>
+      <div class="join gap-0">
+        <button
+          v-for="align in ['left','center','right']" :key="align"
+          class="btn join-item"
+          @click="scrollBaseAlign = align"
+          :class="{'btn-primary':scrollBaseAlign === align}">
+          {{ getAlignText(align) }}
+        </button>
+      </div>
     </div>
 
     <div class="row">
-      <label class="w-32">圖片數量：</label>
-      <input type="range" min="1" max="100"
-             v-model="imgNum" class="range range-primary w-96"/>
-      <span>{{ imgNum }} / 100</span>
+      <label>背景圖片：</label>
+      <div class="join gap-0">
+        <button
+          v-for="align in ['left','center','right']" :key="align"
+          class="btn join-item"
+          @click="bgImageAlign = align"
+          :class="{'btn-primary':bgImageAlign === align}">
+          {{ getAlignText(align) }}
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>位移方向：</label>
+      <label>
+        <input type="radio" name="shiftDirectionLeft" id="shiftDirectionLeft"
+               v-model="shiftDirection" value="left"> 向左
+      </label>
+      <label>
+        <input type="radio" name="shiftDirectionRight" id="shiftDirectionRight"
+               v-model="shiftDirection" value="right"> 向右
+      </label>
     </div>
 
     <div class="row">
       <label class="w-32">位移量基準：</label>
-      <input type="range" :min="0" :max="imgWidth - cardWidth"
-             v-model="shiftBase" class="range range-primary w-96"/>
-      <span>{{ shiftBase }} / {{ imgWidth - cardWidth }}</span>
+      <input type="range" :min="100" :max="8000" :step="100"
+             v-model="shiftBase" class="w-96"/>
+      <span>{{ shiftBase }} / 4000</span>
     </div>
-
   </div>
 
   <div id="horizontal-wrap" ref="wrap" @scroll="handleScroll">
-    <div :key="`item-${n}`"
-         v-for="n in parseInt(imgNum)"
+    <div :key="`item-${idx}`"
+         v-for="(img,idx) in imgs"
          ref="card"
-         class="card rounded-none overflow-hidden"
-         :class="`bg-red-${(n % 9) + 1}00`">
-      <div class="shift">左移量：{{ (-1) * countShiftLeft($refs.card && $refs.card[n - 1]) }}</div>
+         class="card rounded-none overflow-hidden">
+      <div class="shift">
+        位移量：
+        {{ `left: ${leftPercent}` }}
+        +
+        {{`translateX(${countShift($refs.card && $refs.card[idx])}px)`}}
+      </div>
       <img class="img"
-           :style="{transform:`translateX(${countShiftLeft($refs.card && $refs.card[n-1])}px)`}"
-           :src="`https://picsum.photos/${imgWidth}/400?random=${n}`"
+           :style="imgStyle($refs.card && $refs.card[idx])"
+           :src="img"
            draggable="false" alt="random img">
     </div>
   </div>
 </div>
-
 
 <script type="text/javascript">
   //  translate-x="600"
@@ -116,48 +149,103 @@
   3. hover 時的圖片效果(水波紋) -> https://www.oxxostudio.tw/articles/201407/css-water-wave.html
    */
 
+  // https://www.youtube.com/watch?v=z-oexYPY9GY&ab_channel=ConorBailey
   Vue.createApp({
     mounted() {
-      this.cardWidth = this.$refs.card[0].clientWidth;
-      this.shiftBase = Math.floor((this.imgWidth - this.cardWidth) / 1.2) // 位移基準值;
-
       this.ro = new ResizeObserver(this.handleResize)
-      this.ro.observe(this.$refs.wrap)
+      this.ro.observe(this.$refs.wrap);
+      this.cardWidth = this.$refs.card[0].clientWidth;
+
+      setTimeout(() => {
+        this.$forceUpdate();
+      });
     },
     data() {
-      const imgWidth = 2000;
+      const imgs = [
+        'img/macbook01.jpg',
+        'img/macbook02.jpg',
+        'img/macbook03.jpg',
+        'img/macbook04.jpg',
+        'img/macbook05.jpg',
+        'img/macbook06.jpg',
+        'img/macbook07.jpg',
+      ]
 
       return {
-        imgNum: 9,
-        imgWidth,
-        cardWidth: 0,
+        imgs,
         shiftLeft: 0,
         scrollPercent: 0,
-        shiftBase: 0
+        shiftBase: 600,
+        bgImageAlign: 'left', // left . right . center
+        scrollBaseAlign: 'right', // left . right . center
+        shiftDirection: 'left', // left . right
+      }
+    },
+    computed: {
+      sign() {
+        return this.shiftDirection === 'left' ? -1 : 1;
+      },
+      leftPercent() {
+        const align = this.bgImageAlign;
+        if (align === 'left') return 0;
+        else if (align === 'center') return 0.5;
+        else if (align === 'right') return 1;
+        return 0;
       }
     },
     methods: {
-      countShiftLeft(cardEl) {
+      getAlignText(align) {
+        if (align === 'left') return '左'
+        else if (align === 'right') return '右'
+        else if (align === 'center') return '中'
+        return ''
+      },
+
+      imgStyle(cardEl) {
+
+        return {
+          left: `${this.leftPercent*100}%`,
+          transform: `translateX( calc( ${this.leftPercent*-100}% + ${this.countShift(cardEl)}px ) )`,
+        }
+      },
+      shiftPercent(cardEl) {
+        const scrollBaseAlign = this.scrollBaseAlign;
+
+        // scrollBaseAlign
         if (!cardEl) return 0;
 
-        const clientWidth = this.$refs.wrap.clientWidth; // 捲動框的可視長度
+        if (scrollBaseAlign === 'left') return 1 - this.leftShiftPercent(cardEl);
+        else if (scrollBaseAlign === 'right') return this.leftShiftPercent(cardEl);
+        else if (scrollBaseAlign === 'center') return 0.5 - this.leftShiftPercent(cardEl);
+        return 0
+      },
+
+      // 計算位移的百分比 - 左側的百分比
+      leftShiftPercent(cardEl) {
+        if (!cardEl) return 0;
+
+        const scrollViewportWidth = this.$refs.wrap.clientWidth; // 捲動框的可視長度
 
         const cardRight = cardEl.getBoundingClientRect().right;
         const cardLeft = cardEl.getBoundingClientRect().left;
         const cardWidth = cardEl.getBoundingClientRect().width;
-        const percent = (cardLeft > 0) ? (clientWidth - cardLeft) / (clientWidth + cardWidth) : (clientWidth - cardRight + cardWidth) / (clientWidth + cardWidth);
-        if (0 < percent && percent < 1) return parseInt(this.shiftBase * percent * (-1));
-        else return 0;
+        const totalWidth = scrollViewportWidth + cardWidth;
+
+        if (cardLeft > 0) return (totalWidth - cardWidth - cardLeft) / totalWidth;
+        else return (totalWidth - cardRight) / totalWidth;
       },
 
-      handleScroll(){
+      countShift(cardEl) {
+        return Math.floor(this.sign * this.shiftPercent(cardEl) * this.shiftBase);
+      },
+
+      handleScroll() {
         this.$forceUpdate();
       },
 
       handleResize() {
         console.log('resize');
         this.cardWidth = this.$refs.card[0].clientWidth;
-        this.shiftBase = Math.floor((this.imgWidth - this.cardWidth) / 1.2) // 位移基準值;
       }
     }
   }).mount('#app');
@@ -179,11 +267,13 @@
     container.addEventListener('mouseleave', () => {
       isDown = false;
       container.style.cursor = 'grab';
+      // container.style.cursor = 'url("drag.png"), auto';
     });
 
     container.addEventListener('mouseup', () => {
       isDown = false;
       container.style.cursor = 'grab';
+      // container.style.cursor = 'url("drag.png"), auto';
     });
 
     container.addEventListener('mousemove', (e) => {
