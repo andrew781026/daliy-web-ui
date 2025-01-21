@@ -11,6 +11,7 @@
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./js/HoverDragCircle.js"></script>
 
   <style>
 
@@ -157,10 +158,6 @@
         <input type="radio" name="shiftDirectionLeft" id="shiftDirectionLeft"
                v-model="shiftDirection" value="left"> 向左
       </label>
-      <label>
-        <input type="radio" name="shiftDirectionRight" id="shiftDirectionRight"
-               v-model="shiftDirection" value="right"> 向右
-      </label>
     </div>
 
     <div class="row">
@@ -187,6 +184,8 @@
     </div>
   </div>
 </div>
+
+<hover-drag-circle data-container-id="#horizontal-wrap" />
 
 <script type="text/javascript">
   //  translate-x="600"
@@ -225,13 +224,10 @@
         shiftBase: 600,
         bgImageAlign: 'center', // left . right . center
         scrollBaseAlign: 'center', // left . right . center
-        shiftDirection: 'right', // left . right
+        shiftDirection: 'left', // left . right
       }
     },
     computed: {
-      sign() {
-        return this.shiftDirection === 'left' ? -1 : 1;
-      },
       leftPercent() {
         const align = this.bgImageAlign;
         if (align === 'left') return 0;
@@ -261,9 +257,9 @@
         // scrollBaseAlign
         if (!cardEl) return 0;
 
-        if (scrollBaseAlign === 'left') return 1 - this.leftShiftPercent(cardEl);
+        if (scrollBaseAlign === 'left') return this.leftShiftPercent(cardEl) - 1;
         else if (scrollBaseAlign === 'right') return this.leftShiftPercent(cardEl);
-        else if (scrollBaseAlign === 'center') return 0.5 - this.leftShiftPercent(cardEl);
+        else if (scrollBaseAlign === 'center') return this.leftShiftPercent(cardEl) - 0.5;
         return 0
       },
 
@@ -283,7 +279,7 @@
       },
 
       countShift(cardEl) {
-        return Math.floor(this.sign * this.shiftPercent(cardEl) * this.shiftBase);
+        return Math.floor( this.shiftPercent(cardEl) * this.shiftBase);
       },
 
       handleScroll() {
